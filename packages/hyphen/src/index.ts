@@ -2,6 +2,10 @@ import fs from "fs";
 import { join } from "path";
 
 const DICTIONARY_PATH = join(__dirname, "dictionaries");
+const IGNORED = [
+  '%', '#', 'LEFTHYPHENMIN', 'RIGHTHYPHENMIN',
+  'COMPOUNDLEFTHYPHENMIN', 'COMPOUNDRIGHTHYPHENMIN'
+]
 
 class DataInt {
   value: number;
@@ -26,7 +30,7 @@ class HyphenDict {
     const lines = fs.readFileSync(filePath, "utf-8").split("\n");
     lines.forEach((line) => {
       line = line.trim();
-      if (!line || line.startsWith("%") || line.startsWith("#")) return;
+      if (!line || IGNORED.some((i) => line.startsWith(i))) return;
 
       const pattern = line.replace(/\^{2}([0-9a-f]{2})/g, (match, hex) =>
         String.fromCharCode(parseInt(hex, 16)),
