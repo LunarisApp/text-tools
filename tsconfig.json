@@ -11,7 +11,9 @@
     "esModuleInterop": true,               // Ensures compatibility with CommonJS modules
     "strict": true,                        // Enables strict type checking
     "skipLibCheck": true,                  // Skips type checking of declaration files
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*.ts"

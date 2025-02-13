@@ -46,7 +46,7 @@ export class TextStatistics {
    * Remove punctuation from text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   removePunctuation(text: string) {
     if (this.rmApostrophe) {
       return text.replace(/[^\w\s]/g, "");
@@ -61,7 +61,7 @@ export class TextStatistics {
    * @param text The text to count characters in.
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
-  // @lruCache
+  @lruCache()
   charCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
@@ -74,7 +74,7 @@ export class TextStatistics {
    * @param text The text to count letters in.
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
-  // @lruCache
+  @lruCache()
   letterCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
@@ -87,7 +87,7 @@ export class TextStatistics {
    * @param text The text to count words in.
    * @param removePunctuation Whether to remove punctuation from text.
    */
-  // @lruCache
+  @lruCache()
   lexiconCount(text: string, removePunctuation = true) {
     if (removePunctuation) {
       text = this.removePunctuation(text);
@@ -100,7 +100,7 @@ export class TextStatistics {
    * @param text The text to count common words in.
    * @param maxSize The maximum size of the common words to count. Default is 3.
    */
-  // @lruCache
+  @lruCache()
   miniWordCount(text: string, maxSize = 3) {
     return this.removePunctuation(text)
       .split(/\s+/)
@@ -111,7 +111,7 @@ export class TextStatistics {
    * Count the number of syllables in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   syllableCount(text: string) {
     const formatted = this.removePunctuation(text).toLowerCase();
     if (!formatted) return 0;
@@ -133,7 +133,7 @@ export class TextStatistics {
    * Count the number of sentences in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   sentenceCount(text: string) {
     let ignoreCount = 0;
     const sentences = text.match(/\b[^.!?]+[.!?]*/g) || [];
@@ -149,7 +149,7 @@ export class TextStatistics {
    * Calculate the average length of sentences in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   avgSentenceLength(text: string) {
     try {
       return this.lexiconCount(text) / this.sentenceCount(text);
@@ -163,7 +163,7 @@ export class TextStatistics {
    * @param text
    * @param interval
    */
-  // @lruCache
+  @lruCache()
   avgSyllablesPerWord(text: string, interval?: number) {
     const syllableCount = this.syllableCount(text);
     const lexiconCount = this.lexiconCount(text);
@@ -182,7 +182,7 @@ export class TextStatistics {
    * Calculate the average number of characters per word in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   avgCharactersPerWord(text: string) {
     try {
       return this.charCount(text) / this.lexiconCount(text);
@@ -195,7 +195,7 @@ export class TextStatistics {
    * Calculate the average number of letters per word in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   avgLettersPerWord(text: string) {
     try {
       return this.letterCount(text) / this.lexiconCount(text);
@@ -208,7 +208,7 @@ export class TextStatistics {
    * Calculate the average number of sentences per word in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   avgSentencesPerWord(text: string) {
     try {
       return this.sentenceCount(text) / this.lexiconCount(text);
@@ -221,7 +221,7 @@ export class TextStatistics {
    * Calculate the average number of words per sentence in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   avgWordsPerSentence(text: string) {
     const sentencesCount = this.sentenceCount(text);
     if (sentencesCount < 1) {
@@ -234,7 +234,7 @@ export class TextStatistics {
    * Calculates the words in text with 3 or more syllables.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   polySyllablesCount(text: string) {
     let count = 0;
     for (const word of text.split(/\s+/)) {
@@ -249,7 +249,7 @@ export class TextStatistics {
    * Calculate the number of monosyllable words in text.
    * @param text
    */
-  // @lruCache
+  @lruCache()
   monoSyllablesCount(text: string) {
     const words = this.removePunctuation(text).split(/\s+/);
     let count = 0;
@@ -266,7 +266,7 @@ export class TextStatistics {
    * @param text
    * @param threshold
    */
-  // @lruCache
+  @lruCache()
   longWordsCount(text: string, threshold = 6) {
     const words = this.removePunctuation(text).split(/\s+/);
     return words.filter((word) => word.length > threshold).length;
@@ -277,7 +277,7 @@ export class TextStatistics {
    * @param text
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
-  // @lruCache
+  @lruCache()
   readingTime(text: string, msPerChar = 14.69) {
     const words = text.split(/\s+/);
     const chars = words.map((word) => word.length);
@@ -290,7 +290,7 @@ export class TextStatistics {
    * https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#Flesch_reading_ease
    * @param text
    */
-  // @lruCache
+  @lruCache()
   fleschReadingEase(text: string) {
     if (this.lang === "pl") {
       throw new Error(
@@ -313,7 +313,7 @@ export class TextStatistics {
    * TODO: can we support multiple languages?
    * @param text
    */
-  // @lruCache
+  @lruCache()
   fleschKincaidGrade(text: string) {
     if (this.lang === "pl") {
       throw new Error(
@@ -330,7 +330,7 @@ export class TextStatistics {
    * https://en.wikipedia.org/wiki/SMOG
    * @param text
    */
-  // @lruCache
+  @lruCache()
   smogIndex(text: string) {
     const sentences = this.sentenceCount(text);
     if (sentences < 3) {
@@ -345,7 +345,7 @@ export class TextStatistics {
    * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
    * @param text
    */
-  // @lruCache
+  @lruCache()
   colemanLiauIndex(text: string) {
     const letters = this.avgLettersPerWord(text) * 100;
     const sentences = this.avgSentencesPerWord(text) * 100;
@@ -357,7 +357,7 @@ export class TextStatistics {
    * https://en.wikipedia.org/wiki/Automated_readability_index
    * @param text
    */
-  // @lruCache
+  @lruCache()
   automatedReadabilityIndex(text: string) {
     const chars = this.charCount(text);
     const words = this.lexiconCount(text);
@@ -374,7 +374,7 @@ export class TextStatistics {
    * https://en.wikipedia.org/wiki/Linsear_Write
    * @param text
    */
-  // @lruCache
+  @lruCache()
   linsearWriteFormula(text: string) {
     const words = text
       .split(/\s+/)
@@ -410,7 +410,7 @@ export class TextStatistics {
    * https://www.spanishreadability.com/gutierrez-de-polinis-readability-formula
    * @param text
    */
-  // @lruCache
+  @lruCache()
   gutierrezPolini(text: string) {
     if (this.lang !== "es") {
       console.warn(`Gutierrez Polini's formula only supports Spanish language. 
@@ -435,7 +435,7 @@ export class TextStatistics {
    * https://www.spanishreadability.com/the-crawford-score-for-spanish-texts
    * @param text
    */
-  // @lruCache
+  @lruCache()
   crawford(text: string) {
     if (this.lang !== "es") {
       console.warn(`Crawford's formula only supports Spanish language. 
@@ -463,7 +463,7 @@ export class TextStatistics {
    * https://it.wikipedia.org/wiki/Indice_Gulpease
    * @param text
    */
-  // @lruCache
+  @lruCache()
   gulpeaseIndex(text: string) {
     if (this.lang !== "it") {
       console.warn(`Gulpease index only supports Italian language. 
@@ -485,7 +485,7 @@ export class TextStatistics {
    * @param text
    * @param variant
    */
-  // @lruCache
+  @lruCache()
   wienerSachtextformel(text: string, variant: 1 | 2 | 3 | 4 = 1) {
     if (this.lang !== "de") {
       console.warn(`Wiener Sachtextformel only supports German language. 
@@ -518,7 +518,7 @@ export class TextStatistics {
    * https://www.angelfire.com/nd/nirmaldasan/journalismonline/fpetge.html
    * @param text
    */
-  // @lruCache
+  @lruCache()
   mcalpineEflaw(text: string) {
     if (!text) {
       return 0;
