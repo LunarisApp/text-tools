@@ -6,7 +6,7 @@ const caches: Record<string, LRUCache<{}, {}, unknown>> = {};
 /**
  * Method decorator to cache results using the Least Recently Used algorithm.
  */
-export function lruCache(maxSize=128): MethodDecorator {
+export function lruCache(maxSize = 128): MethodDecorator {
   return (target, key, descriptor: TypedPropertyDescriptor<any>) => {
     const keyStr = key.toString();
     const originalMethod = descriptor.value;
@@ -24,7 +24,7 @@ export function lruCache(maxSize=128): MethodDecorator {
       return result;
     };
     return descriptor;
-  }
+  };
 }
 
 export function clearCache() {

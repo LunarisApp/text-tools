@@ -8,7 +8,7 @@ import {
   testSyllableCountCases,
 } from "./data";
 import { assertDelta } from "../src/utils";
-import assert from 'node:assert'
+import assert from "node:assert";
 
 describe("basic stats", () => {
   describe("counts", () => {

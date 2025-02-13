@@ -3,9 +3,13 @@ import { join } from "path";
 
 const DICTIONARY_PATH = join(__dirname, "dictionaries");
 const IGNORED = [
-  '%', '#', 'LEFTHYPHENMIN', 'RIGHTHYPHENMIN',
-  'COMPOUNDLEFTHYPHENMIN', 'COMPOUNDRIGHTHYPHENMIN'
-]
+  "%",
+  "#",
+  "LEFTHYPHENMIN",
+  "RIGHTHYPHENMIN",
+  "COMPOUNDLEFTHYPHENMIN",
+  "COMPOUNDRIGHTHYPHENMIN",
+];
 
 class DataInt {
   value: number;
@@ -117,7 +121,9 @@ export class Hyphen {
     if (!fallback) {
       throw new Error(`Language not found: ${lang}`);
     }
-    this.hd = new HyphenDict(join(DICTIONARY_PATH, this.dictionaries[fallback]!));
+    this.hd = new HyphenDict(
+      join(DICTIONARY_PATH, this.dictionaries[fallback]!),
+    );
   }
 
   private loadDictionaries() {
@@ -165,7 +171,7 @@ export class Hyphen {
   }
 
   /**
-   * Get all possible variants for hyphenating the word.
+   * Get iterator for all possible variants of hyphenating the word.
    * @param word
    */
   *iterate(word: string): Generator<[string, string]> {
@@ -186,6 +192,14 @@ export class Hyphen {
         yield [word.slice(0, position.value), word.slice(position.value)];
       }
     }
+  }
+
+  /**
+   * Get all possible variants for hyphenating the word.
+   * @param word
+   */
+  variants(word: string): string[][] {
+    return this.iterate(word).toArray();
   }
 
   /**
@@ -218,5 +232,4 @@ export class Hyphen {
       });
     return letters.join("");
   }
-
 }
