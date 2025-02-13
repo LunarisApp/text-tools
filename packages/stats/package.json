@@ -1,6 +1,24 @@
 {
   "name": "@lunaris/stats",
+  "description": "A library for calculating text statistics (e.g. word count)",
   "version": "0.0.1",
+  "author": {
+    "name": "Roman Sirokov",
+    "url": "https://mrlightful.com",
+    "email": "roman@lunaris.app"
+  },
+  "homepage": "https://lunaris.app",
+  "repository": {
+    "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/stats"
+  },
+  "keywords": [
+    "statistics",
+    "metrics",
+    "text",
+    "linguistics",
+    "language"
+  ],
+  "License": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",

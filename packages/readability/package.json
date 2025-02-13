@@ -1,6 +1,24 @@
 {
   "name": "@lunaris/readability",
+  "description": "A library for calculating readability scores of texts",
   "version": "0.0.1",
+  "author": {
+    "name": "Roman Sirokov",
+    "url": "https://mrlightful.com",
+    "email": "roman@lunaris.app"
+  },
+  "homepage": "https://lunaris.app",
+  "repository": {
+    "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/readability"
+  },
+  "keywords": [
+    "readability",
+    "text",
+    "linguistics",
+    "language",
+    "flesch-kincaid"
+  ],
+  "License": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
