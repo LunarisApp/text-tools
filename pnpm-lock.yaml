@@ -72,9 +72,6 @@ importers:
 
   packages/readability:
     dependencies:
-      '@lunarisapp/hyphen':
-        specifier: workspace:*
-        version: link:../hyphen
       '@lunarisapp/stats':
         specifier: workspace:*
         version: link:../stats
