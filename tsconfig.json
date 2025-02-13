@@ -1,15 +1,23 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "declaration": true
+    "target": "es2016",                    // or es2016, depending on your compatibility needs
+    "module": "ESNext",                    // Use ESNext or CommonJS based on your module system
+    "moduleResolution": "bundler",         // Use bundler or node based on your module resolution strategy
+    "declaration": true,                   // Generates .d.ts files for type definitions
+    "declarationMap": true,                // Generates source maps for .d.ts files
+    "outDir": "./dist",                    // Output directory for compiled files
+    "esModuleInterop": true,               // Ensures compatibility with CommonJS modules
+    "strict": true,                        // Enables strict type checking
+    "skipLibCheck": true,                  // Skips type checking of declaration files
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
