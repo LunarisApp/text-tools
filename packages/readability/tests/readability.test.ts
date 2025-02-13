@@ -146,4 +146,9 @@ describe("readability tests", () => {
     const score = textstat.mcalpineEflaw(longTest);
     assertDelta(score, 30.8, 0.1);
   });
+
+  it("readme", () => {
+    const a = textstat.fleschReadingEase("Hello, world!");
+    console.log(a);
+  });
 });
