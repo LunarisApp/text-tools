@@ -1,0 +1,42 @@
+export declare class TextStatistics {
+    private lang;
+    private rmApostrophe;
+    private cmudict;
+    private hyphen;
+    constructor(props?: {
+        lang?: string;
+        rmApostrophe?: boolean;
+    });
+    private getCfg;
+    setLang(lang: string): void;
+    setRmApostrophe(rmApostrophe: boolean): void;
+    removePunctuation(text: string): string;
+    charCount(text: string, ignoreSpaces?: boolean): number;
+    letterCount(text: string, ignoreSpaces?: boolean): number;
+    lexiconCount(text: string, removePunctuation?: boolean): number;
+    miniWordCount(text: string, maxSize?: number): number;
+    syllableCount(text: string): number;
+    sentenceCount(text: string): number;
+    avgSentenceLength(text: string): number;
+    avgSyllablesPerWord(text: string, interval?: number): number;
+    avgCharactersPerWord(text: string): number;
+    avgLettersPerWord(text: string): number;
+    avgSentencesPerWord(text: string): number;
+    avgWordsPerSentence(text: string): number;
+    polySyllablesCount(text: string): number;
+    monoSyllablesCount(text: string): number;
+    longWordsCount(text: string, threshold?: number): number;
+    readingTime(text: string, msPerChar?: number): number;
+    fleschReadingEase(text: string): number;
+    fleschKincaidGrade(text: string): number;
+    smogIndex(text: string): number;
+    colemanLiauIndex(text: string): number;
+    automatedReadabilityIndex(text: string): number;
+    linsearWriteFormula(text: string): number;
+    gutierrezPolini(text: string): number;
+    crawford(text: string): number;
+    gulpeaseIndex(text: string): number;
+    wienerSachtextformel(text: string, variant?: 1 | 2 | 3 | 4): number;
+    mcalpineEflaw(text: string): number;
+}
+export declare const textstat: TextStatistics;
