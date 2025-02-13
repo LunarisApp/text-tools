@@ -1,5 +1,5 @@
 {
-  "name": "@lunaris/stats",
+  "name": "@lunarisapp/stats",
   "description": "A library for calculating text statistics (e.g. word count)",
   "version": "0.0.1",
   "author": {
@@ -10,6 +10,9 @@
   "homepage": "https://lunaris.app",
   "repository": {
     "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/stats"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "statistics",
@@ -28,7 +31,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@lunaris/hyphen": "workspace:*",
+    "@lunarisapp/hyphen": "workspace:*",
     "@stdlib/datasets-cmudict": "^0.2.2",
     "jest": "^29.7.0",
     "lru-cache": "^11.0.2"

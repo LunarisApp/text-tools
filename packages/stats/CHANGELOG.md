@@ -1,4 +1,4 @@
-# @lunaris/stats
+# @lunarisapp/stats
 
 ## 0.0.1
 
@@ -6,4 +6,4 @@
 
 - Initial release
 - Updated dependencies
-  - @lunaris/hyphen@0.0.1
+  - @lunarisapp/hyphen@0.0.1

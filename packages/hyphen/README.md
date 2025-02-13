@@ -4,19 +4,19 @@ A hyphenation library based on [LibreOffice dictionaries](https://git.libreoffic
 
 > [!TIP]
 > See also:
->   - [@lunaris/stats](https://github.com/LunarisApp/text-tools/tree/main/packages/stats) for text statistics (e.g. word count, sentence count, etc.).
->   - [@lunaris/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
+>   - [@lunarisapp/stats](https://github.com/LunarisApp/text-tools/tree/main/packages/stats) for text statistics (e.g. word count, sentence count, etc.).
+>   - [@lunarisapp/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
 
 ## Installation
 
 ```bash
-npm install @lunaris/hyphen
+npm install @lunarisapp/hyphen
 ```
 
 ## Usage
 
 ```typescript
-import { TextHyphen } from '@lunaris/hyphen';
+import { TextHyphen } from '@lunarisapp/hyphen';
 
 const hyphen = new TextHyphen({
     lang: 'en_US',

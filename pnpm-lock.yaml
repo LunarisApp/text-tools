@@ -72,10 +72,10 @@ importers:
 
   packages/readability:
     dependencies:
-      '@lunaris/hyphen':
+      '@lunarisapp/hyphen':
         specifier: workspace:*
         version: link:../hyphen
-      '@lunaris/stats':
+      '@lunarisapp/stats':
         specifier: workspace:*
         version: link:../stats
       '@stdlib/datasets-cmudict':
@@ -130,7 +130,7 @@ importers:
 
   packages/stats:
     dependencies:
-      '@lunaris/hyphen':
+      '@lunarisapp/hyphen':
         specifier: workspace:*
         version: link:../hyphen
       '@stdlib/datasets-cmudict':

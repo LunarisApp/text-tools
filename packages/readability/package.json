@@ -1,5 +1,5 @@
 {
-  "name": "@lunaris/readability",
+  "name": "@lunarisapp/readability",
   "description": "A library for calculating readability scores of texts",
   "version": "0.0.1",
   "author": {
@@ -10,6 +10,9 @@
   "homepage": "https://lunaris.app",
   "repository": {
     "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/readability"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "readability",
@@ -28,8 +31,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@lunaris/hyphen": "workspace:*",
-    "@lunaris/stats": "workspace:*",
+    "@lunarisapp/hyphen": "workspace:*",
+    "@lunarisapp/stats": "workspace:*",
     "@stdlib/datasets-cmudict": "^0.2.2",
     "jest": "^29.7.0",
     "lru-cache": "^11.0.2"

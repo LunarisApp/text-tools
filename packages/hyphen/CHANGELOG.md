@@ -1,4 +1,4 @@
-# @lunaris/hyphen
+# @lunarisapp/hyphen
 
 ## 0.0.1
 

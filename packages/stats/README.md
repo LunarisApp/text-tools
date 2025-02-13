@@ -4,19 +4,19 @@ A library for calculating text statistics, such as word count, sentence count, e
 
 > [!TIP]
 > See also:
->   - [@lunaris/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
->   - [@lunaris/hyphen](https://github.com/LunarisApp/text-tools/tree/main/packages/hyphen) for word hyphenation.
+>   - [@lunarisapp/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
+>   - [@lunarisapp/hyphen](https://github.com/LunarisApp/text-tools/tree/main/packages/hyphen) for word hyphenation.
 
 ## Installation
 
 ```bash
-npm install @lunaris/stats
+npm install @lunarisapp/stats
 ```
 
 ## Usage
 
 ```typescript
-import { TextStats } from '@lunaris/stats';
+import { TextStats } from '@lunarisapp/stats';
 
 const stats = new TextStats({
     lang: 'en_US',

@@ -1,6 +1,6 @@
 import { clearCache, lruCache } from "./utils";
 import cmudict from "@stdlib/datasets-cmudict";
-import { TextHyphen } from "@lunaris/hyphen";
+import { TextHyphen } from "@lunarisapp/hyphen";
 
 export class TextStats {
   private lang = "en_US";

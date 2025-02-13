@@ -1,5 +1,5 @@
 {
-  "name": "@lunaris/hyphen",
+  "name": "@lunarisapp/hyphen",
   "description": "A hyphenation library for JavaScript",
   "version": "0.0.1",
   "author": {
@@ -10,6 +10,9 @@
   "homepage": "https://lunaris.app",
   "repository": {
     "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/hyphen"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "hyphenation",

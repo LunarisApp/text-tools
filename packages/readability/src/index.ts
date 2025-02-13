@@ -1,5 +1,5 @@
 import { clearCache, lruCache } from "./utils/utils";
-import { TextStats } from "@lunaris/stats";
+import { TextStats } from "@lunarisapp/stats";
 import { LangConfig, langs } from "./utils/config";
 import {
   fleschReadingEase,
