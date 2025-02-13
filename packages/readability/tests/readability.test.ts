@@ -8,7 +8,7 @@ import {
   longTest,
 } from "./data";
 import assert from "node:assert";
-import { assertDelta } from "../src/utils";
+import { assertDelta } from "../src/utils/utils";
 
 describe("readability tests", () => {
   describe("flesch reading ease", () => {
