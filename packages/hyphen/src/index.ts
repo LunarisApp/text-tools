@@ -1,16 +1,6 @@
 import fs from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
+import { join } from "path";
 
-let __dirname;
-if (typeof __filename === 'undefined') {
-  // ESM: Use import.meta.url
-  const __filename = fileURLToPath(import.meta.url);
-  __dirname = dirname(__filename);
-} else {
-  // CJS: Use __filename and __dirname directly
-  __dirname = dirname(__filename);
-}
 const DICTIONARY_PATH = join(__dirname, "dictionaries");
 
 class DataInt {

@@ -1,7 +1,6 @@
 {
   "name": "@lunaris/textstat",
   "version": "0.0.1",
-  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
