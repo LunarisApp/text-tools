@@ -13,10 +13,10 @@ class DataInt {
   }
 }
 
-class HyphDict {
+class HyphenDict {
   patterns: Map<string, [number, number[]]> = new Map();
   cache: Map<string, DataInt[]> = new Map();
-  maxlen: number = 0;
+  maxLen: number = 0;
 
   constructor(filePath: string) {
     if (!fs.existsSync(filePath)) {
@@ -51,7 +51,7 @@ class HyphDict {
       this.patterns.set(tags.join(""), [start, values.slice(start, end)]);
     });
 
-    this.maxlen = Math.max(
+    this.maxLen = Math.max(
       ...Array.from(this.patterns.keys()).map((k) => k.length),
     );
   }
@@ -66,7 +66,7 @@ class HyphDict {
     for (let i = 0; i < extendedWord.length - 1; i++) {
       for (
         let j = i + 1;
-        j < Math.min(i + this.maxlen, extendedWord.length) + 1;
+        j < Math.min(i + this.maxLen, extendedWord.length) + 1;
         j++
       ) {
         const pattern = this.patterns.get(extendedWord.slice(i, j));
@@ -93,7 +93,7 @@ class HyphDict {
 export class Hyphen {
   private readonly left: number;
   private readonly right: number;
-  private hd: HyphDict;
+  private hd: HyphenDict;
   readonly dictionaries: Record<string, string>;
   private readonly lowercaseLangs: Record<string, string>;
 
@@ -101,7 +101,7 @@ export class Hyphen {
     const { lang = "en_US", left = 2, right = 2 } = props || {};
     this.left = left;
     this.right = right;
-    this.dictionaries = this.loadDicts();
+    this.dictionaries = this.loadDictionaries();
     this.lowercaseLangs = Object.keys(this.dictionaries).reduce(
       (acc, lang) => {
         acc[lang.toLowerCase()] = lang;
@@ -113,25 +113,45 @@ export class Hyphen {
     if (!fallback) {
       throw new Error(`Language not found: ${lang}`);
     }
-    this.hd = new HyphDict(join(DICTIONARY_PATH, this.dictionaries[fallback]!));
+    this.hd = new HyphenDict(join(DICTIONARY_PATH, this.dictionaries[fallback]!));
   }
 
-  private loadDicts() {
-    const dicts: Record<string, string> = {};
+  private loadDictionaries() {
+    const dictionaries: Record<string, string> = {};
     for (const file of fs.readdirSync(DICTIONARY_PATH).sort()) {
       const [name, ext] = file.split(".");
-      const lang = name!.replace("hyph_", "").replace("-", "_");
+      const lang = name!.replace("hyph_", "").replace("-", "_"); // File name format: hyph_LANG-COUNTRY.dic
       const shortLang = lang.split("_")[0];
       if (ext === "dic") {
-        dicts[lang] = file;
-        if (!dicts[shortLang!]) {
-          dicts[shortLang!] = file;
+        dictionaries[lang] = file;
+        if (!dictionaries[shortLang!]) {
+          dictionaries[shortLang!] = file;
         }
       }
     }
-    return dicts;
+    return dictionaries;
   }
 
+  /**
+   * Get the fallback language for a given language.
+   * @param language
+   */
+  getLanguageFallback(language: string) {
+    const parts = language.replace("-", "_").toLowerCase().split("_");
+    while (parts.length) {
+      const currentLanguage = parts.join("_");
+      if (this.lowercaseLangs[currentLanguage]) {
+        return this.lowercaseLangs[currentLanguage];
+      }
+      parts.pop();
+    }
+    return undefined;
+  }
+
+  /**
+   * Get the positions of possible hyphenation points in a word
+   * @param word
+   */
   positions(word: string): number[] {
     const rightLimit = word.length - this.right;
     return this.hd
@@ -140,7 +160,10 @@ export class Hyphen {
       .filter((pos) => this.left <= pos && pos <= rightLimit);
   }
 
-  // Generator function to iterate over all hyphenation possibilities, the longest first
+  /**
+   * Get all possible variants for hyphenating the word.
+   * @param word
+   */
   *iterate(word: string): Generator<[string, string]> {
     for (const position of this.hd.positions(word).reverse()) {
       if (position.data) {
@@ -161,7 +184,12 @@ export class Hyphen {
     }
   }
 
-  // Get the longest possible first part and the last part of a word
+  /**
+   * Wrap a word at a given width with a hyphen.
+   * @param word
+   * @param width
+   * @param hyphen
+   */
   wrap(word: string, width: number, hyphen = "-") {
     width -= hyphen.length;
     for (const [w1, w2] of this.iterate(word)) {
@@ -172,6 +200,11 @@ export class Hyphen {
     return null;
   }
 
+  /**
+   * Insert hyphens into a word at possible positions.
+   * @param word
+   * @param hyphen
+   */
   inserted(word: string, hyphen = "-"): string {
     const letters = [...word];
     this.positions(word)
@@ -182,15 +215,4 @@ export class Hyphen {
     return letters.join("");
   }
 
-  getLanguageFallback(language: string) {
-    const parts = language.replace("-", "_").toLowerCase().split("_");
-    while (parts.length) {
-      const currentLanguage = parts.join("_");
-      if (this.lowercaseLangs[currentLanguage]) {
-        return this.lowercaseLangs[currentLanguage];
-      }
-      parts.pop();
-    }
-    return undefined;
-  }
 }
