@@ -18,26 +18,26 @@ npm install @lunarisapp/hyphen
 ```typescript
 import { TextHyphen } from '@lunarisapp/hyphen';
 
-const hyphen = new TextHyphen({
+const textHyphen = new TextHyphen({
     lang: 'en_US',
     left: 2,
     right: 2,
 });
 
-// Gets the hyphenation points for a word.
+// Gets the textHyphenation points for a word.
 // Result: [2, 6]
-hyphen.positions('hyphenation');
+textHyphen.positions('hyphenation');
 
 // Wraps a word with hyphens at the given positions.
 // Result: 'hy-phenation'
-hyphen.wrap('hy-phenation', 3);
+textHyphen.wrap('hy-phenation', 3);
 
 // Gets the hyphenation variants for a word.
 // Result: [['hy', 'phenation'], ['hyphen', 'ation']]
-hyphen.variants('hyphenation');
+textHyphen.variants('hyphenation');
 
 // Inserts hyphens in all possible positions.
 // Result: 'hy-phen-ation'
-hyphen.inserted('hyphenation');
+textHyphen.inserted('hyphenation');
 ```
 

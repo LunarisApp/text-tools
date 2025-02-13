@@ -22,9 +22,6 @@ const textReadability = new TextReadability({
     lang: 'en_US',
 });
 
-// or global instance
-import { textReadability } from '@lunarisapp/readability';
-
 textReadability.fleschReadingEase('Hello, world!');
 ```
 

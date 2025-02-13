@@ -280,5 +280,3 @@ export class TextStats {
     return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;
   }
 }
-
-export const textStats = new TextStats();

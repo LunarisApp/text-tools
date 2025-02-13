@@ -1,5 +1,4 @@
 import { describe, expect, it } from "@jest/globals";
-import { textStats } from "../src";
 import {
   longTest,
   punctText,
@@ -7,12 +6,14 @@ import {
   punctTextResultWoApostr,
   testSyllableCountCases,
 } from "./data";
+import { TextStats } from "../src";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
   return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
 }
 
 describe("stats tests", () => {
+  const textStats = new TextStats();
   describe("counts", () => {
     it("char count", () => {
       textStats.setLang("en");

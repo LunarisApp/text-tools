@@ -253,5 +253,3 @@ export class TextReadability {
     return mcalpineEflaw({ words, sentences, miniWords });
   }
 }
-
-export const textstat = new TextReadability();

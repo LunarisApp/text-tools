@@ -18,34 +18,34 @@ npm install @lunarisapp/stats
 ```typescript
 import { TextStats } from '@lunarisapp/stats';
 
-const stats = new TextStats({
+const textStats = new TextStats({
     lang: 'en_US',
     rmApostrophe: true,
 });
 
 // Gets the word count.
 // Result: 2
-stats.wordCount('Hello, world!');
+textStats.wordCount('Hello, world!');
 
 // Gets the sentence count.
 // Result: 2
-stats.sentenceCount('Hello, world! How are you?');
+textStats.sentenceCount('Hello, world! How are you?');
 
 // And also...
-stats.readingTime('...'); // in seconds
+textStats.readingTime('...'); // in seconds
 
 // And more...
-stats.charCount('...');
-stats.letterCount('...');
-stats.syllableCount('...');
-stats.longWordsCount('...', 6);
-stats.shortWordCount('...', 3);
-stats.monosyllablesCount('...');
-stats.polysyllablesCount('...');
-stats.avgSentenceLength('...');
-stats.avgSyllablesPerWord('...');
-stats.avgCharactersPerWord('...');
-stats.avgSentencesPerWord('...');
-stats.avgWordsPerSentence('...');
-stats.removePunctuation('...');
+textStats.charCount('...');
+textStats.letterCount('...');
+textStats.syllableCount('...');
+textStats.longWordsCount('...', 6);
+textStats.shortWordCount('...', 3);
+textStats.monosyllablesCount('...');
+textStats.polysyllablesCount('...');
+textStats.avgSentenceLength('...');
+textStats.avgSyllablesPerWord('...');
+textStats.avgCharactersPerWord('...');
+textStats.avgSentencesPerWord('...');
+textStats.avgWordsPerSentence('...');
+textStats.removePunctuation('...');
 ```
