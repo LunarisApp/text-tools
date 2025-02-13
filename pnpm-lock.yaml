@@ -48,7 +48,50 @@ importers:
         specifier: ^8.24.0
         version: 8.24.0(eslint@9.20.1)(typescript@5.7.3)
 
-  packages/textstat:
+  packages/readability:
+    dependencies:
+      '@lunaris/hyphen':
+        specifier: workspace:*
+        version: link:../hyphen
+      '@lunaris/stats':
+        specifier: workspace:*
+        version: link:../stats
+      '@stdlib/datasets-cmudict':
+        specifier: ^0.2.2
+        version: 0.2.2
+      lru-cache:
+        specifier: ^11.0.2
+        version: 11.0.2
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.20.0
+        version: 9.20.0
+      '@types/node':
+        specifier: ^22.13.1
+        version: 22.13.1
+      copyfiles:
+        specifier: ^2.4.1
+        version: 2.4.1
+      eslint:
+        specifier: ^9.20.1
+        version: 9.20.1
+      globals:
+        specifier: ^15.14.0
+        version: 15.14.0
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(tsx@4.19.2)(typescript@5.7.3)
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
+      typescript:
+        specifier: ^5.5.3
+        version: 5.7.3
+      typescript-eslint:
+        specifier: ^8.24.0
+        version: 8.24.0(eslint@9.20.1)(typescript@5.7.3)
+
+  packages/stats:
     dependencies:
       '@lunaris/hyphen':
         specifier: workspace:*

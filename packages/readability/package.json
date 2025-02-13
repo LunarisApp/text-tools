@@ -1,0 +1,29 @@
+{
+  "name": "@lunaris/readability",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "eslint \"{src,tests}/**/*.ts\" --fix",
+    "test": "node --require tsx --test **/*.test.ts"
+  },
+  "dependencies": {
+    "@lunaris/hyphen": "workspace:*",
+    "@lunaris/stats": "workspace:*",
+    "@stdlib/datasets-cmudict": "^0.2.2",
+    "lru-cache": "^11.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^22.13.1",
+    "copyfiles": "^2.4.1",
+    "eslint": "^9.20.1",
+    "globals": "^15.14.0",
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.2",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.24.0"
+  }
+}

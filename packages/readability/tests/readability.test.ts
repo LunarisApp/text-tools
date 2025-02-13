@@ -10,7 +10,7 @@ import {
 import assert from "node:assert";
 import { assertDelta } from "../src/utils";
 
-describe("scores", () => {
+describe("readability tests", () => {
   describe("flesch reading ease", () => {
     it("english config", () => {
       textstat.setLang("en");

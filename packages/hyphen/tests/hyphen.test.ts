@@ -1,22 +1,22 @@
 import { describe, it } from "node:test";
 import * as assert from "node:assert";
-import { Hyphen } from "../src";
+import { TextHyphen } from "../src";
 
-describe("Hyphen Tests", () => {
+describe("hyphen tests", () => {
   it("should correctly hyphenate words using inserted method", () => {
-    const dic = new Hyphen({ lang: "nl_NL" });
+    const dic = new TextHyphen({ lang: "nl_NL" });
     assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-gre-pen");
   });
 
   it("should correctly wrap words", () => {
-    const dic = new Hyphen({ lang: "nl_NL" });
+    const dic = new TextHyphen({ lang: "nl_NL" });
     const actual = dic.wrap("autobandventieldopje", 11);
     const expected = ["autoband-", "ventieldopje"];
     assert.deepStrictEqual(actual, expected);
   });
 
   it("should iterate hyphenation positions correctly", () => {
-    const dic = new Hyphen({ lang: "nl_NL" });
+    const dic = new TextHyphen({ lang: "nl_NL" });
     console.log(dic);
     const actual = dic.variants("Amsterdam");
     const expected = [
@@ -27,7 +27,7 @@ describe("Hyphen Tests", () => {
   });
 
   it("should use a fallback dictionary", () => {
-    const dic = new Hyphen({ lang: "nl_NL-variant" });
+    const dic = new TextHyphen({ lang: "nl_NL-variant" });
     const actual = dic.variants("Amsterdam");
     const expected = [
       ["Amster", "dam"],
@@ -37,7 +37,7 @@ describe("Hyphen Tests", () => {
   });
 
   it("should throw an error for a missing dictionary", () => {
-    assert.throws(() => new Hyphen({ lang: "mi_SS" }), Error);
+    assert.throws(() => new TextHyphen({ lang: "mi_SS" }), Error);
   });
 
   // it('should use a custom dictionary', () => {
@@ -54,19 +54,19 @@ describe("Hyphen Tests", () => {
 
   describe("should support left and right hyphenation constraints", () => {
     it("default", () => {
-      const dic = new Hyphen({ lang: "nl_NL" });
+      const dic = new TextHyphen({ lang: "nl_NL" });
       assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-gre-pen");
     });
     it("left", () => {
-      const dic = new Hyphen({ lang: "nl_NL", left: 4 });
+      const dic = new TextHyphen({ lang: "nl_NL", left: 4 });
       assert.strictEqual(dic.inserted("lettergrepen"), "letter-gre-pen");
     });
     it("right", () => {
-      const dic = new Hyphen({ lang: "nl_NL", right: 4 });
+      const dic = new TextHyphen({ lang: "nl_NL", right: 4 });
       assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-grepen");
     });
     it("both", () => {
-      const dic = new Hyphen({ lang: "nl_NL", left: 4, right: 4 });
+      const dic = new TextHyphen({ lang: "nl_NL", left: 4, right: 4 });
       assert.strictEqual(dic.inserted("lettergrepen"), "letter-grepen");
     });
   });
@@ -84,7 +84,7 @@ describe("Hyphen Tests", () => {
   // });
 
   it("should handle uppercase words correctly", () => {
-    const dic = new Hyphen({ lang: "nl_NL" });
+    const dic = new TextHyphen({ lang: "nl_NL" });
     assert.strictEqual(dic.inserted("LETTERGREPEN"), "LET-TER-GRE-PEN");
   });
 
@@ -98,15 +98,15 @@ describe("Hyphen Tests", () => {
   // });
 
   it("should be able to load all dictionaries", () => {
-    const hyp = new Hyphen();
+    const hyp = new TextHyphen();
     const dictionaries = hyp.dictionaries;
     Object.keys(dictionaries).forEach((dict) => {
-      new Hyphen({ lang: dict });
+      new TextHyphen({ lang: dict });
     });
   });
 
   it("should correctly determine language fallbacks", () => {
-    const hyp = new Hyphen();
+    const hyp = new TextHyphen();
     assert.strictEqual(hyp.getLanguageFallback("en"), "en");
     assert.strictEqual(hyp.getLanguageFallback("en_US"), "en_US");
     assert.strictEqual(hyp.getLanguageFallback("en_FR"), "en");

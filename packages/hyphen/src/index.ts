@@ -98,7 +98,7 @@ class HyphenDict {
   }
 }
 
-export class Hyphen {
+export class TextHyphen {
   private readonly left: number;
   private readonly right: number;
   private hd: HyphenDict;
