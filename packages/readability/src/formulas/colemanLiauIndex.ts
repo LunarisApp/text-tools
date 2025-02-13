@@ -7,8 +7,12 @@ const SENTENCES_COEF = -0.296;
  * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
  */
 export function colemanLiauIndex(params: {
-    letters: number;
-    sentences: number;
+  letters: number;
+  sentences: number;
 }) {
-    return LETTERS_COEF * params.letters + SENTENCES_COEF * params.sentences + BASE_COEF;
+  return (
+    LETTERS_COEF * params.letters +
+    SENTENCES_COEF * params.sentences +
+    BASE_COEF
+  );
 }

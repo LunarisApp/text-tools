@@ -8,9 +8,11 @@ const SYLLABLES_COEF = 11.8;
  * TODO: can we support multiple languages?
  */
 export function fleschKincaidGrade(params: {
-    sentences: number
-    syllablesPerWord: number
+  sentences: number;
+  syllablesPerWord: number;
 }) {
-    const { sentences, syllablesPerWord } = params;
-    return SENTENCES_COEF * sentences + SYLLABLES_COEF * syllablesPerWord + BASE_COEF;
+  const { sentences, syllablesPerWord } = params;
+  return (
+    SENTENCES_COEF * sentences + SYLLABLES_COEF * syllablesPerWord + BASE_COEF
+  );
 }

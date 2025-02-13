@@ -7,16 +7,20 @@ const SYLLABLES_PER_WORDS_COEF = 0.049;
  * https://www.spanishreadability.com/the-crawford-score-for-spanish-texts
  */
 export function crawford(params: {
-    words: number;
-    sentences: number;
-    syllables: number;
+  words: number;
+  sentences: number;
+  syllables: number;
 }) {
-    const { words, sentences, syllables } = params;
-    try {
-        const sentencesPerWords = 100 * (sentences / words);
-        const syllablesPerWords = 100 * (syllables / words);
-        return SENTENCE_PER_WORDS_COEF * sentencesPerWords + SYLLABLES_PER_WORDS_COEF * syllablesPerWords + BASE_COEF;
-    } catch {
-        return 0;
-    }
+  const { words, sentences, syllables } = params;
+  try {
+    const sentencesPerWords = 100 * (sentences / words);
+    const syllablesPerWords = 100 * (syllables / words);
+    return (
+      SENTENCE_PER_WORDS_COEF * sentencesPerWords +
+      SYLLABLES_PER_WORDS_COEF * syllablesPerWords +
+      BASE_COEF
+    );
+  } catch {
+    return 0;
+  }
 }

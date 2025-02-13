@@ -21,7 +21,7 @@ export class TextStats {
   setLang(lang: string) {
     this.lang = lang;
     this.hyphen = new TextHyphen({ lang });
-    if (lang.toLowerCase().startsWith('en')) {
+    if (lang.toLowerCase().startsWith("en")) {
       this.cmudict = cmudict({ data: "dict" }) as Record<string, string>;
     } else {
       this.cmudict = null;
@@ -279,7 +279,6 @@ export class TextStats {
     const rtPerWord = chars.map((char) => char * msPerChar);
     return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;
   }
-
 }
 
 export const textStats = new TextStats();

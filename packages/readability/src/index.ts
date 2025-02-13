@@ -1,23 +1,26 @@
 import { clearCache, lruCache } from "./utils/utils";
-import { TextStats } from '@lunaris/stats'
-import { LangConfig, langs } from './utils/config'
+import { TextStats } from "@lunaris/stats";
+import { LangConfig, langs } from "./utils/config";
 import {
   fleschReadingEase,
   mcalpineEflaw,
   wienerSachtextformel,
   WienerSachtextformelVariant,
-  gulpeaseIndex, crawford, gutierrezPolini,
+  gulpeaseIndex,
+  crawford,
+  gutierrezPolini,
   linsearWriteFormula,
-  automatedReadabilityIndex, smogIndex, fleschKincaidGrade,
-  colemanLiauIndex
-} from './formulas'
+  automatedReadabilityIndex,
+  smogIndex,
+  fleschKincaidGrade,
+  colemanLiauIndex,
+} from "./formulas";
 
 export * from "./formulas";
 
 export class TextReadability {
-
   private lang = "en_US";
-  private textStats!: TextStats
+  private textStats!: TextStats;
 
   constructor(props?: { lang?: string }) {
     const { lang } = props ?? {};
@@ -52,16 +55,19 @@ export class TextReadability {
     }
     const sInterval = ["es", "it"].includes(this.lang) ? 100 : undefined;
     const sentences = this.textStats.avgSentenceLength(text);
-    const syllablesPerWord = this.textStats.avgSyllablesPerWord(text, sInterval);
+    const syllablesPerWord = this.textStats.avgSyllablesPerWord(
+      text,
+      sInterval,
+    );
     return fleschReadingEase({
       sentences,
       syllablesPerWord,
       coefficients: {
-        base: this.getCfg('fre_base'),
-        sentences: this.getCfg('fre_sentence_length'),
-        syllablesPerWord: this.getCfg('fre_syllables_per_word')
-      }
-    })
+        base: this.getCfg("fre_base"),
+        sentences: this.getCfg("fre_sentence_length"),
+        syllablesPerWord: this.getCfg("fre_syllables_per_word"),
+      },
+    });
   }
 
   /**
@@ -129,18 +135,20 @@ export class TextReadability {
    * @param sample Number of words to sample from the text
    */
   // @lruCache()
-  linsearWriteFormula(text: string, sample=100) {
+  linsearWriteFormula(text: string, sample = 100) {
     const words = text
       .split(/\s+/)
       .slice(0, sample)
       .filter((word) => word);
     const newText = words.join(" ");
     const sentences = this.textStats.sentenceCount(newText);
-    const syllablesPerWords = words.map((word) => this.textStats.syllableCount(word));
+    const syllablesPerWords = words.map((word) =>
+      this.textStats.syllableCount(word),
+    );
     return linsearWriteFormula({
-        sentences,
-        syllablesPerWords,
-    })
+      sentences,
+      syllablesPerWords,
+    });
   }
 
   /**
@@ -180,7 +188,7 @@ export class TextReadability {
     const sentences = this.textStats.sentenceCount(text);
     const words = this.textStats.wordCount(text);
     const syllables = this.textStats.syllableCount(text);
-    return crawford({ words, sentences, syllables })
+    return crawford({ words, sentences, syllables });
   }
 
   /**
@@ -198,10 +206,10 @@ export class TextReadability {
       return 0;
     }
     return gulpeaseIndex({
-        words: this.textStats.wordCount(text),
-        sentences: this.textStats.sentenceCount(text),
-        chars: this.textStats.charCount(text),
-    })
+      words: this.textStats.wordCount(text),
+      sentences: this.textStats.sentenceCount(text),
+      chars: this.textStats.charCount(text),
+    });
   }
 
   /**
@@ -220,13 +228,13 @@ export class TextReadability {
       return 0;
     }
     return wienerSachtextformel({
-        words: this.textStats.wordCount(text),
-        sentences: this.textStats.sentenceCount(text),
-        longWords: this.textStats.longWordsCount(text),
-        polysyllables: this.textStats.polySyllablesCount(text),
-        monosyllables: this.textStats.monoSyllablesCount(text),
-        variant,
-    })
+      words: this.textStats.wordCount(text),
+      sentences: this.textStats.sentenceCount(text),
+      longWords: this.textStats.longWordsCount(text),
+      polysyllables: this.textStats.polySyllablesCount(text),
+      monosyllables: this.textStats.monoSyllablesCount(text),
+      variant,
+    });
   }
 
   /**

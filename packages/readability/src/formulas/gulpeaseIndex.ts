@@ -7,10 +7,10 @@ const CHARS_COEF = 10;
  * https://it.wikipedia.org/wiki/Indice_Gulpease
  */
 export function gulpeaseIndex(params: {
-    sentences: number;
-    chars: number;
-    words: number;
+  sentences: number;
+  chars: number;
+  words: number;
 }) {
-    const { sentences, chars, words, } = params;
-    return (SENTENCES_COEF * sentences - CHARS_COEF * chars) / words + BASE_COEF;
+  const { sentences, chars, words } = params;
+  return (SENTENCES_COEF * sentences - CHARS_COEF * chars) / words + BASE_COEF;
 }

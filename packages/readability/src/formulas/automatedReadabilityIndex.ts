@@ -7,16 +7,18 @@ const WORDS_PER_SENTENCES_COEF = 0.5;
  * https://en.wikipedia.org/wiki/Automated_readability_index
  */
 export function automatedReadabilityIndex(params: {
-    chars: number;
-    words: number;
-    sentences: number;
+  chars: number;
+  words: number;
+  sentences: number;
 }) {
-    const { chars, words, sentences } = params;
-    try {
-        return CHARS_PER_WORDS_COEF * (chars / words)
-            + WORDS_PER_SENTENCES_COEF * (words / sentences)
-            + BASE_COEF;
-    } catch {
-        return 0;
-    }
+  const { chars, words, sentences } = params;
+  try {
+    return (
+      CHARS_PER_WORDS_COEF * (chars / words) +
+      WORDS_PER_SENTENCES_COEF * (words / sentences) +
+      BASE_COEF
+    );
+  } catch {
+    return 0;
+  }
 }
