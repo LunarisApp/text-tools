@@ -7,17 +7,22 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "eslint \"{src,tests}/**/*.ts\" --fix",
-    "test": "node --require tsx --test **/*.test.ts"
+    "test": "jest"
   },
   "dependencies": {
     "@lunaris/hyphen": "workspace:*",
     "@lunaris/stats": "workspace:*",
     "@stdlib/datasets-cmudict": "^0.2.2",
+    "jest": "^29.7.0",
     "lru-cache": "^11.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
+    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.20.0",
-    "@types/node": "^22.13.1",
+    "@jest/globals": "^29.7.0",
+    "babel-jest": "^29.7.0",
     "copyfiles": "^2.4.1",
     "eslint": "^9.20.1",
     "globals": "^15.14.0",

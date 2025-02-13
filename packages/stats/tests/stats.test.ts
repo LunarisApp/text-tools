@@ -1,4 +1,4 @@
-import { describe, it } from "node:test";
+import { describe, expect, it } from "@jest/globals";
 import { textStats } from "../src";
 import {
   longTest,
@@ -7,8 +7,10 @@ import {
   punctTextResultWoApostr,
   testSyllableCountCases,
 } from "./data";
-import { assertDelta } from "../src/utils";
-import assert from "node:assert";
+
+function assertDelta(actual: number, expected: number, delta = 0.1) {
+  return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
+}
 
 describe("stats tests", () => {
   describe("counts", () => {
@@ -16,30 +18,30 @@ describe("stats tests", () => {
       textStats.setLang("en");
       const count = textStats.charCount(longTest);
       const countSpaces = textStats.charCount(longTest, false);
-      assert.strictEqual(count, 1748);
-      assert.strictEqual(countSpaces, 2123);
+      expect(count).toBe(1748);
+      expect(countSpaces).toBe(2123);
     });
 
     it("letter count", () => {
       textStats.setLang("en");
       const count = textStats.letterCount(longTest);
       const countSpaces = textStats.letterCount(longTest, false);
-      assert.strictEqual(count, 1686);
-      assert.strictEqual(countSpaces, 2061);
+      expect(count).toBe(1686);
+      expect(countSpaces).toBe(2061);
     });
 
     it("lexicon count", () => {
       textStats.setLang("en");
       const count = textStats.wordCount(longTest);
       const countPunct = textStats.wordCount(longTest, false);
-      assert.strictEqual(count, 372);
-      assert.strictEqual(countPunct, 376);
+      expect(count).toBe(372);
+      expect(countPunct).toBe(376);
     });
 
     it("sentence count", () => {
       textStats.setLang("en");
       const count = textStats.sentenceCount(longTest);
-      assert.strictEqual(count, 17);
+      expect(count).toBe(17);
     });
 
     // it('sentence count russian', () => {
@@ -66,13 +68,13 @@ describe("stats tests", () => {
       textStats.setRmApostrophe(true);
       const text = textStats.removePunctuation(punctText);
       textStats.setRmApostrophe(false);
-      assert.strictEqual(text, punctTextResultWoApostr);
+      expect(text).toBe(punctTextResultWoApostr);
     });
 
     it("excl. apostrophe", () => {
       textStats.setLang("en");
       const text = textStats.removePunctuation(punctText);
-      assert.strictEqual(text, punctTextResultWApostr);
+      expect(text).toBe(punctTextResultWApostr);
     });
   });
 

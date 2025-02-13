@@ -1,5 +1,4 @@
 import { LRUCache } from "lru-cache";
-import assert from "node:assert";
 
 const caches: Record<string, LRUCache<{}, {}, unknown>> = {};
 
@@ -37,11 +36,4 @@ export function getGradeSuffix(grade: number) {
   const ordinalMap: Record<number, string> = { 1: "st", 2: "nd", 3: "rd" };
   const teensMap: Record<number, string> = { 11: "th", 12: "th", 13: "th" };
   return teensMap[grade % 100] || ordinalMap[grade % 10] || "th";
-}
-
-export function assertDelta(actual: number, expected: number, delta = 0.01) {
-  assert.ok(
-    Math.abs(expected - actual) <= delta,
-    `Expected ${expected}, got ${actual}`,
-  );
 }

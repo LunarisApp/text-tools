@@ -1,5 +1,4 @@
 import { LRUCache } from "lru-cache";
-import assert from "node:assert";
 
 const caches: Record<string, LRUCache<{}, {}, unknown>> = {};
 
@@ -31,11 +30,4 @@ export function clearCache() {
   for (const cache of Object.values(caches)) {
     cache.clear();
   }
-}
-
-export function assertDelta(actual: number, expected: number, delta = 0.01) {
-  assert.ok(
-    Math.abs(expected - actual) <= delta,
-    `Expected ${expected}, got ${actual}`,
-  );
 }

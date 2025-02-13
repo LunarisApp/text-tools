@@ -1,18 +1,17 @@
-import { describe, it } from "node:test";
-import * as assert from "node:assert";
+import { describe, it, expect } from "@jest/globals";
 import { TextHyphen } from "../src";
 
 describe("hyphen tests", () => {
   it("should correctly hyphenate words using inserted method", () => {
     const dic = new TextHyphen({ lang: "nl_NL" });
-    assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-gre-pen");
+    expect(dic.inserted("lettergrepen")).toBe("let-ter-gre-pen");
   });
 
   it("should correctly wrap words", () => {
     const dic = new TextHyphen({ lang: "nl_NL" });
     const actual = dic.wrap("autobandventieldopje", 11);
     const expected = ["autoband-", "ventieldopje"];
-    assert.deepStrictEqual(actual, expected);
+    expect(actual).toStrictEqual(expected);
   });
 
   it("should iterate hyphenation positions correctly", () => {
@@ -23,7 +22,7 @@ describe("hyphen tests", () => {
       ["Amster", "dam"],
       ["Am", "sterdam"],
     ];
-    assert.deepStrictEqual(actual, expected);
+    expect(actual).toStrictEqual(expected);
   });
 
   it("should use a fallback dictionary", () => {
@@ -33,11 +32,11 @@ describe("hyphen tests", () => {
       ["Amster", "dam"],
       ["Am", "sterdam"],
     ];
-    assert.deepStrictEqual(actual, expected);
+    expect(actual).toStrictEqual(expected);
   });
 
   it("should throw an error for a missing dictionary", () => {
-    assert.throws(() => new TextHyphen({ lang: "mi_SS" }), Error);
+    expect(() => new TextHyphen({ lang: "mi_SS" })).toThrowError();
   });
 
   // it('should use a custom dictionary', () => {
@@ -55,19 +54,19 @@ describe("hyphen tests", () => {
   describe("should support left and right hyphenation constraints", () => {
     it("default", () => {
       const dic = new TextHyphen({ lang: "nl_NL" });
-      assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-gre-pen");
+      expect(dic.inserted("lettergrepen")).toBe("let-ter-gre-pen");
     });
     it("left", () => {
       const dic = new TextHyphen({ lang: "nl_NL", left: 4 });
-      assert.strictEqual(dic.inserted("lettergrepen"), "letter-gre-pen");
+      expect(dic.inserted("lettergrepen")).toBe("letter-gre-pen");
     });
     it("right", () => {
       const dic = new TextHyphen({ lang: "nl_NL", right: 4 });
-      assert.strictEqual(dic.inserted("lettergrepen"), "let-ter-grepen");
+      expect(dic.inserted("lettergrepen")).toBe("let-ter-grepen");
     });
     it("both", () => {
       const dic = new TextHyphen({ lang: "nl_NL", left: 4, right: 4 });
-      assert.strictEqual(dic.inserted("lettergrepen"), "letter-grepen");
+      expect(dic.inserted("lettergrepen")).toBe("letter-grepen");
     });
   });
 
@@ -85,7 +84,7 @@ describe("hyphen tests", () => {
 
   it("should handle uppercase words correctly", () => {
     const dic = new TextHyphen({ lang: "nl_NL" });
-    assert.strictEqual(dic.inserted("LETTERGREPEN"), "LET-TER-GRE-PEN");
+    expect(dic.inserted("LETTERGREPEN")).toBe("LET-TER-GRE-PEN");
   });
 
   // it("should support uppercase alternative parser", () => {
@@ -107,13 +106,13 @@ describe("hyphen tests", () => {
 
   it("should correctly determine language fallbacks", () => {
     const hyp = new TextHyphen();
-    assert.strictEqual(hyp.getLanguageFallback("en"), "en");
-    assert.strictEqual(hyp.getLanguageFallback("en_US"), "en_US");
-    assert.strictEqual(hyp.getLanguageFallback("en_FR"), "en");
-    assert.strictEqual(hyp.getLanguageFallback("sr-Latn"), "sr_Latn");
-    assert.strictEqual(hyp.getLanguageFallback("SR-LATN"), "sr_Latn");
-    assert.strictEqual(hyp.getLanguageFallback("sr-Cyrl"), "sr");
-    assert.strictEqual(hyp.getLanguageFallback("fr-Latn-FR"), "fr");
-    assert.strictEqual(hyp.getLanguageFallback("en-US_variant1-x"), "en_US");
+    expect(hyp.getLanguageFallback("en")).toBe("en");
+    expect(hyp.getLanguageFallback("en_US")).toBe("en_US");
+    expect(hyp.getLanguageFallback("en_FR")).toBe("en");
+    expect(hyp.getLanguageFallback("sr-Latn")).toBe("sr_Latn");
+    expect(hyp.getLanguageFallback("SR-LATN")).toBe("sr_Latn");
+    expect(hyp.getLanguageFallback("sr-Cyrl")).toBe("sr");
+    expect(hyp.getLanguageFallback("fr-Latn-FR")).toBe("fr");
+    expect(hyp.getLanguageFallback("en-US_variant1-x")).toBe("en_US");
   });
 });

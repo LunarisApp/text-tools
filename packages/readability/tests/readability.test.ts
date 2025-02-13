@@ -1,4 +1,3 @@
-import { describe, it } from "node:test";
 import { textstat } from "../src";
 import {
   easySpanishText,
@@ -7,8 +6,11 @@ import {
   longSpanishText,
   longTest,
 } from "./data";
-import assert from "node:assert";
-import { assertDelta } from "../src/utils/utils";
+import { describe, expect, it } from "@jest/globals";
+
+function assertDelta(actual: number, expected: number, delta = 0.1) {
+  return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
+}
 
 describe("readability tests", () => {
   describe("flesch reading ease", () => {
@@ -49,7 +51,7 @@ describe("readability tests", () => {
     });
     it("polish config should throw", () => {
       textstat.setLang("pl");
-      assert.throws(() => textstat.fleschReadingEase(longTest));
+      expect(() => textstat.fleschReadingEase(longTest)).toThrow();
     });
   });
 
