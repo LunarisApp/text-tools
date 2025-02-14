@@ -1,11 +1,11 @@
 import { clearCache, lruCache } from "./utils";
-import cmudict from "@stdlib/datasets-cmudict";
+import cmudict from "@lunarisapp/cmudict";
 import { TextHyphen } from "@lunarisapp/hyphen";
 
 export class TextStats {
   private lang = "en_US";
   private rmApostrophe = true;
-  private cmudict: Record<string, string> | null = null;
+  private cmudict: Record<string, string[][]> | null = null;
   private hyphen!: TextHyphen;
 
   constructor(props?: { lang?: string; rmApostrophe?: boolean }) {
@@ -22,7 +22,7 @@ export class TextStats {
     this.lang = lang;
     this.hyphen = new TextHyphen({ lang });
     if (lang.toLowerCase().startsWith("en")) {
-      this.cmudict = cmudict({ data: "dict" }) as Record<string, string>;
+      this.cmudict = cmudict.dict();
     } else {
       this.cmudict = null;
     }
@@ -114,9 +114,7 @@ export class TextStats {
     let count = 0;
     for (const word of formatted.split(/\s+/)) {
       try {
-        count += this.cmudict![word.toUpperCase()]!.split(" ").filter((s) =>
-          s.match(/\d/g),
-        ).length;
+        count += this.cmudict![word]![0].filter((s) => s.match(/\d/g)).length;
       } catch {
         count += this.hyphen.positions(word).length + 1;
       }
