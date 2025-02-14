@@ -1,5 +1,13 @@
 # @lunarisapp/stats
 
+## 0.0.3
+
+### Patch Changes
+
+- Compile source
+- Updated dependencies
+  - @lunarisapp/hyphen@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes

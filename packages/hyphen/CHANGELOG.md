@@ -1,5 +1,11 @@
 # @lunarisapp/hyphen
 
+## 0.0.3
+
+### Patch Changes
+
+- Compile source
+
 ## 0.0.2
 
 ### Patch Changes
