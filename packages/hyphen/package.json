@@ -18,7 +18,10 @@
     "hyphenation",
     "text",
     "linguistics",
-    "language"
+    "language",
+    "pronunciation",
+    "transcription",
+    "syllables"
   ],
   "License": "Apache-2.0",
   "main": "./dist/index.js",
