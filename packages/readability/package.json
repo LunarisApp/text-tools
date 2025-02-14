@@ -19,7 +19,12 @@
     "text",
     "linguistics",
     "language",
-    "flesch-kincaid"
+    "flesch-kincaid",
+    "flesch reading ease",
+    "smog",
+    "gunning fog",
+    "coleman-liau",
+    "automated readability index"
   ],
   "License": "MIT",
   "main": "./dist/index.js",
