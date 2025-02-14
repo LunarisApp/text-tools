@@ -230,7 +230,7 @@ export class TextStats {
    * @param text
    */
   // @lruCache()
-  polysyllablesCount(text: string) {
+  polysyllableCount(text: string) {
     let count = 0;
     for (const word of text.split(/\s+/)) {
       if (this.syllableCount(word) > 2) {
@@ -245,7 +245,7 @@ export class TextStats {
    * @param text
    */
   // @lruCache()
-  monosyllablesCount(text: string) {
+  monosyllableCount(text: string) {
     const words = this.removePunctuation(text).split(/\s+/);
     let count = 0;
     for (const word of words) {
@@ -262,7 +262,7 @@ export class TextStats {
    * @param threshold
    */
   // @lruCache()
-  longWordsCount(text: string, threshold = 6) {
+  longWordCount(text: string, threshold = 6) {
     const words = this.removePunctuation(text).split(/\s+/);
     return words.filter((word) => word.length > threshold).length;
   }

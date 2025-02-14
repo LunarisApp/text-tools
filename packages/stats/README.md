@@ -41,10 +41,10 @@ textStats.readingTime('...'); // in seconds
 textStats.charCount('...');
 textStats.letterCount('...');
 textStats.syllableCount('...');
-textStats.longWordsCount('...', 6);
+textStats.longWordCount('...', 6);
 textStats.shortWordCount('...', 3);
-textStats.monosyllablesCount('...');
-textStats.polysyllablesCount('...');
+textStats.monosyllableCount('...');
+textStats.polysyllableCount('...');
 textStats.avgSentenceLength('...');
 textStats.avgSyllablesPerWord('...');
 textStats.avgCharactersPerWord('...');

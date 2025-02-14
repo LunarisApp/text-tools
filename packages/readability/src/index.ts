@@ -100,7 +100,7 @@ export class TextReadability {
     if (sentences < 3) {
       return 0;
     }
-    const polysyllables = this.textStats.polysyllablesCount(text);
+    const polysyllables = this.textStats.polysyllableCount(text);
     return smogIndex({ sentences, polysyllables });
   }
 
@@ -231,9 +231,9 @@ export class TextReadability {
     return wienerSachtextformel({
       words: this.textStats.wordCount(text),
       sentences: this.textStats.sentenceCount(text),
-      longWords: this.textStats.longWordsCount(text),
-      polysyllables: this.textStats.polysyllablesCount(text),
-      monosyllables: this.textStats.monosyllablesCount(text),
+      longWords: this.textStats.longWordCount(text),
+      polysyllables: this.textStats.polysyllableCount(text),
+      monosyllables: this.textStats.monosyllableCount(text),
       variant,
     });
   }
