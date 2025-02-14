@@ -19,7 +19,11 @@
     "metrics",
     "text",
     "linguistics",
-    "language"
+    "language",
+    "word count",
+    "sentence count",
+    "syllable count",
+    "reading time"
   ],
   "License": "MIT",
   "main": "./dist/index.js",
