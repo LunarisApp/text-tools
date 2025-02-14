@@ -1,5 +1,14 @@
 # @lunarisapp/stats
 
+## 0.0.4
+
+### Patch Changes
+
+- Migrate to internal implementation of CMUdict
+- Fix grammar in naming of count methods
+- Updated dependencies
+  - @lunarisapp/cmudict@0.0.1
+
 ## 0.0.3
 
 ### Patch Changes
