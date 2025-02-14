@@ -20,7 +20,7 @@
     "linguistics",
     "language"
   ],
-  "License": "MIT",
+  "License": "Apache-2.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
