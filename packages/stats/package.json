@@ -9,7 +9,7 @@
   },
   "homepage": "https://lunaris.app",
   "repository": {
-    "url": "https://github.com/LunarisApp/text-tools/tree/main/packages/stats"
+    "url": "https://github.com/LunarisApp/text-tools"
   },
   "publishConfig": {
     "access": "public"
