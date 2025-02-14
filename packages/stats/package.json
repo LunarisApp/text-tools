@@ -1,7 +1,7 @@
 {
   "name": "@lunarisapp/stats",
   "description": "A library for calculating text statistics (e.g. word count)",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Roman Sirokov",
     "url": "https://mrlightful.com",
