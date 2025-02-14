@@ -14,6 +14,11 @@ function assertDelta(actual: number, expected: number, delta = 0.1) {
 
 describe("readability tests", () => {
   const textReadability = new TextReadability();
+  it("support full locale lang", () => {
+    textReadability.setLang("en_US");
+    const score = textReadability.fleschReadingEase(longTest);
+    assertDelta(score, 57.71, 3); // TODO: check delta
+  });
   describe("flesch reading ease", () => {
     it("english config", () => {
       textReadability.setLang("en");
@@ -146,10 +151,5 @@ describe("readability tests", () => {
     textReadability.setLang("en");
     const score = textReadability.mcalpineEflaw(longTest);
     assertDelta(score, 30.8, 0.1);
-  });
-
-  it("readme", () => {
-    const a = textReadability.fleschReadingEase("Hello, world!");
-    console.log(a);
   });
 });

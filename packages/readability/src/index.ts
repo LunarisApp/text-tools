@@ -28,7 +28,8 @@ export class TextReadability {
   }
 
   private getCfg(key: keyof LangConfig) {
-    return langs[this.lang][key]!;
+    const lang = this.lang.split("_")[0];
+    return langs[lang][key]!;
   }
 
   /**
