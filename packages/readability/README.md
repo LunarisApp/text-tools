@@ -1,5 +1,8 @@
 # Lunaris Readability
 
+[![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Freadability)](https://www.npmjs.com/package/@lunarisapp/readability)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Freadability)](https://www.npmjs.com/package/@lunarisapp/readability)
+
 A library for calculating text readability scores based on popular algorithms & formulas, inspired by [textstat](https://github.com/textstat/textstat).
 
 > [!TIP]

@@ -1,5 +1,8 @@
 # Lunaris Hyphen
 
+[![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Fhyphen)](https://www.npmjs.com/package/@lunarisapp/hyphen)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Fhyphen)](https://www.npmjs.com/package/@lunarisapp/hyphen)
+
 A hyphenation library based on [LibreOffice dictionaries](https://git.libreoffice.org/dictionaries), inspired by [pyphen](https://github.com/Kozea/Pyphen).
 
 > [!TIP]

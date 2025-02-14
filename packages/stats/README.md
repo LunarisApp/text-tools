@@ -1,5 +1,8 @@
 # Lunaris Stats
 
+[![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Fstats)](https://www.npmjs.com/package/@lunarisapp/stats)
+[![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Fstats)](https://www.npmjs.com/package/@lunarisapp/stats)
+
 A library for calculating text statistics, such as word count, sentence count, etc. Inspired by [textstat](https://github.com/textstat/textstat).
 
 > [!TIP]
