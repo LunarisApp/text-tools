@@ -199,7 +199,7 @@ export class TextHyphen {
    * @param word
    */
   variants(word: string): string[][] {
-    return this.iterate(word).toArray();
+    return Array.from(this.iterate(word));
   }
 
   /**
