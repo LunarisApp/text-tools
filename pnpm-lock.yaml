@@ -21,6 +21,48 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
+  packages/cmudict:
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.26.8
+        version: 7.26.8
+      '@babel/preset-env':
+        specifier: ^7.26.8
+        version: 7.26.8(@babel/core@7.26.8)
+      '@babel/preset-typescript':
+        specifier: ^7.26.0
+        version: 7.26.0(@babel/core@7.26.8)
+      '@eslint/js':
+        specifier: ^9.20.0
+        version: 9.20.0
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
+      babel-jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@babel/core@7.26.8)
+      copyfiles:
+        specifier: ^2.4.1
+        version: 2.4.1
+      eslint:
+        specifier: ^9.20.1
+        version: 9.20.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@22.13.4)
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(tsx@4.19.2)(typescript@5.7.3)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.7.3
+      typescript-eslint:
+        specifier: ^8.24.0
+        version: 8.24.0(eslint@9.20.1)(typescript@5.7.3)
+
   packages/hyphen:
     devDependencies:
       '@babel/core':
