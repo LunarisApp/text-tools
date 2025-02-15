@@ -185,9 +185,4 @@ describe("cmudict tests", () => {
       expect(cmuVp[word]).toEqual(expected);
     }
   });
-
-  it("license should return expected length", () => {
-    const licenseStr = cmudict.license();
-    expect(licenseStr.length).toBe(1754);
-  });
 });

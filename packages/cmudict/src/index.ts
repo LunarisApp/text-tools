@@ -1,19 +1,7 @@
-import { readFileSync } from "fs";
-import { join } from "path";
-
-const CMUDICT_DICT = "data/cmudict.dict";
-const CMUDICT_PHONES = "data/cmudict.phones";
-const CMUDICT_SYMBOLS = "data/cmudict.symbols";
-const CMUDICT_VP = "data/cmudict.vp";
-const CMUDICT_LICENSE = "data/LICENSE";
-
-function readFileString(filePath: string): string {
-  return readFileSync(join(__dirname, filePath), "utf-8");
-}
-
-function readFileLines(filePath: string): string[] {
-  return readFileString(filePath).split("\n");
-}
+import cmuDict from "./data/cmudict.dict";
+import cmuPhones from "./data/cmudict.phones";
+import cmuSymbols from "./data/cmudict.symbols";
+import cmuVp from "./data/cmudict.vp";
 
 function parseEntries(
   lines: string[],
@@ -37,7 +25,7 @@ function parseEntries(
  * Returns the CMU dictionary as a dictionary object.
  */
 function dict(): Record<string, string[][]> {
-  const entries = parseEntries(readFileLines(CMUDICT_DICT), "#");
+  const entries = parseEntries(cmuDict.split("\n"), "#");
   return entries.reduce(
     (dict, [word, pron]) => {
       if (!Array.isArray(dict[word])) dict[word] = [];
@@ -49,17 +37,11 @@ function dict(): Record<string, string[][]> {
 }
 
 /**
- * Returns the CMU dictionary license.
- */
-function license(): string {
-  return readFileString(CMUDICT_LICENSE);
-}
-
-/**
  * Returns the CMU dictionary phones.
  */
 function phones(): [string, string[]][] {
-  return readFileLines(CMUDICT_PHONES)
+  return cmuPhones
+    .split("\n")
     .map((line) => {
       const parts = line.trim().split(/\s+/);
       if (parts.length < 2) {
@@ -74,7 +56,8 @@ function phones(): [string, string[]][] {
  * Returns the CMU dictionary symbols.
  */
 function symbols(): string[] {
-  return readFileLines(CMUDICT_SYMBOLS)
+  return cmuSymbols
+    .split("\n")
     .map((line) => line.trim())
     .filter(Boolean);
 }
@@ -83,7 +66,7 @@ function symbols(): string[] {
  * Returns the CMU dictionary vowel phonemes.
  */
 function vp(): Record<string, string[][]> {
-  const entries = parseEntries(readFileLines(CMUDICT_VP));
+  const entries = parseEntries(cmuVp.split("\n"));
   return entries.reduce(
     (dict, [word, pron]) => {
       if (!dict[word]) dict[word] = [];
@@ -98,7 +81,7 @@ function vp(): Record<string, string[][]> {
  * Returns the CMU dictionary as an array of entries.
  */
 function entries(): [string, string[]][] {
-  return parseEntries(readFileLines(CMUDICT_DICT), "#");
+  return parseEntries(cmuDict.split("\n"), "#");
 }
 
 /**
@@ -110,7 +93,6 @@ function words(): string[] {
 
 const cmudict = {
   dict,
-  license,
   phones,
   symbols,
   vp,

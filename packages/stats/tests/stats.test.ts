@@ -6,7 +6,7 @@ import {
   punctTextResultWoApostr,
   testSyllableCountCases,
 } from "./data";
-import { TextStats } from "../src";
+import { Language, TextStats } from "../src";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
   return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
@@ -55,7 +55,7 @@ describe("stats tests", () => {
       testSyllableCountCases.forEach((testCase) => {
         const [lang, text, expected, delta] = testCase;
         it(`syllable count: ${(text as string).slice(0, 10)}${(text as string).length >= 10 ? "..." : ""}`, () => {
-          textStats.setLang(lang as string);
+          textStats.setLang(lang as Language);
           const actual = textStats.syllableCount(text as string);
           assertDelta(actual, expected as number, delta as number);
         });

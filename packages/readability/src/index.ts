@@ -1,5 +1,5 @@
 import { clearCache, lruCache } from "./utils/utils";
-import { TextStats } from "@lunarisapp/stats";
+import { TextStats, Language } from "@lunarisapp/stats";
 import { LangConfig, langs } from "./utils/config";
 import {
   fleschReadingEase,
@@ -17,12 +17,13 @@ import {
 } from "./formulas";
 
 export * from "./formulas";
+export { Language };
 
 export class TextReadability {
-  private lang = "en_US";
+  private lang: Language = "en_US";
   private textStats!: TextStats;
 
-  constructor(props?: { lang?: string }) {
+  constructor(props?: { lang?: Language }) {
     const { lang } = props ?? {};
     this.setLang(lang ?? this.lang);
   }
@@ -36,7 +37,7 @@ export class TextReadability {
    * Set the language for the text statistics.
    * @param lang
    */
-  setLang(lang: string) {
+  setLang(lang: Language) {
     this.lang = lang;
     this.textStats = new TextStats({ lang });
     clearCache();

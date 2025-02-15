@@ -1,14 +1,16 @@
 import { clearCache, lruCache } from "./utils";
 import cmudict from "@lunarisapp/cmudict";
-import { TextHyphen } from "@lunarisapp/hyphen";
+import { Language, TextHyphen } from "@lunarisapp/hyphen";
+
+export { Language };
 
 export class TextStats {
-  private lang = "en_US";
+  private lang: Language = "en_US";
   private rmApostrophe = true;
   private cmudict: Record<string, string[][]> | null = null;
   private hyphen!: TextHyphen;
 
-  constructor(props?: { lang?: string; rmApostrophe?: boolean }) {
+  constructor(props?: { lang?: Language; rmApostrophe?: boolean }) {
     const { lang, rmApostrophe } = props ?? {};
     this.setLang(lang ?? this.lang);
     this.setRmApostrophe(rmApostrophe ?? this.rmApostrophe);
@@ -18,7 +20,7 @@ export class TextStats {
    * Set the language for the text statistics.
    * @param lang
    */
-  setLang(lang: string) {
+  setLang(lang: Language) {
     this.lang = lang;
     this.hyphen = new TextHyphen({ lang });
     if (lang.toLowerCase().startsWith("en")) {

@@ -1,7 +1,11 @@
-import fs from "fs";
-import { join } from "path";
+import { HyphenDict, enUS, dictionaries, Language } from "./dicts";
 
-const DICTIONARY_PATH = join(__dirname, "dictionaries");
+export * from "./dicts";
+
+// export function getDictionary(lang: string) {
+//   return import(`./dictionaries/hyph_${lang}.dic`);
+// }
+
 const IGNORED = [
   "%",
   "#",
@@ -21,17 +25,13 @@ class DataInt {
   }
 }
 
-class HyphenDict {
+class HyphenDictParser {
   patterns: Map<string, [number, number[]]> = new Map();
   cache: Map<string, DataInt[]> = new Map();
   maxLen: number = 0;
 
-  constructor(filePath: string) {
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`Dictionary file not found: ${filePath}`);
-    }
-
-    const lines = fs.readFileSync(filePath, "utf-8").split("\n");
+  constructor(content: string) {
+    const lines = content.split("\n");
     lines.forEach((line) => {
       line = line.trim();
       if (!line || IGNORED.some((i) => line.startsWith(i))) return;
@@ -101,61 +101,15 @@ class HyphenDict {
 export class TextHyphen {
   private readonly left: number;
   private readonly right: number;
-  private hd: HyphenDict;
-  readonly dictionaries: Record<string, string>;
-  private readonly lowercaseLangs: Record<string, string>;
+  private hd!: HyphenDictParser;
 
-  constructor(props?: { lang?: string; left?: number; right?: number }) {
-    const { lang = "en_US", left = 2, right = 2 } = props || {};
+  constructor(props?: { lang?: Language; left?: number; right?: number }) {
+    const { lang = "en", left = 2, right = 2 } = props || {};
     this.left = left;
     this.right = right;
-    this.dictionaries = this.loadDictionaries();
-    this.lowercaseLangs = Object.keys(this.dictionaries).reduce(
-      (acc, lang) => {
-        acc[lang.toLowerCase()] = lang;
-        return acc;
-      },
-      {} as Record<string, string>,
-    );
-    const fallback = this.getLanguageFallback(lang);
-    if (!fallback) {
-      throw new Error(`Language not found: ${lang}`);
-    }
-    this.hd = new HyphenDict(
-      join(DICTIONARY_PATH, this.dictionaries[fallback]!),
-    );
-  }
-
-  private loadDictionaries() {
-    const dictionaries: Record<string, string> = {};
-    for (const file of fs.readdirSync(DICTIONARY_PATH).sort()) {
-      const [name, ext] = file.split(".");
-      const lang = name!.replace("hyph_", "").replace("-", "_"); // File name format: hyph_LANG-COUNTRY.dic
-      const shortLang = lang.split("_")[0];
-      if (ext === "dic") {
-        dictionaries[lang] = file;
-        if (!dictionaries[shortLang!]) {
-          dictionaries[shortLang!] = file;
-        }
-      }
-    }
-    return dictionaries;
-  }
-
-  /**
-   * Get the fallback language for a given language.
-   * @param language
-   */
-  getLanguageFallback(language: string) {
-    const parts = language.replace("-", "_").toLowerCase().split("_");
-    while (parts.length) {
-      const currentLanguage = parts.join("_");
-      if (this.lowercaseLangs[currentLanguage]) {
-        return this.lowercaseLangs[currentLanguage];
-      }
-      parts.pop();
-    }
-    return undefined;
+    const dict = dictionaries[lang] || enUS;
+    // const dictStr = new TextDecoder().decode(dict);
+    this.hd = new HyphenDictParser(dict);
   }
 
   /**
