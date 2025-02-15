@@ -12,3 +12,12 @@ updates:
               update-types:
                   - 'minor'
                   - 'patch'
+
+    # Track updates in @lunarisapp/hyphen's LibreOffice dictionaries.
+    - package-ecosystem: gitsubmodule
+      directory: /
+      schedule:
+          interval: 'monthly'
+          day: 'thursday'
+          time: '08:00'
+          timezone: 'Europe/Amsterdam'
