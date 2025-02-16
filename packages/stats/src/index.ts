@@ -62,15 +62,6 @@ export class TextStats {
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
   charCount(text: string, ignoreSpaces = true) {
-    return lruCache(
-      this.cache,
-      "charCount",
-      [text, ignoreSpaces],
-      this.computeCharCount,
-    );
-  }
-
-  private computeCharCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
     }
@@ -83,15 +74,6 @@ export class TextStats {
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
   letterCount(text: string, ignoreSpaces = true) {
-    return lruCache(
-      this.cache,
-      "letterCount",
-      [text, ignoreSpaces],
-      (text, ignoreSpaces) => this.computeLetterCount(text, ignoreSpaces),
-    );
-  }
-
-  private computeLetterCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
     }
@@ -132,16 +114,6 @@ export class TextStats {
    * @param removePunctuation Whether to remove punctuation from text.
    */
   wordCount(text: string, removePunctuation = true) {
-    return lruCache(
-      this.cache,
-      "wordCount",
-      [text, removePunctuation],
-      (text, removePunctuation) =>
-        this.computeWordCount(text, removePunctuation),
-    );
-  }
-
-  private computeWordCount(text: string, removePunctuation = true) {
     if (removePunctuation) {
       text = this.removePunctuation(text);
     }
@@ -154,15 +126,6 @@ export class TextStats {
    * @param maxSize The maximum size of the common words to count. Default is 3.
    */
   miniWordCount(text: string, maxSize = 3) {
-    return lruCache(
-      this.cache,
-      "miniWordCount",
-      [text, maxSize],
-      (text, maxSize) => this.computeMiniWordCount(text, maxSize),
-    );
-  }
-
-  private computeMiniWordCount(text: string, maxSize = 3) {
     return this.removePunctuation(text)
       .split(/\s+/)
       .filter((word) => word.length <= maxSize).length;
