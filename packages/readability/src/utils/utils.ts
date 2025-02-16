@@ -6,6 +6,7 @@ import { LRUCache } from "lru-cache";
  * @param key
  * @param values
  * @param fn
+ * @param enabled
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function lruCache<T extends {}, B extends unknown[]>(
@@ -13,10 +14,11 @@ export function lruCache<T extends {}, B extends unknown[]>(
   key: string,
   values: [...B],
   fn: (...args: [...B]) => T,
+  enabled = true,
 ) {
   const valuesStr = JSON.stringify(values);
   const cacheKey = `${key}:${valuesStr}`;
-  if (cache.has(cacheKey)) {
+  if (enabled && cache.has(cacheKey)) {
     return cache.get(cacheKey)!;
   }
   const result = fn(...values);

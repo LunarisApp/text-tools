@@ -11,11 +11,17 @@ export class TextStats {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
   private lang: Language = "en_US";
   private rmApostrophe = true;
+  private readonly cacheEnabled;
   private cmudict: Record<string, string[][]> | null = null;
   private hyphen!: TextHyphen;
 
-  constructor(props?: { lang?: Language; rmApostrophe?: boolean }) {
+  constructor(props?: {
+    lang?: Language;
+    rmApostrophe?: boolean;
+    cache?: boolean;
+  }) {
     const { lang, rmApostrophe } = props ?? {};
+    this.cacheEnabled = props?.cache ?? true;
     this.setLang(lang ?? this.lang);
     this.setRmApostrophe(rmApostrophe ?? this.rmApostrophe);
   }
@@ -136,8 +142,12 @@ export class TextStats {
    * @param text
    */
   syllableCount(text: string) {
-    return lruCache(this.cache, "syllableCount", [text], (text) =>
-      this.computeSyllableCount(text),
+    return lruCache(
+      this.cache,
+      "syllableCount",
+      [text],
+      (text) => this.computeSyllableCount(text),
+      this.cacheEnabled,
     );
   }
 
@@ -161,8 +171,12 @@ export class TextStats {
    * @param text
    */
   sentenceCount(text: string) {
-    return lruCache(this.cache, "sentenceCount", [text], (text) =>
-      this.computeSentenceCount(text),
+    return lruCache(
+      this.cache,
+      "sentenceCount",
+      [text],
+      (text) => this.computeSentenceCount(text),
+      this.cacheEnabled,
     );
   }
 
@@ -261,8 +275,12 @@ export class TextStats {
    * @param text
    */
   polysyllableCount(text: string) {
-    return lruCache(this.cache, "polysyllableCount", [text], (text) =>
-      this.computePolysyllableCount(text),
+    return lruCache(
+      this.cache,
+      "polysyllableCount",
+      [text],
+      (text) => this.computePolysyllableCount(text),
+      this.cacheEnabled,
     );
   }
 
@@ -281,8 +299,12 @@ export class TextStats {
    * @param text
    */
   monosyllableCount(text: string) {
-    return lruCache(this.cache, "monosyllableCount", [text], (text) =>
-      this.computeMonosyllableCount(text),
+    return lruCache(
+      this.cache,
+      "monosyllableCount",
+      [text],
+      (text) => this.computeMonosyllableCount(text),
+      this.cacheEnabled,
     );
   }
 

@@ -23,7 +23,8 @@ npm install @lunarisapp/stats
 import { TextStats } from '@lunarisapp/stats';
 
 const textStats = new TextStats({ 
-    lang: 'en_US' // optional, en_US by default
+    lang: 'en_US', // optional, en_US by default
+    cache: true,   // optional, true by default
 });
 textStats.wordCount('Hello, world!');
 ```

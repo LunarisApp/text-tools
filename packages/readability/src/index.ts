@@ -22,21 +22,19 @@ export { Language };
 
 export class TextReadability {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
+  private readonly cacheEnabled: boolean;
   private lang: Language = "en_US";
   private textStats!: TextStats;
 
-  constructor(props?: { lang?: Language }) {
-    const { lang } = props ?? {};
+  constructor(props?: { lang?: Language; cache?: boolean }) {
+    const { lang, cache } = props ?? {};
+    this.cacheEnabled = cache ?? true;
     this.setLang(lang ?? this.lang);
   }
 
   private getCfg(key: keyof LangConfig) {
     const lang = this.lang.split("_")[0];
     return langs[lang][key]!;
-  }
-
-  private getCacheKey(method: string, text: string) {
-    return `${method}:${text}`;
   }
 
   /**
@@ -55,8 +53,12 @@ export class TextReadability {
    * @param text
    */
   fleschReadingEase(text: string) {
-    return lruCache(this.cache, "fleschReadingEase", [text], (text) =>
-      this.computeFleschReadingEase(text),
+    return lruCache(
+      this.cache,
+      "fleschReadingEase",
+      [text],
+      (text) => this.computeFleschReadingEase(text),
+      this.cacheEnabled,
     );
   }
 
@@ -90,8 +92,12 @@ export class TextReadability {
    * @param text
    */
   fleschKincaidGrade(text: string) {
-    return lruCache(this.cache, "fleschKincaidGrade", [text], (text) =>
-      this.computeFleschKincaidGrade(text),
+    return lruCache(
+      this.cache,
+      "fleschKincaidGrade",
+      [text],
+      (text) => this.computeFleschKincaidGrade(text),
+      this.cacheEnabled,
     );
   }
 
@@ -112,8 +118,12 @@ export class TextReadability {
    * @param text
    */
   smogIndex(text: string) {
-    return lruCache(this.cache, "smogIndex", [text], (text) =>
-      this.computeSmogIndex(text),
+    return lruCache(
+      this.cache,
+      "smogIndex",
+      [text],
+      (text) => this.computeSmogIndex(text),
+      this.cacheEnabled,
     );
   }
 
@@ -132,8 +142,12 @@ export class TextReadability {
    * @param text
    */
   colemanLiauIndex(text: string) {
-    return lruCache(this.cache, "colemanLiauIndex", [text], (text) =>
-      this.computeColemanLiauIndex(text),
+    return lruCache(
+      this.cache,
+      "colemanLiauIndex",
+      [text],
+      (text) => this.computeColemanLiauIndex(text),
+      this.cacheEnabled,
     );
   }
 
@@ -149,8 +163,12 @@ export class TextReadability {
    * @param text
    */
   automatedReadabilityIndex(text: string) {
-    return lruCache(this.cache, "automatedReadabilityIndex", [text], (text) =>
-      this.computeAutomatedReadabilityIndex(text),
+    return lruCache(
+      this.cache,
+      "automatedReadabilityIndex",
+      [text],
+      (text) => this.computeAutomatedReadabilityIndex(text),
+      this.cacheEnabled,
     );
   }
 
@@ -173,6 +191,7 @@ export class TextReadability {
       "linsearWriteFormula",
       [text, sample],
       (text, sample) => this.computeLinsearWriteFormula(text, sample),
+      this.cacheEnabled,
     );
   }
 
@@ -198,8 +217,12 @@ export class TextReadability {
    * @param text
    */
   gutierrezPolini(text: string) {
-    return lruCache(this.cache, "gutierrezPolini", [text], (text) =>
-      this.computeGutierrezPolini(text),
+    return lruCache(
+      this.cache,
+      "gutierrezPolini",
+      [text],
+      (text) => this.computeGutierrezPolini(text),
+      this.cacheEnabled,
     );
   }
 
@@ -223,8 +246,12 @@ export class TextReadability {
    * @param text
    */
   crawford(text: string) {
-    return lruCache(this.cache, "crawford", [text], (text) =>
-      this.computeCrawford(text),
+    return lruCache(
+      this.cache,
+      "crawford",
+      [text],
+      (text) => this.computeCrawford(text),
+      this.cacheEnabled,
     );
   }
 
@@ -248,8 +275,12 @@ export class TextReadability {
    * @param text
    */
   gulpeaseIndex(text: string) {
-    return lruCache(this.cache, "gulpeaseIndex", [text], (text) =>
-      this.computeGulpeaseIndex(text),
+    return lruCache(
+      this.cache,
+      "gulpeaseIndex",
+      [text],
+      (text) => this.computeGulpeaseIndex(text),
+      this.cacheEnabled,
     );
   }
 
@@ -274,13 +305,13 @@ export class TextReadability {
    * @param text
    * @param variant
    */
-  // @lruCache()
   wienerSachtextformel(text: string, variant: WienerSachtextformelVariant = 1) {
     return lruCache(
       this.cache,
       "wienerSachtextformel",
       [text, variant],
       (text, variant) => this.computeWienerSachtextformel(text, variant),
+      this.cacheEnabled,
     );
   }
 
@@ -311,8 +342,12 @@ export class TextReadability {
    * @param text
    */
   mcalpineEflaw(text: string) {
-    return lruCache(this.cache, "mcalpineEflaw", [text], (text) =>
-      this.computeMcalpineEflaw(text),
+    return lruCache(
+      this.cache,
+      "mcalpineEflaw",
+      [text],
+      (text) => this.computeMcalpineEflaw(text),
+      this.cacheEnabled,
     );
   }
 
