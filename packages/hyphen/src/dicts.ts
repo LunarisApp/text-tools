@@ -181,7 +181,7 @@ export const dictionaries = {
   pa: paIN,
   pl: plPL,
   pt: ptBR,
-  ptPT: ptPT,
+  pt_PT: ptPT,
   pt_BR: ptBR,
   ro: roRO,
   ru: ruRU,
