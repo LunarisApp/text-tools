@@ -1,6 +1,6 @@
 import { LRUCache } from "lru-cache";
 
-const caches: Record<string, LRUCache<{}, {}, unknown>> = {};
+const caches: Record<string, LRUCache<string, object, unknown>> = {};
 
 /**
  * Method decorator to cache results using the Least Recently Used algorithm.
@@ -12,7 +12,9 @@ export function lruCache(maxSize = 128): MethodDecorator {
     descriptor.value = function (...args: any[]) {
       const body = JSON.stringify(args);
       if (!caches[keyStr]) {
-        caches[keyStr] = new LRUCache({ max: maxSize });
+        caches[keyStr] = new LRUCache<string, object, unknown>({
+          max: maxSize,
+        });
       }
       const cache = caches[keyStr];
       if (cache.has(body)) {

@@ -1,4 +1,4 @@
-export type HyphenDict = string;
+type HyphenDict = string;
 
 import * as afZaDict from "./dictionaries/hyph_af_ZA.dic";
 export const afZa: HyphenDict = afZaDict.default;

@@ -1,4 +1,4 @@
-import { clearCache, lruCache } from "./utils/utils";
+import { clearCache } from "./utils/utils";
 import { TextStats, Language } from "@lunarisapp/stats";
 import { LangConfig, langs } from "./utils/config";
 import {

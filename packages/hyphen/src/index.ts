@@ -1,4 +1,4 @@
-import { HyphenDict, enUS, dictionaries, Language } from "./dicts";
+import { enUS, dictionaries, Language } from "./dicts";
 
 export * from "./dicts";
 
