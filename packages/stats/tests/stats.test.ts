@@ -31,6 +31,18 @@ describe("stats tests", () => {
       expect(countSpaces).toBe(2061);
     });
 
+    it("vowel count", () => {
+      textStats.setLang("en");
+      const count = textStats.vowelCount("abcde, f");
+      expect(count).toBe(2);
+    });
+
+    it("consonant count", () => {
+      textStats.setLang("en");
+      const count = textStats.consonantCount("abcde, f");
+      expect(count).toBe(4);
+    });
+
     it("lexicon count", () => {
       textStats.setLang("en");
       const count = textStats.wordCount(longTest);

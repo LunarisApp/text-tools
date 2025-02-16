@@ -1,9 +1,11 @@
+import { vowels, consonants } from "./data";
 import cmudict from "@lunarisapp/cmudict";
 import { Language, TextHyphen } from "@lunarisapp/hyphen";
 import { LRUCache } from "lru-cache";
 import { lruCache } from "./utils";
 
 export { Language };
+export { vowels, consonants };
 
 export class TextStats {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
@@ -94,6 +96,34 @@ export class TextStats {
       text = text.replace(/\s/g, "");
     }
     return this.removePunctuation(text).length;
+  }
+
+  /**
+   * Count the number of vowels in text.
+   * @param text
+   */
+  vowelCount(text: string) {
+    const formatted = this.removePunctuation(text)
+      .replace(/\s+/g, "")
+      .toLowerCase();
+    if (!formatted) return 0;
+
+    const dict = vowels[this.lang];
+    return formatted.split("").filter((char) => dict.includes(char)).length;
+  }
+
+  /**
+   * Count the number of consonants in text.
+   * @param text
+   */
+  consonantCount(text: string) {
+    const formatted = this.removePunctuation(text)
+      .replace(/\s+/g, "")
+      .toLowerCase();
+    if (!formatted) return 0;
+
+    const dict = consonants[this.lang];
+    return formatted.split("").filter((char) => dict.includes(char)).length;
   }
 
   /**

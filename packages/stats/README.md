@@ -28,11 +28,9 @@ const textStats = new TextStats({
 });
 
 // Gets the word count.
-// Result: 2
 textStats.wordCount('Hello, world!');
 
 // Gets the sentence count.
-// Result: 2
 textStats.sentenceCount('Hello, world! How are you?');
 
 // And also...
@@ -42,6 +40,8 @@ textStats.readingTime('...'); // in seconds
 textStats.charCount('...');
 textStats.letterCount('...');
 textStats.syllableCount('...');
+textStats.vowelCount('...');
+textStats.consonantCount('...');
 textStats.longWordCount('...', 6);
 textStats.shortWordCount('...', 3);
 textStats.monosyllableCount('...');
