@@ -1,7 +1,7 @@
 {
   "name": "@lunarisapp/hyphen",
   "description": "A hyphenation library for JavaScript",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Roman Sirokov",
     "url": "https://mrlightful.com",

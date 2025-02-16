@@ -1,5 +1,15 @@
 # @lunarisapp/cmudict
 
+## 0.0.4
+
+### Patch Changes
+
+- [`e12fd19`](https://github.com/LunarisApp/text-tools/commit/e12fd19b13dc45c61a684a001eede2b255a1aa56) Thanks [@MrLightful](https://github.com/MrLightful)! - Migrate to MIT license
+
+- [`c4f3d40`](https://github.com/LunarisApp/text-tools/commit/c4f3d400629995869115d6663fcb1513701df1f0) Thanks [@MrLightful](https://github.com/MrLightful)! - Export functions individually besides default
+
+- [`ae9d814`](https://github.com/LunarisApp/text-tools/commit/ae9d81453b4da7b561256536f3ad09ac5d63edcd) Thanks [@MrLightful](https://github.com/MrLightful)! - Properly export cmudict default
+
 ## 0.0.3
 
 ### Patch Changes

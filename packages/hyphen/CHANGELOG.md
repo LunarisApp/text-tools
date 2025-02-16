@@ -1,5 +1,13 @@
 # @lunarisapp/hyphen
 
+## 0.0.6
+
+### Patch Changes
+
+- [`0d8e329`](https://github.com/LunarisApp/text-tools/commit/0d8e3297b8a001816d5e4fef9f2580ed81d83345) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix dictionary language key for pt_PT
+
+- [`e12fd19`](https://github.com/LunarisApp/text-tools/commit/e12fd19b13dc45c61a684a001eede2b255a1aa56) Thanks [@MrLightful](https://github.com/MrLightful)! - Migrate to MIT license
+
 ## 0.0.5
 
 ### Patch Changes
