@@ -1,4 +1,3 @@
-import { clearCache } from "./utils/utils";
 import { TextStats, Language } from "@lunarisapp/stats";
 import { LangConfig, langs } from "./utils/config";
 import {
@@ -15,11 +14,14 @@ import {
   fleschKincaidGrade,
   colemanLiauIndex,
 } from "./formulas";
+import { LRUCache } from "lru-cache";
+import { lruCache } from "./utils/utils";
 
 export * from "./formulas";
 export { Language };
 
 export class TextReadability {
+  private readonly cache = new LRUCache<string, number>({ max: 512 });
   private lang: Language = "en_US";
   private textStats!: TextStats;
 
@@ -33,6 +35,10 @@ export class TextReadability {
     return langs[lang][key]!;
   }
 
+  private getCacheKey(method: string, text: string) {
+    return `${method}:${text}`;
+  }
+
   /**
    * Set the language for the text statistics.
    * @param lang
@@ -40,7 +46,7 @@ export class TextReadability {
   setLang(lang: Language) {
     this.lang = lang;
     this.textStats = new TextStats({ lang });
-    clearCache();
+    this.cache.clear();
   }
 
   /**
@@ -48,8 +54,13 @@ export class TextReadability {
    * https://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_tests#Flesch_reading_ease
    * @param text
    */
-  // @lruCache()
   fleschReadingEase(text: string) {
+    return lruCache(this.cache, "fleschReadingEase", [text], (text) =>
+      this.computeFleschReadingEase(text),
+    );
+  }
+
+  private computeFleschReadingEase(text: string) {
     if (this.lang === "pl") {
       throw new Error(
         "Flesch reading ease test does not support Polish language.",
@@ -78,8 +89,13 @@ export class TextReadability {
    * TODO: can we support multiple languages?
    * @param text
    */
-  // @lruCache()
   fleschKincaidGrade(text: string) {
+    return lruCache(this.cache, "fleschKincaidGrade", [text], (text) =>
+      this.computeFleschKincaidGrade(text),
+    );
+  }
+
+  private computeFleschKincaidGrade(text: string) {
     if (this.lang === "pl") {
       throw new Error(
         "Flesch-Kincaid grade level does not support Polish language.",
@@ -95,8 +111,13 @@ export class TextReadability {
    * https://en.wikipedia.org/wiki/SMOG
    * @param text
    */
-  // @lruCache()
   smogIndex(text: string) {
+    return lruCache(this.cache, "smogIndex", [text], (text) =>
+      this.computeSmogIndex(text),
+    );
+  }
+
+  private computeSmogIndex(text: string) {
     const sentences = this.textStats.sentenceCount(text);
     if (sentences < 3) {
       return 0;
@@ -110,8 +131,13 @@ export class TextReadability {
    * https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index
    * @param text
    */
-  // @lruCache()
   colemanLiauIndex(text: string) {
+    return lruCache(this.cache, "colemanLiauIndex", [text], (text) =>
+      this.computeColemanLiauIndex(text),
+    );
+  }
+
+  private computeColemanLiauIndex(text: string) {
     const letters = this.textStats.avgLettersPerWord(text) * 100;
     const sentences = this.textStats.avgSentencesPerWord(text) * 100;
     return colemanLiauIndex({ letters, sentences });
@@ -122,8 +148,13 @@ export class TextReadability {
    * https://en.wikipedia.org/wiki/Automated_readability_index
    * @param text
    */
-  // @lruCache()
   automatedReadabilityIndex(text: string) {
+    return lruCache(this.cache, "automatedReadabilityIndex", [text], (text) =>
+      this.computeAutomatedReadabilityIndex(text),
+    );
+  }
+
+  private computeAutomatedReadabilityIndex(text: string) {
     const chars = this.textStats.charCount(text);
     const words = this.textStats.wordCount(text);
     const sentences = this.textStats.sentenceCount(text);
@@ -136,8 +167,16 @@ export class TextReadability {
    * @param text
    * @param sample Number of words to sample from the text
    */
-  // @lruCache()
   linsearWriteFormula(text: string, sample = 100) {
+    return lruCache(
+      this.cache,
+      "linsearWriteFormula",
+      [text, sample],
+      (text, sample) => this.computeLinsearWriteFormula(text, sample),
+    );
+  }
+
+  private computeLinsearWriteFormula(text: string, sample: number) {
     const words = text
       .split(/\s+/)
       .slice(0, sample)
@@ -158,8 +197,13 @@ export class TextReadability {
    * https://www.spanishreadability.com/gutierrez-de-polinis-readability-formula
    * @param text
    */
-  // @lruCache()
   gutierrezPolini(text: string) {
+    return lruCache(this.cache, "gutierrezPolini", [text], (text) =>
+      this.computeGutierrezPolini(text),
+    );
+  }
+
+  private computeGutierrezPolini(text: string) {
     if (this.lang !== "es") {
       console.warn(`Gutierrez Polini's formula only supports Spanish language. 
                           Textstat language is set to '${this.lang}'.`);
@@ -178,8 +222,13 @@ export class TextReadability {
    * https://www.spanishreadability.com/the-crawford-score-for-spanish-texts
    * @param text
    */
-  // @lruCache()
   crawford(text: string) {
+    return lruCache(this.cache, "crawford", [text], (text) =>
+      this.computeCrawford(text),
+    );
+  }
+
+  private computeCrawford(text: string) {
     if (this.lang !== "es") {
       console.warn(`Crawford's formula only supports Spanish language. 
                           Textstat language is set to '${this.lang}'.`);
@@ -198,8 +247,13 @@ export class TextReadability {
    * https://it.wikipedia.org/wiki/Indice_Gulpease
    * @param text
    */
-  // @lruCache()
   gulpeaseIndex(text: string) {
+    return lruCache(this.cache, "gulpeaseIndex", [text], (text) =>
+      this.computeGulpeaseIndex(text),
+    );
+  }
+
+  private computeGulpeaseIndex(text: string) {
     if (this.lang !== "it") {
       console.warn(`Gulpease index only supports Italian language. 
                           Textstat language is set to '${this.lang}'.`);
@@ -222,6 +276,18 @@ export class TextReadability {
    */
   // @lruCache()
   wienerSachtextformel(text: string, variant: WienerSachtextformelVariant = 1) {
+    return lruCache(
+      this.cache,
+      "wienerSachtextformel",
+      [text, variant],
+      (text, variant) => this.computeWienerSachtextformel(text, variant),
+    );
+  }
+
+  private computeWienerSachtextformel(
+    text: string,
+    variant: WienerSachtextformelVariant,
+  ) {
     if (this.lang !== "de") {
       console.warn(`Wiener Sachtextformel only supports German language. 
                           Textstat language is set to '${this.lang}'.`);
@@ -244,8 +310,13 @@ export class TextReadability {
    * https://www.angelfire.com/nd/nirmaldasan/journalismonline/fpetge.html
    * @param text
    */
-  // @lruCache()
   mcalpineEflaw(text: string) {
+    return lruCache(this.cache, "mcalpineEflaw", [text], (text) =>
+      this.computeMcalpineEflaw(text),
+    );
+  }
+
+  private computeMcalpineEflaw(text: string) {
     if (!text) {
       return 0;
     }

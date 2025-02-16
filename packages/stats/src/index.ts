@@ -1,10 +1,12 @@
-import { clearCache, lruCache } from "./utils";
 import cmudict from "@lunarisapp/cmudict";
 import { Language, TextHyphen } from "@lunarisapp/hyphen";
+import { LRUCache } from "lru-cache";
+import { lruCache } from "./utils";
 
 export { Language };
 
 export class TextStats {
+  private readonly cache = new LRUCache<string, number>({ max: 512 });
   private lang: Language = "en_US";
   private rmApostrophe = true;
   private cmudict: Record<string, string[][]> | null = null;
@@ -28,7 +30,7 @@ export class TextStats {
     } else {
       this.cmudict = null;
     }
-    clearCache();
+    this.cache.clear();
   }
 
   /**
@@ -43,7 +45,6 @@ export class TextStats {
    * Remove punctuation from text.
    * @param text
    */
-  // @lruCache()
   removePunctuation(text: string) {
     if (this.rmApostrophe) {
       return text.replace(/[^\w\s]/g, "");
@@ -58,8 +59,16 @@ export class TextStats {
    * @param text The text to count characters in.
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
-  // @lruCache()
   charCount(text: string, ignoreSpaces = true) {
+    return lruCache(
+      this.cache,
+      "charCount",
+      [text, ignoreSpaces],
+      this.computeCharCount,
+    );
+  }
+
+  private computeCharCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
     }
@@ -71,8 +80,16 @@ export class TextStats {
    * @param text The text to count letters in.
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
-  // @lruCache()
   letterCount(text: string, ignoreSpaces = true) {
+    return lruCache(
+      this.cache,
+      "letterCount",
+      [text, ignoreSpaces],
+      (text, ignoreSpaces) => this.computeLetterCount(text, ignoreSpaces),
+    );
+  }
+
+  private computeLetterCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
       text = text.replace(/\s/g, "");
     }
@@ -84,8 +101,17 @@ export class TextStats {
    * @param text The text to count words in.
    * @param removePunctuation Whether to remove punctuation from text.
    */
-  // @lruCache()
   wordCount(text: string, removePunctuation = true) {
+    return lruCache(
+      this.cache,
+      "wordCount",
+      [text, removePunctuation],
+      (text, removePunctuation) =>
+        this.computeWordCount(text, removePunctuation),
+    );
+  }
+
+  private computeWordCount(text: string, removePunctuation = true) {
     if (removePunctuation) {
       text = this.removePunctuation(text);
     }
@@ -97,8 +123,16 @@ export class TextStats {
    * @param text The text to count common words in.
    * @param maxSize The maximum size of the common words to count. Default is 3.
    */
-  // @lruCache()
   miniWordCount(text: string, maxSize = 3) {
+    return lruCache(
+      this.cache,
+      "miniWordCount",
+      [text, maxSize],
+      (text, maxSize) => this.computeMiniWordCount(text, maxSize),
+    );
+  }
+
+  private computeMiniWordCount(text: string, maxSize = 3) {
     return this.removePunctuation(text)
       .split(/\s+/)
       .filter((word) => word.length <= maxSize).length;
@@ -108,8 +142,13 @@ export class TextStats {
    * Count the number of syllables in text.
    * @param text
    */
-  // @lruCache()
   syllableCount(text: string) {
+    return lruCache(this.cache, "syllableCount", [text], (text) =>
+      this.computeSyllableCount(text),
+    );
+  }
+
+  private computeSyllableCount(text: string) {
     const formatted = this.removePunctuation(text).toLowerCase();
     if (!formatted) return 0;
 
@@ -128,8 +167,13 @@ export class TextStats {
    * Count the number of sentences in text.
    * @param text
    */
-  // @lruCache()
   sentenceCount(text: string) {
+    return lruCache(this.cache, "sentenceCount", [text], (text) =>
+      this.computeSentenceCount(text),
+    );
+  }
+
+  private computeSentenceCount(text: string) {
     let ignoreCount = 0;
     const sentences = text.match(/\b[^.!?]+[.!?]*/g) || [];
     for (const sentence of sentences) {
@@ -144,7 +188,6 @@ export class TextStats {
    * Calculate the average length of sentences in text.
    * @param text
    */
-  // @lruCache()
   avgSentenceLength(text: string) {
     try {
       return this.wordCount(text) / this.sentenceCount(text);
@@ -158,7 +201,6 @@ export class TextStats {
    * @param text
    * @param interval
    */
-  // @lruCache()
   avgSyllablesPerWord(text: string, interval?: number) {
     const syllableCount = this.syllableCount(text);
     const lexiconCount = this.wordCount(text);
@@ -177,7 +219,6 @@ export class TextStats {
    * Calculate the average number of characters per word in text.
    * @param text
    */
-  // @lruCache()
   avgCharactersPerWord(text: string) {
     try {
       return this.charCount(text) / this.wordCount(text);
@@ -190,7 +231,6 @@ export class TextStats {
    * Calculate the average number of letters per word in text.
    * @param text
    */
-  // @lruCache()
   avgLettersPerWord(text: string) {
     try {
       return this.letterCount(text) / this.wordCount(text);
@@ -203,7 +243,6 @@ export class TextStats {
    * Calculate the average number of sentences per word in text.
    * @param text
    */
-  // @lruCache()
   avgSentencesPerWord(text: string) {
     try {
       return this.sentenceCount(text) / this.wordCount(text);
@@ -216,7 +255,6 @@ export class TextStats {
    * Calculate the average number of words per sentence in text.
    * @param text
    */
-  // @lruCache()
   avgWordsPerSentence(text: string) {
     const sentencesCount = this.sentenceCount(text);
     if (sentencesCount < 1) {
@@ -229,8 +267,13 @@ export class TextStats {
    * Calculates the words in text with 3 or more syllables.
    * @param text
    */
-  // @lruCache()
   polysyllableCount(text: string) {
+    return lruCache(this.cache, "polysyllableCount", [text], (text) =>
+      this.computePolysyllableCount(text),
+    );
+  }
+
+  private computePolysyllableCount(text: string) {
     let count = 0;
     for (const word of text.split(/\s+/)) {
       if (this.syllableCount(word) > 2) {
@@ -244,8 +287,13 @@ export class TextStats {
    * Calculate the number of monosyllable words in text.
    * @param text
    */
-  // @lruCache()
   monosyllableCount(text: string) {
+    return lruCache(this.cache, "monosyllableCount", [text], (text) =>
+      this.computeMonosyllableCount(text),
+    );
+  }
+
+  private computeMonosyllableCount(text: string) {
     const words = this.removePunctuation(text).split(/\s+/);
     let count = 0;
     for (const word of words) {
@@ -261,7 +309,6 @@ export class TextStats {
    * @param text
    * @param threshold
    */
-  // @lruCache()
   longWordCount(text: string, threshold = 6) {
     const words = this.removePunctuation(text).split(/\s+/);
     return words.filter((word) => word.length > threshold).length;
@@ -272,7 +319,6 @@ export class TextStats {
    * @param text
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
-  // @lruCache()
   readingTime(text: string, msPerChar = 14.69) {
     const words = text.split(/\s+/);
     const chars = words.map((word) => word.length);
