@@ -1,5 +1,11 @@
 # @lunarisapp/hyphen
 
+## 0.0.5
+
+### Patch Changes
+
+- [`0ecbc05`](https://github.com/LunarisApp/text-tools/commit/0ecbc050cb67f9e841a584ec6aae4c20d4bfaa52) Thanks [@MrLightful](https://github.com/MrLightful)! - Include only necessary files into npm releases
+
 ## 0.0.4
 
 ### Patch Changes
