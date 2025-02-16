@@ -100,4 +100,4 @@ const cmudict = {
   words,
 };
 
-export default cmudict;
+export { cmudict as default };
