@@ -47,6 +47,15 @@ importers:
       eslint:
         specifier: ^9.20.1
         version: 9.20.1
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-turbo:
+        specifier: ^2.4.2
+        version: 2.4.2(eslint@9.20.1)(turbo@2.4.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.4)
@@ -83,6 +92,15 @@ importers:
       eslint:
         specifier: ^9.20.1
         version: 9.20.1
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-turbo:
+        specifier: ^2.4.2
+        version: 2.4.2(eslint@9.20.1)(turbo@2.4.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.4)
@@ -126,6 +144,15 @@ importers:
       eslint:
         specifier: ^9.20.1
         version: 9.20.1
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-turbo:
+        specifier: ^2.4.2
+        version: 2.4.2(eslint@9.20.1)(turbo@2.4.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.4)
@@ -172,6 +199,15 @@ importers:
       eslint:
         specifier: ^9.20.1
         version: 9.20.1
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-turbo:
+        specifier: ^2.4.2
+        version: 2.4.2(eslint@9.20.1)(turbo@2.4.2)
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.13.4)
@@ -1773,6 +1809,10 @@ packages:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
 
+  dotenv@16.0.3:
+    resolution: {integrity: sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==}
+    engines: {node: '>=12'}
+
   dotenv@8.6.0:
     resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
     engines: {node: '>=10'}
@@ -1821,6 +1861,22 @@ packages:
   escape-string-regexp@4.0.0:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
+
+  eslint-config-prettier@10.0.1:
+    resolution: {integrity: sha512-lZBts941cyJyeaooiKxAtzoPHTN+GbQTJFAIdQbRhA4/8whaAraEh47Whw/ZFfrjNSnlAxqfm9i0XVAEkULjCw==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+
+  eslint-plugin-only-warn@1.1.0:
+    resolution: {integrity: sha512-2tktqUAT+Q3hCAU0iSf4xAN1k9zOpjK5WO8104mB0rT/dGhOa09582HN5HlbxNbPRZ0THV7nLGvzugcNOSjzfA==}
+    engines: {node: '>=6'}
+
+  eslint-plugin-turbo@2.4.2:
+    resolution: {integrity: sha512-67IZtvOFaWDnUmYMV3luRIE1kqL+ok5MxPEsIPUqH2vQggML7jmZFZx/P9jhXAoFH+pViEz5QEzDa2DBLHqzQg==}
+    peerDependencies:
+      eslint: '>6.6.0'
+      turbo: '>2.0.0'
 
   eslint-scope@8.2.0:
     resolution: {integrity: sha512-PHlWUfG6lvPc3yvP5A4PNyBL1W8fkDUccmI21JUu/+GKZBoH/W5u6usENXUrWFRsyoW5ACUjFGgAFQp5gUlb/A==}
@@ -4815,6 +4871,8 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
+  dotenv@16.0.3: {}
+
   dotenv@8.6.0: {}
 
   eastasianwidth@0.2.0: {}
@@ -4897,6 +4955,18 @@ snapshots:
   escape-string-regexp@2.0.0: {}
 
   escape-string-regexp@4.0.0: {}
+
+  eslint-config-prettier@10.0.1(eslint@9.20.1):
+    dependencies:
+      eslint: 9.20.1
+
+  eslint-plugin-only-warn@1.1.0: {}
+
+  eslint-plugin-turbo@2.4.2(eslint@9.20.1)(turbo@2.4.2):
+    dependencies:
+      dotenv: 16.0.3
+      eslint: 9.20.1
+      turbo: 2.4.2
 
   eslint-scope@8.2.0:
     dependencies:

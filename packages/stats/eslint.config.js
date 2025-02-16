@@ -1,4 +1,4 @@
-import { config } from "../../eslint.config.js";
+const { config } = require("../../eslint.config.js");
 
 /** @type {import("eslint").Linter.Config} */
-export default config;
+module.exports = config;
