@@ -22,34 +22,31 @@ npm install @lunarisapp/stats
 ```typescript
 import { TextStats } from '@lunarisapp/stats';
 
-const textStats = new TextStats({
-    lang: 'en_US',
-    rmApostrophe: true,
+const textStats = new TextStats({ 
+    lang: 'en_US' // optional, en_US by default
 });
-
-// Gets the word count.
 textStats.wordCount('Hello, world!');
+```
 
-// Gets the sentence count.
-textStats.sentenceCount('Hello, world! How are you?');
+| Function                            | Description                                                                 |
+|-------------------------------------|-----------------------------------------------------------------------------|
+| `readingTime(text)`                 | Calculates the reading time of the text in seconds.                         |
+| `wordCount(text)`                   | Counts the number of words in the provided text.                            |
+| `sentenceCount(text)`               | Counts the number of sentence in the provided text.                         |
+| `charCount(text)`                   | Counts the number of characters in the provided text.                       |
+| `letterCount(text)`                 | Counts the number of letters in the provided text.                          |
+| `syllableCount(text)`               | Counts the number of syllables in the provided text.                        |
+| `vowelCount(text)`                  | Counts the number of vowels in the provided text.                           |
+| `consonantCount(text)`              | Counts the number of consonants in the provided text.                       |
+| `longWordCount(text, len)`          | Counts the words longer than the specified length in the provided text.     |
+| `shortWordCount(text, len)`         | Counts the words shorter than the specified length in the provided text.    |
+| `monosyllableCount(text)`           | Counts the monosyllabic words in the provided text.                         |
+| `polysyllableCount(text)`           | Counts the polysyllabic words in the provided text.                         |
+| `avgSentenceLength(text)`           | Calculates the average sentence length in the provided text.                |
+| `avgSyllablesPerWord(text)`         | Calculates the average syllables per word in the provided text.             |
+| `avgCharactersPerWord(text)`        | Calculates the average characters per word in the provided text.            |
 
-// And also...
-textStats.readingTime('...'); // in seconds
-
-// And more...
-textStats.charCount('...');
-textStats.letterCount('...');
-textStats.syllableCount('...');
-textStats.vowelCount('...');
-textStats.consonantCount('...');
-textStats.longWordCount('...', 6);
-textStats.shortWordCount('...', 3);
-textStats.monosyllableCount('...');
-textStats.polysyllableCount('...');
-textStats.avgSentenceLength('...');
-textStats.avgSyllablesPerWord('...');
-textStats.avgCharactersPerWord('...');
-textStats.avgSentencesPerWord('...');
-textStats.avgWordsPerSentence('...');
-textStats.removePunctuation('...');
+### Other
+```
+import { consonants, vowels, type Language } from '@lunarisapp/stats';
 ```
