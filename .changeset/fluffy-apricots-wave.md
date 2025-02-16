@@ -5,4 +5,4 @@
 "@lunarisapp/stats": patch
 ---
 
-Downgrade target to es2017
+Downgrade target to es2020
