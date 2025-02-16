@@ -2,6 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Fhyphen)](https://www.npmjs.com/package/@lunarisapp/hyphen)
 [![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Fhyphen)](https://www.npmjs.com/package/@lunarisapp/hyphen)
+[![CI/CD Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI%2FCD)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
 
 A hyphenation library based on [LibreOffice dictionaries](https://git.libreoffice.org/dictionaries), inspired by [pyphen](https://github.com/Kozea/Pyphen).
 

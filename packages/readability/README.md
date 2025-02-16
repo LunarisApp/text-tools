@@ -2,6 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Freadability)](https://www.npmjs.com/package/@lunarisapp/readability)
 [![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Freadability)](https://www.npmjs.com/package/@lunarisapp/readability)
+[![CI/CD Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI%2FCD)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
 
 A library for calculating text readability scores based on popular algorithms & formulas, inspired by [textstat](https://github.com/textstat/textstat).
 
