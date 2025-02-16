@@ -1,5 +1,18 @@
 # @lunarisapp/readability
 
+## 0.0.7
+
+### Patch Changes
+
+- [`e240a75`](https://github.com/LunarisApp/text-tools/commit/e240a75426bb369e3b264b1b538a30901062bebe) Thanks [@MrLightful](https://github.com/MrLightful)! - Add LRU caching
+
+- [`6f15d3f`](https://github.com/LunarisApp/text-tools/commit/6f15d3f102e251847ebdecc8d4654e180869d0f7) Thanks [@MrLightful](https://github.com/MrLightful)! - Add option to disable caching
+
+- [`e12fd19`](https://github.com/LunarisApp/text-tools/commit/e12fd19b13dc45c61a684a001eede2b255a1aa56) Thanks [@MrLightful](https://github.com/MrLightful)! - Migrate to MIT license
+
+- Updated dependencies [[`e240a75`](https://github.com/LunarisApp/text-tools/commit/e240a75426bb369e3b264b1b538a30901062bebe), [`6f15d3f`](https://github.com/LunarisApp/text-tools/commit/6f15d3f102e251847ebdecc8d4654e180869d0f7), [`e12fd19`](https://github.com/LunarisApp/text-tools/commit/e12fd19b13dc45c61a684a001eede2b255a1aa56), [`4201d8c`](https://github.com/LunarisApp/text-tools/commit/4201d8c37b779aebe602b4b0b004d03ac409a001)]:
+  - @lunarisapp/stats@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes
