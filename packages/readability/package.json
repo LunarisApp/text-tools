@@ -31,7 +31,7 @@
     "coleman-liau",
     "automated readability index"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
