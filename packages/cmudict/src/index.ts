@@ -24,7 +24,7 @@ function parseEntries(
 /**
  * Returns the CMU dictionary as a dictionary object.
  */
-function dict(): Record<string, string[][]> {
+export function dict(): Record<string, string[][]> {
   const entries = parseEntries(cmuDict.split("\n"), "#");
   return entries.reduce(
     (dict, [word, pron]) => {
@@ -39,7 +39,7 @@ function dict(): Record<string, string[][]> {
 /**
  * Returns the CMU dictionary phones.
  */
-function phones(): [string, string[]][] {
+export function phones(): [string, string[]][] {
   return cmuPhones
     .split("\n")
     .map((line) => {
@@ -55,7 +55,7 @@ function phones(): [string, string[]][] {
 /**
  * Returns the CMU dictionary symbols.
  */
-function symbols(): string[] {
+export function symbols(): string[] {
   return cmuSymbols
     .split("\n")
     .map((line) => line.trim())
@@ -65,7 +65,7 @@ function symbols(): string[] {
 /**
  * Returns the CMU dictionary vowel phonemes.
  */
-function vp(): Record<string, string[][]> {
+export function vp(): Record<string, string[][]> {
   const entries = parseEntries(cmuVp.split("\n"));
   return entries.reduce(
     (dict, [word, pron]) => {
@@ -80,14 +80,14 @@ function vp(): Record<string, string[][]> {
 /**
  * Returns the CMU dictionary as an array of entries.
  */
-function entries(): [string, string[]][] {
+export function entries(): [string, string[]][] {
   return parseEntries(cmuDict.split("\n"), "#");
 }
 
 /**
  * Returns the CMU dictionary as an array of words.
  */
-function words(): string[] {
+export function words(): string[] {
   return entries().map(([word]) => word);
 }
 
