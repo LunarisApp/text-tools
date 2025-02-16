@@ -54,6 +54,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
+      - name: Build
+        run: pnpm build
+
       - name: Test
         run: pnpm test --filter=@lunarisapp/cmudict
 
@@ -65,6 +68,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - uses: pnpm/action-setup@v4
 
@@ -76,6 +81,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
+
+      - name: Build
+        run: pnpm build
 
       - name: Test
         run: pnpm test --filter=@lunarisapp/hyphen
@@ -87,6 +95,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - uses: pnpm/action-setup@v4
 
@@ -98,6 +108,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
+
+      - name: Build
+        run: pnpm build
 
       - name: Test
         run: pnpm test --filter=@lunarisapp/stats
@@ -110,6 +123,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - uses: pnpm/action-setup@v4
 
@@ -121,6 +136,9 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm i
+
+      - name: Build
+        run: pnpm build
 
       - name: Test
         run: pnpm test --filter=@lunarisapp/readability
