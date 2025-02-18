@@ -25,3 +25,26 @@ export function lruCache<T extends {}, B extends unknown[]>(
   cache.set(cacheKey, result);
   return result;
 }
+
+/**
+ * Chunk text input into smaller parts and aggregate the results.
+ */
+export function chunkAndProcessText(
+  text: string,
+  fn: (text: string) => number,
+  opts?: {
+    chunkSize?: number;
+    regex?: RegExp;
+  },
+) {
+  const { chunkSize = 100, regex = /\s+/ } = opts ?? {};
+  const words = text.split(regex);
+  let result = 0;
+
+  for (let i = 0; i < words.length; i += chunkSize) {
+    const chunk = words.slice(i, i + chunkSize).join(" ");
+    result += fn(chunk);
+  }
+
+  return result;
+}

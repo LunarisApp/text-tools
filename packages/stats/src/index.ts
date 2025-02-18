@@ -2,7 +2,7 @@ import { vowels, consonants } from "./data";
 import cmudict from "@lunarisapp/cmudict";
 import { Language, TextHyphen } from "@lunarisapp/hyphen";
 import { LRUCache } from "lru-cache";
-import { lruCache } from "./utils";
+import { chunkAndProcessText, lruCache } from "./utils";
 
 export { Language };
 export { vowels, consonants };
@@ -142,12 +142,14 @@ export class TextStats {
    * @param text
    */
   syllableCount(text: string) {
-    return lruCache(
-      this.cache,
-      "syllableCount",
-      [text],
-      (text) => this.computeSyllableCount(text),
-      this.cacheEnabled,
+    return chunkAndProcessText(text, (text) =>
+      lruCache(
+        this.cache,
+        "syllableCount",
+        [text],
+        (text) => this.computeSyllableCount(text),
+        this.cacheEnabled,
+      ),
     );
   }
 
