@@ -197,7 +197,7 @@ export class TextReadability {
 
   private computeLinsearWriteFormula(text: string, sample: number) {
     const words = text
-      .split(/\s+/)
+      .split(/[\s\u00A0]+/)
       .slice(0, sample)
       .filter((word) => word);
     const newText = words.join(" ");
