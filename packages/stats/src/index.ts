@@ -55,10 +55,10 @@ export class TextStats {
    */
   removePunctuation(text: string) {
     if (this.rmApostrophe) {
-      return text.replace(/[^\w\s]/g, "");
+      return text.replace(/[^\p{L}\p{N}\s\u00A0]/gu, "");
     } else {
-      text = text.replace(/'(?![tsd]\b|ve\b|ll\b|re\b)/g, '"');
-      return text.replace(/[^\w\s']/g, ""); // remove all punctuation except apostrophes
+      text = text.replace(/'(?![tsd]\b|ve\b|ll\b|re\b)/g, '"'); // english contractions.
+      return text.replace(/[^\p{L}\p{N}\s\u00A0']/gu, "");
     }
   }
 
@@ -69,7 +69,7 @@ export class TextStats {
    */
   charCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
-      text = text.replace(/\s/g, "");
+      text = text.replace(/[\s\u00A0]+/g, "");
     }
     return text.length;
   }
@@ -81,7 +81,7 @@ export class TextStats {
    */
   letterCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
-      text = text.replace(/\s/g, "");
+      text = text.replace(/[\s\u00A0]+/g, "");
     }
     return this.removePunctuation(text).length;
   }
@@ -92,7 +92,7 @@ export class TextStats {
    */
   vowelCount(text: string) {
     const formatted = this.removePunctuation(text)
-      .replace(/\s+/g, "")
+      .replace(/[\s\u00A0]+/g, "")
       .toLowerCase();
     if (!formatted) return 0;
 
@@ -106,7 +106,7 @@ export class TextStats {
    */
   consonantCount(text: string) {
     const formatted = this.removePunctuation(text)
-      .replace(/\s+/g, "")
+      .replace(/[\s\u00A0]+/g, "")
       .toLowerCase();
     if (!formatted) return 0;
 
@@ -123,7 +123,7 @@ export class TextStats {
     if (removePunctuation) {
       text = this.removePunctuation(text);
     }
-    return text.split(/\s+/).length;
+    return text.split(/[\s\u00A0]+/g).length;
   }
 
   /**
@@ -133,7 +133,7 @@ export class TextStats {
    */
   miniWordCount(text: string, maxSize = 3) {
     return this.removePunctuation(text)
-      .split(/\s+/)
+      .split(/[\s\u00A0]+/g)
       .filter((word) => word.length <= maxSize).length;
   }
 
@@ -158,7 +158,7 @@ export class TextStats {
     if (!formatted) return 0;
 
     let count = 0;
-    for (const word of formatted.split(/\s+/)) {
+    for (const word of formatted.split(/[\s\u00A0]+/g)) {
       try {
         count += this.cmudict![word]![0].filter((s) => s.match(/\d/g)).length;
       } catch {
@@ -184,7 +184,8 @@ export class TextStats {
 
   private computeSentenceCount(text: string) {
     let ignoreCount = 0;
-    const sentences = text.match(/\b[^.!?]+[.!?]*/g) || [];
+    const sentences =
+      text.match(/[^.!?。！？\n\r]+[.!?。！？]*[\n\r]*/gu) || [];
     for (const sentence of sentences) {
       if (this.wordCount(sentence) <= 2) {
         ignoreCount += 1;
@@ -288,7 +289,7 @@ export class TextStats {
 
   private computePolysyllableCount(text: string) {
     let count = 0;
-    for (const word of text.split(/\s+/)) {
+    for (const word of text.split(/[\s\u00A0]+/g)) {
       if (this.syllableCount(word) > 2) {
         count += 1;
       }
@@ -311,7 +312,7 @@ export class TextStats {
   }
 
   private computeMonosyllableCount(text: string) {
-    const words = this.removePunctuation(text).split(/\s+/);
+    const words = this.removePunctuation(text).split(/[\s\u00A0]+/g);
     let count = 0;
     for (const word of words) {
       if (this.syllableCount(word) === 1) {
@@ -327,7 +328,7 @@ export class TextStats {
    * @param threshold
    */
   longWordCount(text: string, threshold = 6) {
-    const words = this.removePunctuation(text).split(/\s+/);
+    const words = this.removePunctuation(text).split(/[\s\u00A0]+/g);
     return words.filter((word) => word.length > threshold).length;
   }
 
@@ -337,7 +338,7 @@ export class TextStats {
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
   readingTime(text: string, msPerChar = 14.69) {
-    const words = text.split(/\s+/);
+    const words = text.split(/[\s\u00A0]+/g);
     const chars = words.map((word) => word.length);
     const rtPerWord = chars.map((char) => char * msPerChar);
     return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;

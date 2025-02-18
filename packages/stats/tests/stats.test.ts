@@ -1,5 +1,6 @@
 import { describe, expect, it } from "@jest/globals";
 import {
+  longRussianTextGuillemets,
   longTest,
   punctText,
   punctTextResultWApostr,
@@ -57,11 +58,11 @@ describe("stats tests", () => {
       expect(count).toBe(17);
     });
 
-    // it('sentence count russian', () => {
-    //     textStats.setLang('ru_RU')
-    //     const count = textStats.sentenceCount(longRussianTextGuillemets)
-    //     assert.strictEqual(count, 16)
-    // })
+    it("sentence count russian", () => {
+      textStats.setLang("ru");
+      const count = textStats.sentenceCount(longRussianTextGuillemets);
+      expect(count).toBe(16);
+    });
 
     describe("syllable count", () => {
       testSyllableCountCases.forEach((testCase) => {
