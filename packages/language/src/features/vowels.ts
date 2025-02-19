@@ -1,4 +1,4 @@
-import { Language } from "@lunarisapp/hyphen";
+import { Language } from "./languages";
 
 const VOWEL_LATIN_GROUP = ["a", "e", "i", "o", "u"];
 const VOWEL_GERMANIC_UMLAUTS_GROUP = [...VOWEL_LATIN_GROUP, "ä", "ö", "ü", "y"];

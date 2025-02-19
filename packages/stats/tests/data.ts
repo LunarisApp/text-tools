@@ -4,21 +4,6 @@ export const difficultWord = "Regardless";
 
 export const shortTest = "Cool dogs wear da sunglasses.";
 
-export const punctText = `I said: 'This is a test sentence to test the remove_punctuation function.
-It's short and not the work of a singer-songwriter. But it'll suffice.'
-Your answer was: "I don't know. If I were you I'd write a test; just to make
-sure, you're really just removing the characters you want to remove!" Didn't`;
-
-export const punctTextResultWApostr = `I said This is a test sentence to test the removepunctuation function
-It's short and not the work of a singersongwriter But it'll suffice
-Your answer was I don't know If I were you I'd write a test just to make
-sure you're really just removing the characters you want to remove Didn't`;
-
-export const punctTextResultWoApostr = `I said This is a test sentence to test the removepunctuation function
-Its short and not the work of a singersongwriter But itll suffice
-Your answer was I dont know If I were you Id write a test just to make
-sure youre really just removing the characters you want to remove Didnt`;
-
 export const longTest =
   "Playing ... games has always been thought to be " +
   "important to the development of well-balanced and " +
@@ -182,7 +167,6 @@ export const hardArabicText =
 
 export const testSyllableCountCases = [
   ["en", shortTest, 7, 0],
-  ["en", punctText, 74, 3], // Original delta: 2
   ["en", "faeries", 2, 1],
   ["en", "relived", 2, 0],
   ["en", "couple", 2, 0],

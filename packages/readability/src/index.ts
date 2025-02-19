@@ -1,4 +1,4 @@
-import { TextStats, Language } from "@lunarisapp/stats";
+import { TextStats } from "@lunarisapp/stats";
 import { LangConfig, langs } from "./utils/config";
 import {
   fleschReadingEase,
@@ -16,9 +16,10 @@ import {
 } from "./formulas";
 import { LRUCache } from "lru-cache";
 import { lruCache } from "./utils/utils";
+import { type Language } from "@lunarisapp/language";
 
 export * from "./formulas";
-export { Language };
+export { type Language };
 
 export class TextReadability {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
@@ -197,7 +198,7 @@ export class TextReadability {
 
   private computeLinsearWriteFormula(text: string, sample: number) {
     const words = text
-      .split(/[\s\u00A0]+/)
+      .split(/\s+/)
       .slice(0, sample)
       .filter((word) => word);
     const newText = words.join(" ");

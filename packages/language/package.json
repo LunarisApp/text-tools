@@ -1,7 +1,7 @@
 {
-  "name": "@lunarisapp/stats",
-  "description": "A library for calculating text statistics (e.g. word count)",
-  "version": "0.0.7",
+  "name": "@lunarisapp/language",
+  "description": "A library about the language details.",
+  "version": "0.0.0",
   "author": {
     "name": "Roman Sirokov",
     "url": "https://mrlightful.com",
@@ -20,15 +20,12 @@
     "dist"
   ],
   "keywords": [
-    "statistics",
-    "metrics",
     "text",
     "linguistics",
     "language",
-    "word count",
-    "sentence count",
-    "syllable count",
-    "reading time"
+    "vowels",
+    "consonants",
+    "tools"
   ],
   "license": "MIT",
   "main": "./dist/index.js",
@@ -39,18 +36,13 @@
     "lint": "eslint \"{src,tests}/**/*.ts\" --fix",
     "test": "jest"
   },
-  "dependencies": {
-    "@lunarisapp/cmudict": "workspace:*",
-    "@lunarisapp/hyphen": "workspace:*",
-    "@lunarisapp/language": "workspace:*",
-    "lru-cache": "^11.0.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.26.9",
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.20.0",
     "@jest/globals": "^29.7.0",
+    "@lunarisapp/cmudict": "^0.0.4",
     "babel-jest": "^29.7.0",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",

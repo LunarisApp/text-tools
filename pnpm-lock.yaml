@@ -114,8 +114,59 @@ importers:
         specifier: ^8.24.0
         version: 8.24.0(eslint@9.20.1)(typescript@5.7.3)
 
+  packages/language:
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.26.9
+        version: 7.26.9
+      '@babel/preset-env':
+        specifier: ^7.26.9
+        version: 7.26.9(@babel/core@7.26.9)
+      '@babel/preset-typescript':
+        specifier: ^7.26.0
+        version: 7.26.0(@babel/core@7.26.9)
+      '@eslint/js':
+        specifier: ^9.20.0
+        version: 9.20.0
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
+      '@lunarisapp/cmudict':
+        specifier: ^0.0.4
+        version: 0.0.4
+      babel-jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@babel/core@7.26.9)
+      eslint:
+        specifier: ^9.20.1
+        version: 9.20.1
+      eslint-config-prettier:
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@9.20.1)
+      eslint-plugin-only-warn:
+        specifier: ^1.1.0
+        version: 1.1.0
+      eslint-plugin-turbo:
+        specifier: ^2.4.2
+        version: 2.4.2(eslint@9.20.1)(turbo@2.4.2)
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@22.13.4)
+      tsup:
+        specifier: ^8.3.6
+        version: 8.3.6(tsx@4.19.2)(typescript@5.7.3)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.7.3
+      typescript-eslint:
+        specifier: ^8.24.0
+        version: 8.24.0(eslint@9.20.1)(typescript@5.7.3)
+
   packages/readability:
     dependencies:
+      '@lunarisapp/language':
+        specifier: workspace:*
+        version: link:../language
       '@lunarisapp/stats':
         specifier: workspace:*
         version: link:../stats
@@ -174,6 +225,9 @@ importers:
       '@lunarisapp/hyphen':
         specifier: workspace:*
         version: link:../hyphen
+      '@lunarisapp/language':
+        specifier: workspace:*
+        version: link:../language
       lru-cache:
         specifier: ^11.0.2
         version: 11.0.2
@@ -1330,6 +1384,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@lunarisapp/cmudict@0.0.4':
+    resolution: {integrity: sha512-d9Ba4+9CLzpRUtaqXZ1fBiE2vSSOZMKeOMPkHepwRCBpGp+3mekr2nA+XAN11Xn9m8a6LWn6JYW2P9zBOBWEyA==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -4382,6 +4439,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@lunarisapp/cmudict@0.0.4': {}
 
   '@manypkg/find-root@1.1.0':
     dependencies:

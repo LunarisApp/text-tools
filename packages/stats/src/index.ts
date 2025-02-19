@@ -1,29 +1,27 @@
-import { vowels, consonants } from "./data";
 import cmudict from "@lunarisapp/cmudict";
-import { Language, TextHyphen } from "@lunarisapp/hyphen";
+import { TextHyphen } from "@lunarisapp/hyphen";
 import { LRUCache } from "lru-cache";
 import { chunkAndProcessText, lruCache } from "./utils";
+import {
+  type Language,
+  removePunctuation,
+  vowels,
+  consonants,
+} from "@lunarisapp/language";
 
-export { Language };
-export { vowels, consonants };
+export { type Language, vowels, consonants };
 
 export class TextStats {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
   private lang: Language = "en_US";
-  private rmApostrophe = true;
   private readonly cacheEnabled;
   private cmudict: Record<string, string[][]> | null = null;
   private hyphen!: TextHyphen;
 
-  constructor(props?: {
-    lang?: Language;
-    rmApostrophe?: boolean;
-    cache?: boolean;
-  }) {
-    const { lang, rmApostrophe } = props ?? {};
+  constructor(props?: { lang?: Language; cache?: boolean }) {
+    const { lang } = props ?? {};
     this.cacheEnabled = props?.cache ?? true;
     this.setLang(lang ?? this.lang);
-    this.setRmApostrophe(rmApostrophe ?? this.rmApostrophe);
   }
 
   /**
@@ -42,34 +40,13 @@ export class TextStats {
   }
 
   /**
-   * Set whether to remove apostrophes from text.
-   * @param rmApostrophe
-   */
-  setRmApostrophe(rmApostrophe: boolean) {
-    this.rmApostrophe = rmApostrophe;
-  }
-
-  /**
-   * Remove punctuation from text.
-   * @param text
-   */
-  removePunctuation(text: string) {
-    if (this.rmApostrophe) {
-      return text.replace(/[^\p{L}\p{N}\s\u00A0]/gu, "");
-    } else {
-      text = text.replace(/'(?![tsd]\b|ve\b|ll\b|re\b)/g, '"'); // english contractions.
-      return text.replace(/[^\p{L}\p{N}\s\u00A0']/gu, "");
-    }
-  }
-
-  /**
    * Count the number of characters in text (incl. punctuation).
    * @param text The text to count characters in.
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
   charCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
-      text = text.replace(/[\s\u00A0]+/g, "");
+      text = text.replace(/\s+/g, "");
     }
     return text.length;
   }
@@ -81,9 +58,9 @@ export class TextStats {
    */
   letterCount(text: string, ignoreSpaces = true) {
     if (ignoreSpaces) {
-      text = text.replace(/[\s\u00A0]+/g, "");
+      text = text.replace(/\s+/g, "");
     }
-    return this.removePunctuation(text).length;
+    return removePunctuation(text).length;
   }
 
   /**
@@ -91,9 +68,7 @@ export class TextStats {
    * @param text
    */
   vowelCount(text: string) {
-    const formatted = this.removePunctuation(text)
-      .replace(/[\s\u00A0]+/g, "")
-      .toLowerCase();
+    const formatted = removePunctuation(text).replace(/\s+/g, "").toLowerCase();
     if (!formatted) return 0;
 
     const dict = vowels[this.lang];
@@ -105,9 +80,7 @@ export class TextStats {
    * @param text
    */
   consonantCount(text: string) {
-    const formatted = this.removePunctuation(text)
-      .replace(/[\s\u00A0]+/g, "")
-      .toLowerCase();
+    const formatted = removePunctuation(text).replace(/\s+/g, "").toLowerCase();
     if (!formatted) return 0;
 
     const dict = consonants[this.lang];
@@ -117,13 +90,13 @@ export class TextStats {
   /**
    * Count the number of words in text.
    * @param text The text to count words in.
-   * @param removePunctuation Whether to remove punctuation from text.
+   * @param isRemovePunctuation Whether to remove punctuation from text.
    */
-  wordCount(text: string, removePunctuation = true) {
-    if (removePunctuation) {
-      text = this.removePunctuation(text);
+  wordCount(text: string, isRemovePunctuation = true) {
+    if (isRemovePunctuation) {
+      text = removePunctuation(text);
     }
-    return text.split(/[\s\u00A0]+/g).length;
+    return text.split(/\s+/g).length;
   }
 
   /**
@@ -132,8 +105,8 @@ export class TextStats {
    * @param maxSize The maximum size of the common words to count. Default is 3.
    */
   miniWordCount(text: string, maxSize = 3) {
-    return this.removePunctuation(text)
-      .split(/[\s\u00A0]+/g)
+    return removePunctuation(text)
+      .split(/\s+/g)
       .filter((word) => word.length <= maxSize).length;
   }
 
@@ -154,11 +127,11 @@ export class TextStats {
   }
 
   private computeSyllableCount(text: string) {
-    const formatted = this.removePunctuation(text).toLowerCase();
+    const formatted = removePunctuation(text).toLowerCase();
     if (!formatted) return 0;
 
     let count = 0;
-    for (const word of formatted.split(/[\s\u00A0]+/g)) {
+    for (const word of formatted.split(/\s+/g)) {
       try {
         count += this.cmudict![word]![0].filter((s) => s.match(/\d/g)).length;
       } catch {
@@ -289,7 +262,7 @@ export class TextStats {
 
   private computePolysyllableCount(text: string) {
     let count = 0;
-    for (const word of text.split(/[\s\u00A0]+/g)) {
+    for (const word of text.split(/\s+/g)) {
       if (this.syllableCount(word) > 2) {
         count += 1;
       }
@@ -312,7 +285,7 @@ export class TextStats {
   }
 
   private computeMonosyllableCount(text: string) {
-    const words = this.removePunctuation(text).split(/[\s\u00A0]+/g);
+    const words = removePunctuation(text).split(/\s+/g);
     let count = 0;
     for (const word of words) {
       if (this.syllableCount(word) === 1) {
@@ -328,7 +301,7 @@ export class TextStats {
    * @param threshold
    */
   longWordCount(text: string, threshold = 6) {
-    const words = this.removePunctuation(text).split(/[\s\u00A0]+/g);
+    const words = removePunctuation(text).split(/\s+/g);
     return words.filter((word) => word.length > threshold).length;
   }
 
@@ -338,7 +311,7 @@ export class TextStats {
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
   readingTime(text: string, msPerChar = 14.69) {
-    const words = text.split(/[\s\u00A0]+/g);
+    const words = text.split(/\s+/g);
     const chars = words.map((word) => word.length);
     const rtPerWord = chars.map((char) => char * msPerChar);
     return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;

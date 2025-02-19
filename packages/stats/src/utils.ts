@@ -37,7 +37,7 @@ export function chunkAndProcessText(
     regex?: RegExp;
   },
 ) {
-  const { chunkSize = 100, regex = /[\s\u00A0]+/g } = opts ?? {};
+  const { chunkSize = 100, regex = /\s+/g } = opts ?? {};
   const words = text.split(regex);
   let result = 0;
 

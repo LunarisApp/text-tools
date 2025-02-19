@@ -41,6 +41,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@lunarisapp/language": "workspace:*",
     "@lunarisapp/stats": "workspace:*",
     "lru-cache": "^11.0.2"
   },

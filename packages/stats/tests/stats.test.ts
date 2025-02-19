@@ -2,9 +2,6 @@ import { describe, expect, it } from "@jest/globals";
 import {
   longRussianTextGuillemets,
   longTest,
-  punctText,
-  punctTextResultWApostr,
-  punctTextResultWoApostr,
   testSyllableCountCases,
 } from "./data";
 import { Language, TextStats } from "../src";
@@ -73,22 +70,6 @@ describe("stats tests", () => {
           assertDelta(actual, expected as number, delta as number);
         });
       });
-    });
-  });
-
-  describe("remove punctuation", () => {
-    it("incl. apostrophe", () => {
-      textStats.setLang("en");
-      textStats.setRmApostrophe(true);
-      const text = textStats.removePunctuation(punctText);
-      textStats.setRmApostrophe(false);
-      expect(text).toBe(punctTextResultWoApostr);
-    });
-
-    it("excl. apostrophe", () => {
-      textStats.setLang("en");
-      const text = textStats.removePunctuation(punctText);
-      expect(text).toBe(punctTextResultWApostr);
     });
   });
 

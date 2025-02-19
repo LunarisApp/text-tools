@@ -1,4 +1,4 @@
-import { Language } from "@lunarisapp/hyphen";
+import { Language } from "./languages";
 
 const CONSONANT_LATIN_GROUP = [
   "b",
