@@ -1,15 +1,18 @@
-import { enContractionsStr } from "./contractions";
+import { contractionsRegexSeq } from "./contractions";
 
 /**
  * Remove punctuation from text.
  * @param text
- * @param ignoreContractions If true, contractions will be spared.
+ * @param ignoreContractions
  */
 export function removePunctuation(text: string, ignoreContractions = false) {
   if (ignoreContractions) {
-    const antiContractionsRegex = new RegExp(`'(?!${enContractionsStr})`, "g");
-    text = text.replace(antiContractionsRegex, '"');
-    return text.replace(/[^\p{L}\p{N}\s']/gu, "");
+    const contractions = Object.values(contractionsRegexSeq).join("|");
+    if (contractions) {
+      const antiContractionsRegex = new RegExp(`'(?!${contractions})`, "g");
+      text = text.replace(antiContractionsRegex, '"');
+      return text.replace(/[^\p{L}\p{N}\s']/gu, "");
+    }
   }
   return text.replace(/[^\p{L}\p{N}\s]/gu, "");
 }
