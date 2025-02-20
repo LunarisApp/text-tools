@@ -1,5 +1,11 @@
 # @lunarisapp/hyphen
 
+## 1.0.0
+
+### Major Changes
+
+- [`d36fe1b`](https://github.com/LunarisApp/text-tools/commit/d36fe1b4dd9b76723bcfe80b05df240d1ef795b7) Thanks [@MrLightful](https://github.com/MrLightful)! - Stable release
+
 ## 0.0.6
 
 ### Patch Changes

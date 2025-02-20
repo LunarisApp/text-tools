@@ -1,7 +1,7 @@
 {
   "name": "@lunarisapp/cmudict",
   "description": "A JavaScript interface to the CMU Pronouncing Dictionary",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "author": {
     "name": "Roman Sirokov",
     "url": "https://mrlightful.com",
