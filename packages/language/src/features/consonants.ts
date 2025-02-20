@@ -21,7 +21,7 @@ const CONSONANT_LATIN_GROUP = [
   "w",
   "x",
   "z",
-];
+] as const;
 
 const CONSONANT_CYRILLIC_GROUP = [
   "б",
@@ -45,9 +45,9 @@ const CONSONANT_CYRILLIC_GROUP = [
   "ч",
   "ш",
   "щ",
-];
+] as const;
 
-export const consonants: Record<Language, string[]> = {
+export const consonants: Readonly<Record<Language, readonly string[]>> = {
   af: CONSONANT_LATIN_GROUP,
   as: [
     "ক",
@@ -82,24 +82,24 @@ export const consonants: Record<Language, string[]> = {
     "ষ",
     "স",
     "হ",
-  ],
+  ] as const,
   be: CONSONANT_CYRILLIC_GROUP,
   bg: CONSONANT_CYRILLIC_GROUP,
   ca: CONSONANT_LATIN_GROUP,
-  da: [...CONSONANT_LATIN_GROUP, "ð"],
-  de: [...CONSONANT_LATIN_GROUP, "ß"],
-  de_AT: [...CONSONANT_LATIN_GROUP, "ß"],
-  de_CH: [...CONSONANT_LATIN_GROUP, "ß"],
-  de_DE: [...CONSONANT_LATIN_GROUP, "ß"],
+  da: [...CONSONANT_LATIN_GROUP, "ð"] as const,
+  de: [...CONSONANT_LATIN_GROUP, "ß"] as const,
+  de_AT: [...CONSONANT_LATIN_GROUP, "ß"] as const,
+  de_CH: [...CONSONANT_LATIN_GROUP, "ß"] as const,
+  de_DE: [...CONSONANT_LATIN_GROUP, "ß"] as const,
   en: CONSONANT_LATIN_GROUP,
   en_GB: CONSONANT_LATIN_GROUP,
   en_US: CONSONANT_LATIN_GROUP,
   eo: CONSONANT_LATIN_GROUP,
-  es: [...CONSONANT_LATIN_GROUP, "ñ"],
+  es: [...CONSONANT_LATIN_GROUP, "ñ"] as const,
   et: CONSONANT_LATIN_GROUP,
-  fr: [...CONSONANT_LATIN_GROUP, "ç"],
+  fr: [...CONSONANT_LATIN_GROUP, "ç"] as const,
   gl: CONSONANT_LATIN_GROUP,
-  hr: [...CONSONANT_LATIN_GROUP, "č", "ć", "đ", "š", "ž"],
+  hr: [...CONSONANT_LATIN_GROUP, "č", "ć", "đ", "š", "ž"] as const,
   hu: [
     ...CONSONANT_LATIN_GROUP,
     "cs",
@@ -110,9 +110,9 @@ export const consonants: Record<Language, string[]> = {
     "sz",
     "ty",
     "zs",
-  ],
+  ] as const,
   id: CONSONANT_LATIN_GROUP,
-  is: [...CONSONANT_LATIN_GROUP, "ð", "þ"],
+  is: [...CONSONANT_LATIN_GROUP, "ð", "þ"] as const,
   it: CONSONANT_LATIN_GROUP,
   kn: [
     "ಕ",
@@ -148,8 +148,8 @@ export const consonants: Record<Language, string[]> = {
     "ಷ",
     "ಸ",
     "ಹ",
-  ],
-  lt: [...CONSONANT_LATIN_GROUP, "č", "š", "ž"],
+  ] as const,
+  lt: [...CONSONANT_LATIN_GROUP, "č", "š", "ž"] as const,
   lv: CONSONANT_LATIN_GROUP,
   mr: [
     "क",
@@ -189,7 +189,7 @@ export const consonants: Record<Language, string[]> = {
     "क्‍ष",
     "त्र",
     "ज्ञ",
-  ],
+  ] as const,
   mn: [
     "б",
     "в",
@@ -211,9 +211,9 @@ export const consonants: Record<Language, string[]> = {
     "ц",
     "ч",
     "ш",
-  ],
-  nb: [...CONSONANT_LATIN_GROUP, "ç"],
-  nn: [...CONSONANT_LATIN_GROUP, "ç"],
+  ] as const,
+  nb: [...CONSONANT_LATIN_GROUP, "ç"] as const,
+  nn: [...CONSONANT_LATIN_GROUP, "ç"] as const,
   nl: CONSONANT_LATIN_GROUP,
   pa: [
     "ਕ",
@@ -249,12 +249,12 @@ export const consonants: Record<Language, string[]> = {
     "ਜ਼",
     "ਸ",
     "ਹ",
-  ],
-  pl: [...CONSONANT_LATIN_GROUP, "ł", "ń", "ś", "ź", "ż", "ć"],
+  ] as const,
+  pl: [...CONSONANT_LATIN_GROUP, "ł", "ń", "ś", "ź", "ż", "ć"] as const,
   pt: CONSONANT_LATIN_GROUP,
   pt_BR: CONSONANT_LATIN_GROUP,
   pt_PT: CONSONANT_LATIN_GROUP,
-  ro: [...CONSONANT_LATIN_GROUP, "ț", "ș"],
+  ro: [...CONSONANT_LATIN_GROUP, "ț", "ș"] as const,
   ru: CONSONANT_CYRILLIC_GROUP,
   sa: [
     "क",
@@ -294,10 +294,10 @@ export const consonants: Record<Language, string[]> = {
     "क्‍ष",
     "त्र",
     "ज्ञ",
-  ],
-  sk: [...CONSONANT_LATIN_GROUP, "č", "ď", "ľ", "ň", "š", "ť", "ž"],
-  sl: [...CONSONANT_LATIN_GROUP, "č", "š", "ž"],
-  sq: [...CONSONANT_LATIN_GROUP, "ç"],
+  ] as const,
+  sk: [...CONSONANT_LATIN_GROUP, "č", "ď", "ľ", "ň", "š", "ť", "ž"] as const,
+  sl: [...CONSONANT_LATIN_GROUP, "č", "š", "ž"] as const,
+  sq: [...CONSONANT_LATIN_GROUP, "ç"] as const,
   sr: [
     "б",
     "в",
@@ -324,8 +324,8 @@ export const consonants: Record<Language, string[]> = {
     "ч",
     "џ",
     "ш",
-  ],
-  sr_Latn: [...CONSONANT_LATIN_GROUP, "č", "ć", "đ", "š", "ž"],
+  ] as const,
+  sr_Latn: [...CONSONANT_LATIN_GROUP, "č", "ć", "đ", "š", "ž"] as const,
   sv: CONSONANT_LATIN_GROUP,
   te: [
     "క",
@@ -361,7 +361,7 @@ export const consonants: Record<Language, string[]> = {
     "ష",
     "స",
     "హ",
-  ],
+  ] as const,
   th: [
     "ก",
     "ข",
@@ -407,7 +407,7 @@ export const consonants: Record<Language, string[]> = {
     "ฬ",
     "อ",
     "ฮ",
-  ],
+  ] as const,
   uk: CONSONANT_CYRILLIC_GROUP,
   zu: CONSONANT_LATIN_GROUP,
-};
+} as const;
