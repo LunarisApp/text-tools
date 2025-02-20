@@ -8,6 +8,7 @@ import {
   vowels,
   consonants,
 } from "@lunarisapp/language";
+import { getSentences, getWords } from "@lunarisapp/language/src";
 
 export { type Language, vowels, consonants };
 
@@ -68,11 +69,11 @@ export class TextStats {
    * @param text
    */
   vowelCount(text: string) {
-    const formatted = removePunctuation(text).replace(/\s+/g, "").toLowerCase();
-    if (!formatted) return 0;
+    const seq = getWords(text).join("");
+    if (!seq) return 0;
 
     const dict = vowels[this.lang];
-    return formatted.split("").filter((char) => dict.includes(char)).length;
+    return seq.split("").filter((char) => dict.includes(char)).length;
   }
 
   /**
@@ -80,11 +81,11 @@ export class TextStats {
    * @param text
    */
   consonantCount(text: string) {
-    const formatted = removePunctuation(text).replace(/\s+/g, "").toLowerCase();
-    if (!formatted) return 0;
+    const seq = getWords(text).join("");
+    if (!seq) return 0;
 
     const dict = consonants[this.lang];
-    return formatted.split("").filter((char) => dict.includes(char)).length;
+    return seq.split("").filter((char) => dict.includes(char)).length;
   }
 
   /**
@@ -93,21 +94,7 @@ export class TextStats {
    * @param isRemovePunctuation Whether to remove punctuation from text.
    */
   wordCount(text: string, isRemovePunctuation = true) {
-    if (isRemovePunctuation) {
-      text = removePunctuation(text);
-    }
-    return text.split(/\s+/g).length;
-  }
-
-  /**
-   * Count he number of common words with [maxSize] characters or less in text.
-   * @param text The text to count common words in.
-   * @param maxSize The maximum size of the common words to count. Default is 3.
-   */
-  miniWordCount(text: string, maxSize = 3) {
-    return removePunctuation(text)
-      .split(/\s+/g)
-      .filter((word) => word.length <= maxSize).length;
+    return getWords(text, isRemovePunctuation).length;
   }
 
   /**
@@ -127,11 +114,8 @@ export class TextStats {
   }
 
   private computeSyllableCount(text: string) {
-    const formatted = removePunctuation(text).toLowerCase();
-    if (!formatted) return 0;
-
     let count = 0;
-    for (const word of formatted.split(/\s+/g)) {
+    for (const word of getWords(text)) {
       try {
         count += this.cmudict![word]![0].filter((s) => s.match(/\d/g)).length;
       } catch {
@@ -157,8 +141,7 @@ export class TextStats {
 
   private computeSentenceCount(text: string) {
     let ignoreCount = 0;
-    const sentences =
-      text.match(/[^.!?。！？\n\r]+[.!?。！？]*[\n\r]*/gu) || [];
+    const sentences = getSentences(text);
     for (const sentence of sentences) {
       if (this.wordCount(sentence) <= 2) {
         ignoreCount += 1;
@@ -262,7 +245,7 @@ export class TextStats {
 
   private computePolysyllableCount(text: string) {
     let count = 0;
-    for (const word of text.split(/\s+/g)) {
+    for (const word of getWords(text)) {
       if (this.syllableCount(word) > 2) {
         count += 1;
       }
@@ -285,9 +268,8 @@ export class TextStats {
   }
 
   private computeMonosyllableCount(text: string) {
-    const words = removePunctuation(text).split(/\s+/g);
     let count = 0;
-    for (const word of words) {
+    for (const word of getWords(text)) {
       if (this.syllableCount(word) === 1) {
         count += 1;
       }
@@ -296,13 +278,21 @@ export class TextStats {
   }
 
   /**
+   * Count he number of common words with [maxSize] characters or less in text.
+   * @param text The text to count common words in.
+   * @param maxSize The maximum size of the common words to count. Default is 3.
+   */
+  miniWordCount(text: string, maxSize = 3) {
+    return getWords(text).filter((word) => word.length <= maxSize).length;
+  }
+
+  /**
    * Calculate the number of long words in text.
    * @param text
    * @param threshold
    */
   longWordCount(text: string, threshold = 6) {
-    const words = removePunctuation(text).split(/\s+/g);
-    return words.filter((word) => word.length > threshold).length;
+    return getWords(text).filter((word) => word.length > threshold).length;
   }
 
   /**
@@ -311,8 +301,7 @@ export class TextStats {
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
   readingTime(text: string, msPerChar = 14.69) {
-    const words = text.split(/\s+/g);
-    const chars = words.map((word) => word.length);
+    const chars = getWords(text, false).map((word) => word.length);
     const rtPerWord = chars.map((char) => char * msPerChar);
     return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;
   }

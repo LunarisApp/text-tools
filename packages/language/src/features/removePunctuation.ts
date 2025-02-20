@@ -7,8 +7,8 @@ import { enContractionsStr } from "./contractions";
  */
 export function removePunctuation(text: string, ignoreContractions = false) {
   if (ignoreContractions) {
-    const contractionsRegex = new RegExp(`'(?!${enContractionsStr})`, "g");
-    text = text.replace(contractionsRegex, '"');
+    const antiContractionsRegex = new RegExp(`'(?!${enContractionsStr})`, "g");
+    text = text.replace(antiContractionsRegex, '"');
     return text.replace(/[^\p{L}\p{N}\s']/gu, "");
   }
   return text.replace(/[^\p{L}\p{N}\s]/gu, "");

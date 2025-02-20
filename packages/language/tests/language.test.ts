@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import { removePunctuation } from "../src";
+import { getSentences, getWords, removePunctuation } from "../src";
 
 export const punctText = `I said: 'This is a test sentence to test the remove_punctuation function.
 It's short and not the work of a singer-songwriter. But it'll suffice.'
@@ -16,14 +16,26 @@ Its short and not the work of a singersongwriter But itll suffice
 Your answer was I dont know If I were you Id write a test just to make
 sure youre really just removing the characters you want to remove Didnt`;
 
-describe("remove punctuation", () => {
-  it("incl. apostr in contractions", () => {
-    const text = removePunctuation(punctText);
-    expect(text).toBe(punctTextResultWoApostr);
-  });
+export const simpleText = `This is a simple sentence. It has nothing special, but it has words. It has punctuation!`;
 
-  it("ignore contractions", () => {
-    const text = removePunctuation(punctText, true);
-    expect(text).toBe(punctTextResultWApostr);
+describe("language tests", () => {
+  describe("remove punctuation", () => {
+    it("incl. apostr in contractions", () => {
+      const text = removePunctuation(punctText);
+      expect(text).toBe(punctTextResultWoApostr);
+    });
+
+    it("ignore contractions", () => {
+      const text = removePunctuation(punctText, true);
+      expect(text).toBe(punctTextResultWApostr);
+    });
+  });
+  it("should get 53 words", () => {
+    const words = getWords(punctText);
+    expect(words).toHaveLength(53);
+  });
+  it("should get sentences", () => {
+    const sentences = getSentences(simpleText);
+    expect(sentences).toHaveLength(3);
   });
 });
