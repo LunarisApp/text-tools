@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Fcmudict)](https://www.npmjs.com/package/@lunarisapp/cmudict)
 [![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Fcmudict)](https://www.npmjs.com/package/@lunarisapp/cmudict)
-[![CI/CD Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI%2FCD)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
 
 
 A JavaScript interface to [the Carnegie Mellon University Pronouncing Dictionary (CMUdict)](https://github.com/cmusphinx/cmudict), inspired by [cmudict](https://github.com/prosegrinder/python-cmudict).

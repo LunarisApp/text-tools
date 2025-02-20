@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/%40lunarisapp%2Fstats)](https://www.npmjs.com/package/@lunarisapp/stats)
 [![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Fstats)](https://www.npmjs.com/package/@lunarisapp/stats)
-[![CI/CD Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI%2FCD)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
 
 A library for calculating text statistics, such as word count, sentence count, etc. Inspired by [textstat](https://github.com/textstat/textstat).
 
