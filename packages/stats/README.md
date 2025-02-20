@@ -12,6 +12,13 @@ A library for calculating text statistics, such as word count, sentence count, e
 >   - [@lunarisapp/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
 >   - [@lunarisapp/hyphen](https://github.com/LunarisApp/text-tools/tree/main/packages/hyphen) for word hyphenation.
 
+## Features
+
+- Browser & Node.js support
+- Multi-language support
+- Caching for faster performance
+- TypeScript support
+
 ## Installation
 
 ```bash

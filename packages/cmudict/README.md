@@ -13,6 +13,12 @@ A JavaScript interface to [the Carnegie Mellon University Pronouncing Dictionary
 >   - [@lunarisapp/stats](https://github.com/LunarisApp/text-tools/tree/main/packages/stats) for text statistics (e.g. word count, sentence count, etc.).
 >   - [@lunarisapp/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
 
+## Features
+
+- Browser & Node.js support
+- TypeScript support
+- Up-to-date [CMUdict](https://github.com/cmusphinx/cmudict) data
+
 ## Installation
 
 ```bash
