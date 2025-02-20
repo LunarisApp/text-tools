@@ -30,9 +30,9 @@ npm install @lunarisapp/hyphen
 import { TextHyphen } from '@lunarisapp/hyphen';
 
 const textHyphen = new TextHyphen({
-    lang: 'en_US',
-    left: 2,
-    right: 2,
+    lang: 'en_US',  // optional, en_US by default
+    left: 2,        // optional, 2 by default
+    right: 2,       // optional, 2 by default
 });
 
 // Gets the textHyphenation points for a word.
