@@ -4,7 +4,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/%40lunarisapp%2Flanguage)](https://www.npmjs.com/package/@lunarisapp/language)
 [![CI/CD Status](https://img.shields.io/github/actions/workflow/status/LunarisApp/text-tools/checks.yml?label=CI%2FCD)](https://github.com/LunarisApp/text-tools/actions/workflows/checks.yml)
 
-A library about the language details.
+A utility library for core linguistic breakdown: vowels, consonants, words, and sentences.
 
 > [!TIP]
 > See also:

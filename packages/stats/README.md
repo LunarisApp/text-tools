@@ -8,6 +8,7 @@ A library for calculating text statistics, such as word count, sentence count, e
 
 > [!TIP]
 > See also:
+>   - [@lunarisapp/language](https://github.com/LunarisApp/text-tools/tree/main/packages/language) for core linguistic breakdown: vowels, consonants, words, and sentences.
 >   - [@lunarisapp/readability](https://github.com/LunarisApp/text-tools/tree/main/packages/readability) for text readability scores (e.g. Flesch Reading Ease).
 >   - [@lunarisapp/hyphen](https://github.com/LunarisApp/text-tools/tree/main/packages/hyphen) for word hyphenation.
 

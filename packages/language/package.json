@@ -1,6 +1,6 @@
 {
   "name": "@lunarisapp/language",
-  "description": "A library about the language details.",
+  "description": "A utility library for core linguistic breakdown: vowels, consonants, words, and sentences.",
   "version": "0.0.0",
   "author": {
     "name": "Roman Sirokov",
@@ -25,7 +25,9 @@
     "language",
     "vowels",
     "consonants",
-    "tools"
+    "tools",
+    "words",
+    "sentences"
   ],
   "license": "MIT",
   "main": "./dist/index.js",
