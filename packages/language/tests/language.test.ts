@@ -30,7 +30,7 @@ describe("language tests", () => {
       expect(text).toBe(punctTextResultWApostr);
     });
   });
-  it("should get 53 words", () => {
+  it("should get words", () => {
     const words = getWords(punctText);
     expect(words).toHaveLength(53);
   });
