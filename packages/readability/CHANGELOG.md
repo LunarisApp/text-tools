@@ -1,5 +1,11 @@
 # @lunarisapp/readability
 
+## 1.0.1
+
+### Patch Changes
+
+- [`d7ba40b`](https://github.com/LunarisApp/text-tools/commit/d7ba40bf4e8be09935f877d84929aa890fdcbbc9) Thanks [@MrLightful](https://github.com/MrLightful)! - Add LIX & RIX readability formulas
+
 ## 1.0.0
 
 ### Major Changes
