@@ -17,6 +17,8 @@ import {
 import { LRUCache } from "lru-cache";
 import { lruCache } from "./utils/utils";
 import { type Language } from "@lunarisapp/language";
+import { rix } from "./formulas/rix";
+import { lix } from "./formulas/lix";
 
 export * from "./formulas";
 export { type Language };
@@ -297,6 +299,57 @@ export class TextReadability {
       words: this.textStats.wordCount(text),
       sentences: this.textStats.sentenceCount(text),
       chars: this.textStats.charCount(text),
+    });
+  }
+
+  /**
+   * Calculate the RIX ratio.
+   * https://readable.com/readability/lix-rix-readability-formulas/
+   * @param text
+   */
+  rix(text: string) {
+    return lruCache(
+      this.cache,
+      "rix",
+      [text],
+      (text) => this.computeRix(text),
+      this.cacheEnabled,
+    );
+  }
+
+  private computeRix(text: string) {
+    if (!text) {
+      return 0;
+    }
+    return rix({
+      longWords: this.textStats.longWordCount(text),
+      sentences: this.textStats.sentenceCount(text),
+    });
+  }
+
+  /**
+   * Calculate the LIX ratio.
+   * https://readable.com/readability/lix-rix-readability-formulas/
+   * @param text
+   */
+  lix(text: string): number {
+    return lruCache(
+      this.cache,
+      "lix",
+      [text],
+      (text) => this.computeLix(text),
+      this.cacheEnabled,
+    );
+  }
+
+  private computeLix(text: string): number {
+    if (!text) {
+      return 0;
+    }
+    return lix({
+      words: this.textStats.wordCount(text),
+      longWords: this.textStats.longWordCount(text),
+      wordsPerSentence: this.textStats.avgWordsPerSentence(text),
     });
   }
 

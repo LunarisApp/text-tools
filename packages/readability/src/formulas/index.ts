@@ -9,3 +9,5 @@ export * from "./crawford";
 export * from "./gulpeaseIndex";
 export * from "./wienerSachtextformel";
 export * from "./mcalpineEflaw";
+export * from "./lix";
+export * from "./rix";

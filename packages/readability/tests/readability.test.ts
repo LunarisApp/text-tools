@@ -4,12 +4,19 @@ import {
   italianText,
   longSpanishText,
   longTest,
+  punctText,
+  shortText,
 } from "./data";
 import { describe, expect, it } from "@jest/globals";
 import { TextReadability } from "../src";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
-  return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
+  const diff = Math.abs(actual - expected);
+  if (diff > delta) {
+    throw new Error(
+      `actual=${actual}; expected=${expected}; allowed error=${delta}`,
+    );
+  }
 }
 
 describe("readability tests", () => {
@@ -108,6 +115,42 @@ describe("readability tests", () => {
       textReadability.setLang("es");
       const score = textReadability.gutierrezPolini(emptyStr);
       assertDelta(score, 0);
+    });
+  });
+
+  describe("rix", () => {
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.rix(emptyStr);
+      assertDelta(score, 0);
+    });
+    it("short text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.rix(shortText);
+      assertDelta(score, 1);
+    });
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.rix(longTest);
+      assertDelta(score, 4.529);
+    });
+  });
+
+  describe("lix", () => {
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.lix(emptyStr);
+      assertDelta(score, 0);
+    });
+    it("short text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.lix(shortText);
+      assertDelta(score, 25);
+    });
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.lix(longTest);
+      assertDelta(score, 42.581, 0.5); // TODO: check delta
     });
   });
 

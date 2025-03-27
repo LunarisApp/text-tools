@@ -2,7 +2,7 @@ export const emptyStr = "";
 export const easyWord = "Dog";
 export const difficultWord = "Regardless";
 
-export const shortTest = "Cool dogs wear da sunglasses.";
+export const shortText = "Cool dogs wear da sunglasses.";
 
 export const punctText = `I said: 'This is a test sentence to test the remove_punctuation function.
 It's short and not the work of a singer-songwriter. But it'll suffice.'
@@ -181,7 +181,7 @@ export const hardArabicText =
   "\u0627\u0644\u0645\u062e\u062a\u0644\u0641\u0629";
 
 export const testSyllableCountCases = [
-  ["en", shortTest, 7, 0],
+  ["en", shortText, 7, 0],
   ["en", punctText, 74, 3], // Original delta: 2
   ["en", "faeries", 2, 1],
   ["en", "relived", 2, 0],
