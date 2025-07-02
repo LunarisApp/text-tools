@@ -42,7 +42,7 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.1",
     "@eslint/js": "^9.30.0",
-    "@jest/globals": "^29.7.0",
+    "@jest/globals": "^30.0.3",
     "babel-jest": "^30.0.2",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
