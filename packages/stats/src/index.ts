@@ -8,7 +8,7 @@ import {
   vowels,
   consonants,
 } from "@lunarisapp/language";
-import { getSentences, getWords } from "@lunarisapp/language/src";
+import { getSentences, getWords } from "@lunarisapp/language";
 
 export { type Language, vowels, consonants };
 
