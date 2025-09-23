@@ -1,5 +1,11 @@
 # @lunarisapp/stats
 
+## 1.0.1
+
+### Patch Changes
+
+- [`aeecd47`](https://github.com/LunarisApp/text-tools/commit/aeecd47e9e369b8847567af01a910f5f2511acd3) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix import of @lunarisapp/language
+
 ## 1.0.0
 
 ### Major Changes
