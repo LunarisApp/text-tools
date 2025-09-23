@@ -1,5 +1,12 @@
 # @lunarisapp/readability
 
+## 1.0.2
+
+### Patch Changes
+
+- Updated dependencies [[`aeecd47`](https://github.com/LunarisApp/text-tools/commit/aeecd47e9e369b8847567af01a910f5f2511acd3)]:
+  - @lunarisapp/stats@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
