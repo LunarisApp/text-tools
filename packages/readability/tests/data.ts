@@ -1,23 +1,6 @@
 export const emptyStr = "";
-export const easyWord = "Dog";
-export const difficultWord = "Regardless";
 
 export const shortText = "Cool dogs wear da sunglasses.";
-
-export const punctText = `I said: 'This is a test sentence to test the remove_punctuation function.
-It's short and not the work of a singer-songwriter. But it'll suffice.'
-Your answer was: "I don't know. If I were you I'd write a test; just to make
-sure, you're really just removing the characters you want to remove!" Didn't`;
-
-export const punctTextResultWApostr = `I said This is a test sentence to test the remove_punctuation function
-It's short and not the work of a singersongwriter But it'll suffice
-Your answer was I don't know If I were you I'd write a test just to make
-sure you're really just removing the characters you want to remove Didn't`;
-
-export const punctTextResultWoApostr = `I said This is a test sentence to test the remove_punctuation function
-Its short and not the work of a singersongwriter But itll suffice
-Your answer was I dont know If I were you Id write a test just to make
-sure youre really just removing the characters you want to remove Didnt`;
 
 export const longTest =
   "Playing ... games has always been thought to be " +
@@ -67,18 +50,6 @@ export const longTest =
   "competition. For these reasons, adults should " +
   "place a higher priority on playing games in their " +
   "lives";
-
-// const easyText: string =
-//     "Anna and her family love doing puzzles. Anna is best at " +
-//     "little puzzles. Anna and her brother work on medium size " +
-//     "puzzles together. Anna's Brother likes puzzles with cars " +
-//     "in them. When the whole family does a puzzle, they do really " +
-//     "big puzzles. It can take them a week to finish a really " +
-//     "big puzzle. Last year they did a puzzle with 500 pieces! " +
-//     "Anna tries to finish one small puzzle a day by her. " +
-//     "Her puzzles have about 50 pieces. They all glue their " +
-//     "favorite puzzles together and frame them. The puzzles look " +
-//     "so nice on the wall.";
 
 export const longSpanishText: string =
   "Muchos años después, frente al pelotón de fusilamiento, " +
@@ -144,68 +115,3 @@ export const longRussianTextGuillemets =
 export const italianText =
   "Roma è un comune italiano, capitale della Repubblica Italiana, " +
   "nonché capoluogo dell'omonima città metropolitana e della regione Lazio.";
-
-export const easyArabicText =
-  "ذهب هند وأحمد الى المدرسة. هند تحب الرسم والمطالعة";
-
-export const hardArabicText =
-  "\u062a\u062a\u0631\u0643\u0632 \u0623\u0633\u0633 " +
-  "\u0627\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0646\u0648\u0648\u064a\u0629 \u0628\u0634\u0643\u0644 " +
-  "\u0639\u0627\u0645 \u0639\u0644\u064a \u0627\u0644\u0630\u0631\u0629 " +
-  "\u0648\u0645\u0643\u0648\u0646\u0627\u062a\u0647\u0627 " +
-  "\u0627\u0644\u062f\u0627\u062e\u0644\u064a\u0629 " +
-  "\u0648\u0627\u0644\u062a\u0639\u0627\u0645\u0644 " +
-  "\u0645\u0639 \u062a\u0644\u0643 \u0627\u0644\u0630\u0631\u0629 " +
-  "\u0648\u0627\u0644\u0639\u0646\u0627\u0635\u0631 " +
-  "\u0648\u062d\u064a\u062b \u0627\u0646 \u0647\u0630\u0627 \u0647\u0648 " +
-  "\u0627\u0644\u0645\u0628\u062d\u062b \u0627\u0644\u0639\u0627\u0645 " +
-  "\u0644\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0646\u0648\u0648\u064a\u0629 \u0641\u0627\u0646\u0647 " +
-  "\u0627\u062d\u064a\u0627\u0646\u0627 \u0645\u0627 " +
-  "\u064a\u0637\u0644\u0642 \u0639\u0644\u064a\u0647\u0627 " +
-  "\u0627\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0630\u0631\u064a\u0629 " +
-  "\u0627\u0644\u0627 \u0623\u0646 \u0645\u062c\u0627\u0644 " +
-  "\u0627\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0646\u0648\u0648\u064a\u0629 " +
-  "\u0623\u0639\u0645 \u0648\u0627\u0634\u0645\u0644 \u0645\u0646 " +
-  "\u0627\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0630\u0631\u064a\u0629 \u0648\u0643\u0632\u0644\u0643 " +
-  "\u0627\u0644\u0641\u064a\u0632\u064a\u0627\u0621 " +
-  "\u0627\u0644\u0630\u0631\u064a\u0629 \u062a\u0647\u062a\u0645 " +
-  "\u0628\u062f\u0627\u0631\u0633\u0629 " +
-  "\u0627\u0644\u0630\u0631\u0629 \u0641\u0649 " +
-  "\u062d\u0627\u0644\u0627\u062a\u0647\u0627 " +
-  "\u0648\u062a\u0641\u0627\u0639\u0644\u0627\u062a\u0647\u0627 " +
-  "\u0627\u0644\u0645\u062e\u062a\u0644\u0641\u0629";
-
-export const testSyllableCountCases = [
-  ["en", shortText, 7, 0],
-  ["en", punctText, 74, 3], // Original delta: 2
-  ["en", "faeries", 2, 1],
-  ["en", "relived", 2, 0],
-  ["en", "couple", 2, 0],
-  ["en", "enriched", 2, 0],
-  ["en", "us", 1, 0],
-  ["en", "too", 1, 0],
-  ["en", "monopoly", 4, 0],
-  ["en", "him", 1, 0],
-  ["en", "he", 1, 0],
-  ["en", "without", 2, 0],
-  ["en", "creative", 3, 0],
-  ["en", "every", 3, 0],
-  ["en", "stimulating", 4, 0],
-  ["en", "life", 1, 0],
-  ["en", "cupboards", 2, 0],
-  ["en", "day's", 1, 0],
-  ["en", "forgotten", 3, 0],
-  ["en", "through", 1, 0],
-  ["en", "marriage", 2, 0],
-  ["en", "hello", 2, 0],
-  ["en", "the", 1, 0],
-  ["en", "sentences", 3, 0],
-  ["en", "songwriter", 3, 0],
-  ["en", "removing", 3, 0],
-  ["en", "interpersonal", 5, 0],
-];

@@ -2,7 +2,6 @@ export interface LangConfig {
   fre_base: number;
   fre_sentence_length: number;
   fre_syllables_per_word: number;
-  syllable_threshold?: number;
 }
 
 /**
@@ -13,7 +12,6 @@ export const langs: Record<string, LangConfig> = {
     fre_base: 206.835,
     fre_sentence_length: 1.015,
     fre_syllables_per_word: 84.6,
-    syllable_threshold: 3,
   },
   de: {
     fre_base: 180,
@@ -44,7 +42,6 @@ export const langs: Record<string, LangConfig> = {
     fre_base: 0,
     fre_sentence_length: 0,
     fre_syllables_per_word: 0,
-    syllable_threshold: 4,
   },
   ru: {
     fre_base: 206.835,
@@ -55,6 +52,5 @@ export const langs: Record<string, LangConfig> = {
     fre_base: 206.835,
     fre_sentence_length: 1.015,
     fre_syllables_per_word: 58.5,
-    syllable_threshold: 5,
   },
 };
