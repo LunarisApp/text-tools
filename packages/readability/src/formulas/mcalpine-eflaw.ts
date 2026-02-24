@@ -8,5 +8,8 @@ export function mcalpineEflaw(params: {
   miniWords: number;
 }) {
   const { words, sentences, miniWords } = params;
+  if (sentences === 0) {
+    return 0;
+  }
   return (words + miniWords) / sentences;
 }

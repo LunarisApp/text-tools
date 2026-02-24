@@ -12,15 +12,14 @@ export function gutierrezPolini(params: {
   letters: number;
 }) {
   const { words, sentences, letters } = params;
-  try {
-    const wordsPerSentences = words / sentences;
-    const lettersPerWords = letters / words;
-    return (
-      BASE_COEF +
-      WORDS_PER_SENTENCES_COEF * wordsPerSentences +
-      LETTERS_PER_WORDS_COEF * lettersPerWords
-    );
-  } catch {
+  if (words === 0 || sentences === 0) {
     return 0;
   }
+  const wordsPerSentences = words / sentences;
+  const lettersPerWords = letters / words;
+  return (
+    BASE_COEF +
+    WORDS_PER_SENTENCES_COEF * wordsPerSentences +
+    LETTERS_PER_WORDS_COEF * lettersPerWords
+  );
 }

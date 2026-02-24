@@ -12,15 +12,14 @@ export function crawford(params: {
   syllables: number;
 }) {
   const { words, sentences, syllables } = params;
-  try {
-    const sentencesPerWords = 100 * (sentences / words);
-    const syllablesPerWords = 100 * (syllables / words);
-    return (
-      SENTENCE_PER_WORDS_COEF * sentencesPerWords +
-      SYLLABLES_PER_WORDS_COEF * syllablesPerWords +
-      BASE_COEF
-    );
-  } catch {
+  if (words === 0) {
     return 0;
   }
+  const sentencesPerWords = 100 * (sentences / words);
+  const syllablesPerWords = 100 * (syllables / words);
+  return (
+    SENTENCE_PER_WORDS_COEF * sentencesPerWords +
+    SYLLABLES_PER_WORDS_COEF * syllablesPerWords +
+    BASE_COEF
+  );
 }

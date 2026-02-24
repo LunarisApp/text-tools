@@ -12,5 +12,8 @@ export function gulpeaseIndex(params: {
   words: number;
 }) {
   const { sentences, chars, words } = params;
+  if (words === 0) {
+    return 0;
+  }
   return (SENTENCES_COEF * sentences - CHARS_COEF * chars) / words + BASE_COEF;
 }

@@ -12,13 +12,12 @@ export function automatedReadabilityIndex(params: {
   sentences: number;
 }) {
   const { chars, words, sentences } = params;
-  try {
-    return (
-      CHARS_PER_WORDS_COEF * (chars / words) +
-      WORDS_PER_SENTENCES_COEF * (words / sentences) +
-      BASE_COEF
-    );
-  } catch {
+  if (words === 0 || sentences === 0) {
     return 0;
   }
+  return (
+    CHARS_PER_WORDS_COEF * (chars / words) +
+    WORDS_PER_SENTENCES_COEF * (words / sentences) +
+    BASE_COEF
+  );
 }

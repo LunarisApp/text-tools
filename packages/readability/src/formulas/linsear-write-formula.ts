@@ -17,13 +17,12 @@ export function linsearWriteFormula(params: {
       difficultWords += 1;
     }
   }
-  try {
-    const score = (easyWords + difficultWords * 3) / sentences;
-    if (score <= 20) {
-      return (score - 2) / 2;
-    }
-    return score / 2;
-  } catch {
+  if (sentences === 0) {
     return 0;
   }
+  const score = (easyWords + difficultWords * 3) / sentences;
+  if (score <= 20) {
+    return (score - 2) / 2;
+  }
+  return score / 2;
 }

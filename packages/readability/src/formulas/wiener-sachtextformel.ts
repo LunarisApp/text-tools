@@ -47,6 +47,10 @@ export function wienerSachtextformel(params: {
     params;
   const { ms, sl, iw, es, base } = VARIANTS[variant];
 
+  if (words === 0 || sentences === 0) {
+    return 0;
+  }
+
   const msVal = (100 * polysyllables) / words;
   const slVal = words / sentences;
   const iwVal = (100 * longWords) / words;
