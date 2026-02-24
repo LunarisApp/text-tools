@@ -24,10 +24,10 @@ describe("cmudict tests", () => {
       expect(rev).not.toContainEqual(["", [""]]);
     });
     it("vp", () => {
-      const keys = Object.keys(cmuDict).reverse();
+      const keys = Object.keys(cmuVp).reverse();
       expect(keys).not.toContain("");
 
-      const entries = Object.entries(cmuDict).reverse();
+      const entries = Object.entries(cmuVp).reverse();
       expect(entries).not.toContainEqual(["", []]);
       expect(entries).not.toContainEqual(["", [""]]);
     });
@@ -52,6 +52,57 @@ describe("cmudict tests", () => {
     for (const [word, expected] of Object.entries(cases)) {
       expect(cmuDict[word]).toEqual(expected);
     }
+  });
+
+  it("phones should return known phone-to-type mappings", () => {
+    const phonesMap = new Map(cmuPhones);
+    expect(phonesMap.get("AA")).toEqual(["vowel"]);
+    expect(phonesMap.get("B")).toEqual(["stop"]);
+    expect(phonesMap.get("CH")).toEqual(["affricate"]);
+    expect(phonesMap.get("DH")).toEqual(["fricative"]);
+    expect(phonesMap.get("HH")).toEqual(["aspirate"]);
+    expect(phonesMap.get("L")).toEqual(["liquid"]);
+    expect(phonesMap.get("M")).toEqual(["nasal"]);
+    expect(phonesMap.get("NG")).toEqual(["nasal"]);
+    expect(phonesMap.get("R")).toEqual(["liquid"]);
+    expect(phonesMap.get("W")).toEqual(["semivowel"]);
+  });
+
+  it("symbols should contain known symbols", () => {
+    expect(cmuSymbols).toContain("AA");
+    expect(cmuSymbols).toContain("AA0");
+    expect(cmuSymbols).toContain("AA1");
+    expect(cmuSymbols).toContain("AA2");
+    expect(cmuSymbols).toContain("ZH");
+    expect(cmuSymbols.length).toBeGreaterThan(70);
+  });
+
+  it("entries should return [word, phonemes] tuples consistent with dict", () => {
+    const cmuEntries = cmudict.entries();
+    expect(cmuEntries.length).toBeGreaterThan(100_000);
+    // Each entry should be a [string, string[]] tuple
+    const [word, phonemes] = cmuEntries[0];
+    expect(typeof word).toBe("string");
+    expect(Array.isArray(phonemes)).toBe(true);
+    // The word should exist in the dict with a matching pronunciation
+    expect(cmuDict[word]).toBeDefined();
+    expect(cmuDict[word]).toContainEqual(phonemes);
+  });
+
+  it("words should return the same words as entries", () => {
+    const cmuWords = cmudict.words();
+    const cmuEntries = cmudict.entries();
+    expect(cmuWords).toEqual(cmuEntries.map(([w]) => w));
+  });
+
+  it("dict should collapse variant suffixes into multiple pronunciations", () => {
+    // "a" has a(2) and a(3) variants in the dictionary
+    expect(cmuDict.a.length).toBeGreaterThanOrEqual(2);
+    // aalborg has aalborg and aalborg(2)
+    expect(cmuDict.aalborg).toEqual([
+      ["AO1", "L", "B", "AO0", "R", "G"],
+      ["AA1", "L", "B", "AO0", "R", "G"],
+    ]);
   });
 
   it("vp should return expected pronunciations", () => {
