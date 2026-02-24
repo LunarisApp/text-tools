@@ -317,7 +317,7 @@ export const consonants: Readonly<Record<Language, readonly string[]>> = {
     "с",
     "т",
     "ћ",
-    "у",
+    "ђ",
     "ф",
     "х",
     "ц",
