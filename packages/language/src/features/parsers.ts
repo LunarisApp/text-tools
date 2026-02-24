@@ -9,7 +9,7 @@ export function getWords(text: string, isRemovePunctuation = true) {
   const processedText = isRemovePunctuation
     ? removePunctuation(text, true)
     : text;
-  return processedText.toLowerCase().split(/\s+/g);
+  return processedText.toLowerCase().split(/\s+/g).filter(Boolean);
 }
 
 /**
@@ -17,5 +17,7 @@ export function getWords(text: string, isRemovePunctuation = true) {
  * @param text
  */
 export function getSentences(text: string) {
-  return text.match(/[^.!?。！？\n\r]+[.!?。！？]*[\n\r]*/gu) || [];
+  return (text.match(/[^.!?。！？\n\r]+[.!?。！？]*[\n\r]*/gu) || []).map((s) =>
+    s.trim()
+  );
 }
