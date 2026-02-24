@@ -146,8 +146,11 @@ export class TextStats {
   }
 
   private computeSentenceCount(text: string) {
-    let ignoreCount = 0;
     const sentences = getSentences(text);
+    if (sentences.length === 0) {
+      return 0;
+    }
+    let ignoreCount = 0;
     for (const sentence of sentences) {
       if (this.wordCount(sentence) <= 2) {
         ignoreCount += 1;
@@ -161,11 +164,11 @@ export class TextStats {
    * @param text
    */
   avgSentenceLength(text: string) {
-    try {
-      return this.wordCount(text) / this.sentenceCount(text);
-    } catch {
+    const sentenceCount = this.sentenceCount(text);
+    if (sentenceCount === 0) {
       return 0;
     }
+    return this.wordCount(text) / sentenceCount;
   }
 
   /**
@@ -175,15 +178,14 @@ export class TextStats {
    */
   avgSyllablesPerWord(text: string, interval?: number) {
     const syllableCount = this.syllableCount(text);
-    const lexiconCount = this.wordCount(text);
-    try {
-      if (interval) {
-        return (syllableCount * interval) / lexiconCount;
-      }
-      return syllableCount / lexiconCount;
-    } catch {
+    const wordCount = this.wordCount(text);
+    if (wordCount === 0) {
       return 0;
     }
+    if (interval) {
+      return (syllableCount * interval) / wordCount;
+    }
+    return syllableCount / wordCount;
   }
 
   /**
@@ -191,11 +193,11 @@ export class TextStats {
    * @param text
    */
   avgCharactersPerWord(text: string) {
-    try {
-      return this.charCount(text) / this.wordCount(text);
-    } catch {
+    const wordCount = this.wordCount(text);
+    if (wordCount === 0) {
       return 0;
     }
+    return this.charCount(text) / wordCount;
   }
 
   /**
@@ -203,11 +205,11 @@ export class TextStats {
    * @param text
    */
   avgLettersPerWord(text: string) {
-    try {
-      return this.letterCount(text) / this.wordCount(text);
-    } catch {
+    const wordCount = this.wordCount(text);
+    if (wordCount === 0) {
       return 0;
     }
+    return this.letterCount(text) / wordCount;
   }
 
   /**
@@ -215,11 +217,11 @@ export class TextStats {
    * @param text
    */
   avgSentencesPerWord(text: string) {
-    try {
-      return this.sentenceCount(text) / this.wordCount(text);
-    } catch {
+    const wordCount = this.wordCount(text);
+    if (wordCount === 0) {
       return 0;
     }
+    return this.sentenceCount(text) / wordCount;
   }
 
   /**
@@ -283,7 +285,7 @@ export class TextStats {
   }
 
   /**
-   * Count he number of common words with [maxSize] characters or less in text.
+   * Count the number of common words with [maxSize] characters or less in text.
    * @param text The text to count common words in.
    * @param maxSize The maximum size of the common words to count. Default is 3.
    */

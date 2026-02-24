@@ -21,7 +21,9 @@ export function lruCache<T extends {}, B extends unknown[]>(
     return cache.get(cacheKey) as T;
   }
   const result = fn(...values);
-  cache.set(cacheKey, result);
+  if (enabled) {
+    cache.set(cacheKey, result);
+  }
   return result;
 }
 
