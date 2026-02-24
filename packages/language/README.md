@@ -26,7 +26,7 @@ npm install @lunarisapp/language
 ## Usage
 
 ```typescript
-import { type Language, vowels, consonants, removePunctuation, getWords, getSenteces } from '@lunarisapp/language';
+import { type Language, vowels, consonants, removePunctuation, getWords, getSentences } from '@lunarisapp/language';
 
 const lang: Language = 'en_US';
 
@@ -35,6 +35,6 @@ const enConsonants = consonants[lang];
 
 const text = 'Hello, world!';
 const words = getWords(text);
-const sentences = getSenteces(text);
+const sentences = getSentences(text);
 const textWithoutPunctuation = removePunctuation(text);
 ```
