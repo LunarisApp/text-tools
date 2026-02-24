@@ -10,6 +10,9 @@ import {
 } from "./data";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
+  if (Number.isNaN(actual)) {
+    throw new Error(`actual is NaN; expected=${expected}`);
+  }
   const diff = Math.abs(actual - expected);
   if (diff > delta) {
     throw new Error(
