@@ -1,5 +1,23 @@
 # @lunarisapp/readability
 
+## 1.0.3
+
+### Patch Changes
+
+- [`e4799e6`](https://github.com/LunarisApp/text-tools/commit/e4799e6dec1ca7c2f3bce27122b4bbac0f923a62) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix assertDelta test helper to reject NaN values
+
+- [`35fef17`](https://github.com/LunarisApp/text-tools/commit/35fef170e3aa0064ea8950969d4de7aa59471f58) Thanks [@MrLightful](https://github.com/MrLightful)! - Add empty text guards and fix getCfg error for unsupported languages
+
+- [`fccdb44`](https://github.com/LunarisApp/text-tools/commit/fccdb44c92a0d32d6fa2502c7812b6f6517acbf9) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix division-by-zero handling in readability formulas
+
+- [`53ee217`](https://github.com/LunarisApp/text-tools/commit/53ee21744d9432c7f74c93d99e2e796787018a2b) Thanks [@MrLightful](https://github.com/MrLightful)! - Remove unused syllable_threshold config and dead test data
+
+- [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72) Thanks [@MrLightful](https://github.com/MrLightful)! - Replace eslint with biome (also adding formatter)
+
+- Updated dependencies [[`cd1b807`](https://github.com/LunarisApp/text-tools/commit/cd1b807a38579791504e8412f302e13616692bd0), [`1eac30b`](https://github.com/LunarisApp/text-tools/commit/1eac30b9c76811a098551c84b1ca62d3957b7060), [`ae5263c`](https://github.com/LunarisApp/text-tools/commit/ae5263c8b5427160c364f0e859f1fb35067ba5bb), [`d7f95f6`](https://github.com/LunarisApp/text-tools/commit/d7f95f6508f0cc5083a42e9d7d90dc73a9e50895), [`8407a4d`](https://github.com/LunarisApp/text-tools/commit/8407a4d1946087bc73c9369bdf02154cc6f12cba), [`df955d2`](https://github.com/LunarisApp/text-tools/commit/df955d2a509bae1c706aed7816cdcbd29d96a4a9), [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72)]:
+  - @lunarisapp/language@1.1.0
+  - @lunarisapp/stats@1.0.2
+
 ## 1.0.2
 
 ### Patch Changes

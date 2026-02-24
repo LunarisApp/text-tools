@@ -1,5 +1,20 @@
 # @lunarisapp/stats
 
+## 1.0.2
+
+### Patch Changes
+
+- [`1eac30b`](https://github.com/LunarisApp/text-tools/commit/1eac30b9c76811a098551c84b1ca62d3957b7060) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix division-by-zero and empty text handling in stats methods
+
+- [`8407a4d`](https://github.com/LunarisApp/text-tools/commit/8407a4d1946087bc73c9369bdf02154cc6f12cba) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix tests failing locally
+
+- [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72) Thanks [@MrLightful](https://github.com/MrLightful)! - Replace eslint with biome (also adding formatter)
+
+- Updated dependencies [[`cd1b807`](https://github.com/LunarisApp/text-tools/commit/cd1b807a38579791504e8412f302e13616692bd0), [`c9d5eab`](https://github.com/LunarisApp/text-tools/commit/c9d5eab515f3c78832163813595fd56300efcecc), [`8bc92b4`](https://github.com/LunarisApp/text-tools/commit/8bc92b48875e33f6bb62dd7d29948751f0bd16d0), [`ae5263c`](https://github.com/LunarisApp/text-tools/commit/ae5263c8b5427160c364f0e859f1fb35067ba5bb), [`d7f95f6`](https://github.com/LunarisApp/text-tools/commit/d7f95f6508f0cc5083a42e9d7d90dc73a9e50895), [`5e33b25`](https://github.com/LunarisApp/text-tools/commit/5e33b25c8e8e3e5c5c6b63dad0bcd15808ff7f38), [`df955d2`](https://github.com/LunarisApp/text-tools/commit/df955d2a509bae1c706aed7816cdcbd29d96a4a9), [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72), [`e54abbb`](https://github.com/LunarisApp/text-tools/commit/e54abbb64ddf7c4639a2bbd59cdab37515ea9d24), [`5d4e39f`](https://github.com/LunarisApp/text-tools/commit/5d4e39f71628e6210eadaf0d9a46d8189135ad9b)]:
+  - @lunarisapp/language@1.1.0
+  - @lunarisapp/hyphen@1.1.0
+  - @lunarisapp/cmudict@1.0.1
+
 ## 1.0.1
 
 ### Patch Changes
