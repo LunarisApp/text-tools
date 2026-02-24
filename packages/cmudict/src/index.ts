@@ -74,7 +74,7 @@ export function vp(): Record<string, string[][]> {
   const entries = parseEntries(cmuVp.split("\n"));
   return entries.reduce(
     (dict, [word, pron]) => {
-      if (!dict[word]) {
+      if (!Array.isArray(dict[word])) {
         dict[word] = [];
       }
       dict[word].push(pron);
