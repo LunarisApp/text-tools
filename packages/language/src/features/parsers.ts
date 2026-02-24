@@ -1,4 +1,4 @@
-import { removePunctuation } from "./removePunctuation";
+import { removePunctuation } from "./remove-punctuation";
 
 /**
  * Get the words from text.
@@ -6,10 +6,10 @@ import { removePunctuation } from "./removePunctuation";
  * @param isRemovePunctuation
  */
 export function getWords(text: string, isRemovePunctuation = true) {
-  if (isRemovePunctuation) {
-    text = removePunctuation(text, true);
-  }
-  return text.toLowerCase().split(/\s+/g);
+  const processedText = isRemovePunctuation
+    ? removePunctuation(text, true)
+    : text;
+  return processedText.toLowerCase().split(/\s+/g);
 }
 
 /**

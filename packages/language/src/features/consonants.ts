@@ -1,4 +1,4 @@
-import { Language } from "./languages";
+import type { Language } from "./languages";
 
 const CONSONANT_LATIN_GROUP = [
   "b",

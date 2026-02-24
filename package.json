@@ -3,16 +3,20 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
     "test": "turbo test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "check": "ultracite check",
+    "fix": "ultracite fix",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.0",
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
-    "prettier": "^3.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "turbo": "^2.8.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "ultracite": "7.2.3"
   },
   "packageManager": "pnpm@10.4.0",
   "engines": {
@@ -21,6 +25,11 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
+      "pnpm dlx ultracite fix"
     ]
   }
 }

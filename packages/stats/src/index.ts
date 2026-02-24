@@ -1,16 +1,18 @@
 import cmudict from "@lunarisapp/cmudict";
 import { TextHyphen } from "@lunarisapp/hyphen";
-import { LRUCache } from "lru-cache";
-import { chunkAndProcessText, lruCache } from "./utils";
 import {
+  consonants,
+  getSentences,
+  getWords,
   type Language,
   removePunctuation,
   vowels,
-  consonants,
 } from "@lunarisapp/language";
-import { getSentences, getWords } from "@lunarisapp/language";
+import { LRUCache } from "lru-cache";
+import { chunkAndProcessText, lruCache } from "./utils";
 
-export { type Language, vowels, consonants };
+// biome-ignore lint/performance/noBarrelFile: library entry point
+export { consonants, type Language, vowels } from "@lunarisapp/language";
 
 export class TextStats {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
@@ -46,10 +48,8 @@ export class TextStats {
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
   charCount(text: string, ignoreSpaces = true) {
-    if (ignoreSpaces) {
-      text = text.replace(/\s+/g, "");
-    }
-    return text.length;
+    const processedText = ignoreSpaces ? text.replace(/\s+/g, "") : text;
+    return processedText.length;
   }
 
   /**
@@ -58,10 +58,8 @@ export class TextStats {
    * @param ignoreSpaces Whether to ignore spaces in text.
    */
   letterCount(text: string, ignoreSpaces = true) {
-    if (ignoreSpaces) {
-      text = text.replace(/\s+/g, "");
-    }
-    return removePunctuation(text).length;
+    const processedText = ignoreSpaces ? text.replace(/\s+/g, "") : text;
+    return removePunctuation(processedText).length;
   }
 
   /**
@@ -70,7 +68,9 @@ export class TextStats {
    */
   vowelCount(text: string) {
     const seq = getWords(text).join("");
-    if (!seq) return 0;
+    if (!seq) {
+      return 0;
+    }
 
     const dict = vowels[this.lang];
     return seq.split("").filter((char) => dict.includes(char)).length;
@@ -82,7 +82,9 @@ export class TextStats {
    */
   consonantCount(text: string) {
     const seq = getWords(text).join("");
-    if (!seq) return 0;
+    if (!seq) {
+      return 0;
+    }
 
     const dict = consonants[this.lang];
     return seq.split("").filter((char) => dict.includes(char)).length;
@@ -108,8 +110,8 @@ export class TextStats {
         "syllableCount",
         [text],
         (text) => this.computeSyllableCount(text),
-        this.cacheEnabled,
-      ),
+        this.cacheEnabled
+      )
     );
   }
 
@@ -117,7 +119,11 @@ export class TextStats {
     let count = 0;
     for (const word of getWords(text)) {
       try {
-        count += this.cmudict![word]![0].filter((s) => s.match(/\d/g)).length;
+        const pronunciations = this.cmudict?.[word]?.[0];
+        if (!pronunciations) {
+          throw new Error(`Word not found in CMU dictionary: ${word}`);
+        }
+        count += pronunciations.filter((s) => s.match(/\d/g)).length;
       } catch {
         count += this.hyphen.positions(word).length + 1;
       }
@@ -135,7 +141,7 @@ export class TextStats {
       "sentenceCount",
       [text],
       (text) => this.computeSentenceCount(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -173,9 +179,8 @@ export class TextStats {
     try {
       if (interval) {
         return (syllableCount * interval) / lexiconCount;
-      } else {
-        return syllableCount / lexiconCount;
       }
+      return syllableCount / lexiconCount;
     } catch {
       return 0;
     }
@@ -239,7 +244,7 @@ export class TextStats {
       "polysyllableCount",
       [text],
       (text) => this.computePolysyllableCount(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -263,7 +268,7 @@ export class TextStats {
       "monosyllableCount",
       [text],
       (text) => this.computeMonosyllableCount(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 

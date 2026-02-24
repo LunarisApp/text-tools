@@ -10,8 +10,8 @@ export function removePunctuation(text: string, ignoreContractions = false) {
     const contractions = Object.values(contractionsRegexSeq).join("|");
     if (contractions) {
       const antiContractionsRegex = new RegExp(`'(?!${contractions})`, "g");
-      text = text.replace(antiContractionsRegex, '"');
-      return text.replace(/[^\p{L}\p{N}\s']/gu, "");
+      const replacedText = text.replace(antiContractionsRegex, '"');
+      return replacedText.replace(/[^\p{L}\p{N}\s']/gu, "");
     }
   }
   return text.replace(/[^\p{L}\p{N}\s]/gu, "");

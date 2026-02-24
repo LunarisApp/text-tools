@@ -12,8 +12,8 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  lint:
-    name: Lint
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -30,11 +30,11 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
-      - name: Lint
-        run: pnpm run lint
+      - name: Check
+        run: pnpm check
 
   test-language:
-    needs: lint
+    needs: check
     name: Test Language
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +61,7 @@ jobs:
         run: pnpm test --filter=@lunarisapp/language
 
   test-cmudict:
-    needs: lint
+    needs: check
     name: Test CMUdict
     runs-on: ubuntu-latest
     steps:
@@ -89,7 +89,7 @@ jobs:
 
 
   test-hyphen:
-    needs: lint
+    needs: check
     name: Test Hyphen
     runs-on: ubuntu-latest
     steps:
@@ -116,7 +116,7 @@ jobs:
         run: pnpm test --filter=@lunarisapp/hyphen
 
   test-stats:
-    needs: lint
+    needs: check
     name: Test Stats
     runs-on: ubuntu-latest
     steps:
@@ -144,7 +144,7 @@ jobs:
 
 
   test-readability:
-    needs: lint
+    needs: check
     name: Test Readability
     runs-on: ubuntu-latest
     steps:

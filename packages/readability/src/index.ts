@@ -1,27 +1,30 @@
+import type { Language } from "@lunarisapp/language";
 import { TextStats } from "@lunarisapp/stats";
-import { LangConfig, langs } from "./utils/config";
+import { LRUCache } from "lru-cache";
 import {
-  fleschReadingEase,
-  mcalpineEflaw,
-  wienerSachtextformel,
-  WienerSachtextformelVariant,
-  gulpeaseIndex,
+  automatedReadabilityIndex,
+  colemanLiauIndex,
   crawford,
+  fleschKincaidGrade,
+  fleschReadingEase,
+  gulpeaseIndex,
   gutierrezPolini,
   linsearWriteFormula,
-  automatedReadabilityIndex,
+  mcalpineEflaw,
   smogIndex,
-  fleschKincaidGrade,
-  colemanLiauIndex,
+  type WienerSachtextformelVariant,
+  wienerSachtextformel,
 } from "./formulas";
-import { LRUCache } from "lru-cache";
-import { lruCache } from "./utils/utils";
-import { type Language } from "@lunarisapp/language";
-import { rix } from "./formulas/rix";
 import { lix } from "./formulas/lix";
+import { rix } from "./formulas/rix";
+import { type LangConfig, langs } from "./utils/config";
+import { lruCache } from "./utils/utils";
 
+const WHITESPACE_RE = /\s+/;
+
+export type { Language } from "@lunarisapp/language";
+// biome-ignore lint/performance/noBarrelFile: library entry point
 export * from "./formulas";
-export { type Language };
 
 export class TextReadability {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
@@ -37,7 +40,7 @@ export class TextReadability {
 
   private getCfg(key: keyof LangConfig) {
     const lang = this.lang.split("_")[0];
-    return langs[lang][key]!;
+    return langs[lang][key] as number;
   }
 
   /**
@@ -61,21 +64,21 @@ export class TextReadability {
       "fleschReadingEase",
       [text],
       (text) => this.computeFleschReadingEase(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
   private computeFleschReadingEase(text: string) {
     if (this.lang === "pl") {
       throw new Error(
-        "Flesch reading ease test does not support Polish language.",
+        "Flesch reading ease test does not support Polish language."
       );
     }
     const sInterval = ["es", "it"].includes(this.lang) ? 100 : undefined;
     const sentences = this.textStats.avgSentenceLength(text);
     const syllablesPerWord = this.textStats.avgSyllablesPerWord(
       text,
-      sInterval,
+      sInterval
     );
     return fleschReadingEase({
       sentences,
@@ -100,14 +103,14 @@ export class TextReadability {
       "fleschKincaidGrade",
       [text],
       (text) => this.computeFleschKincaidGrade(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
   private computeFleschKincaidGrade(text: string) {
     if (this.lang === "pl") {
       throw new Error(
-        "Flesch-Kincaid grade level does not support Polish language.",
+        "Flesch-Kincaid grade level does not support Polish language."
       );
     }
     const sentences = this.textStats.avgSentenceLength(text);
@@ -126,7 +129,7 @@ export class TextReadability {
       "smogIndex",
       [text],
       (text) => this.computeSmogIndex(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -150,7 +153,7 @@ export class TextReadability {
       "colemanLiauIndex",
       [text],
       (text) => this.computeColemanLiauIndex(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -171,7 +174,7 @@ export class TextReadability {
       "automatedReadabilityIndex",
       [text],
       (text) => this.computeAutomatedReadabilityIndex(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -194,19 +197,19 @@ export class TextReadability {
       "linsearWriteFormula",
       [text, sample],
       (text, sample) => this.computeLinsearWriteFormula(text, sample),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
   private computeLinsearWriteFormula(text: string, sample: number) {
     const words = text
-      .split(/\s+/)
+      .split(WHITESPACE_RE)
       .slice(0, sample)
       .filter((word) => word);
     const newText = words.join(" ");
     const sentences = this.textStats.sentenceCount(newText);
     const syllablesPerWords = words.map((word) =>
-      this.textStats.syllableCount(word),
+      this.textStats.syllableCount(word)
     );
     return linsearWriteFormula({
       sentences,
@@ -225,7 +228,7 @@ export class TextReadability {
       "gutierrezPolini",
       [text],
       (text) => this.computeGutierrezPolini(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -254,7 +257,7 @@ export class TextReadability {
       "crawford",
       [text],
       (text) => this.computeCrawford(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -283,7 +286,7 @@ export class TextReadability {
       "gulpeaseIndex",
       [text],
       (text) => this.computeGulpeaseIndex(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -313,7 +316,7 @@ export class TextReadability {
       "rix",
       [text],
       (text) => this.computeRix(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -338,7 +341,7 @@ export class TextReadability {
       "lix",
       [text],
       (text) => this.computeLix(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
@@ -365,13 +368,13 @@ export class TextReadability {
       "wienerSachtextformel",
       [text, variant],
       (text, variant) => this.computeWienerSachtextformel(text, variant),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 
   private computeWienerSachtextformel(
     text: string,
-    variant: WienerSachtextformelVariant,
+    variant: WienerSachtextformelVariant
   ) {
     if (this.lang !== "de") {
       console.warn(`Wiener Sachtextformel only supports German language. 
@@ -401,7 +404,7 @@ export class TextReadability {
       "mcalpineEflaw",
       [text],
       (text) => this.computeMcalpineEflaw(text),
-      this.cacheEnabled,
+      this.cacheEnabled
     );
   }
 

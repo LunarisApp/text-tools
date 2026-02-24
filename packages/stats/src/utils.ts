@@ -1,4 +1,4 @@
-import { LRUCache } from "lru-cache";
+import type { LRUCache } from "lru-cache";
 
 /**
  * Wrapper around lru-cache for more convenient method caching.
@@ -8,18 +8,17 @@ import { LRUCache } from "lru-cache";
  * @param fn
  * @param enabled
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export function lruCache<T extends {}, B extends unknown[]>(
   cache: LRUCache<string, T, unknown>,
   key: string,
   values: [...B],
   fn: (...args: [...B]) => T,
-  enabled = true,
+  enabled = true
 ) {
   const valuesStr = JSON.stringify(values);
   const cacheKey = `${key}:${valuesStr}`;
   if (enabled && cache.has(cacheKey)) {
-    return cache.get(cacheKey)!;
+    return cache.get(cacheKey) as T;
   }
   const result = fn(...values);
   cache.set(cacheKey, result);
@@ -35,7 +34,7 @@ export function chunkAndProcessText(
   opts?: {
     chunkSize?: number;
     regex?: RegExp;
-  },
+  }
 ) {
   const { chunkSize = 100, regex = /\s+/g } = opts ?? {};
   const words = text.split(regex);

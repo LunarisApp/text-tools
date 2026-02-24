@@ -1,3 +1,5 @@
+// biome-ignore-all lint/performance/noNamespaceImport: Would be a breaking change.
+
 type HyphenDict = string;
 
 import * as afZaDict from "./dictionaries/hyph_af_ZA.dic";
@@ -26,6 +28,7 @@ export const deDT: HyphenDict = deDTDict.default;
 
 import * as deCHDict from "./dictionaries/hyph_de_CH.dic";
 export const deCH: HyphenDict = deCHDict.default;
+
 //
 import * as deDEDict from "./dictionaries/hyph_de_DE.dic";
 export const deDE: HyphenDict = deDEDict.default;
@@ -35,9 +38,11 @@ export const deDE: HyphenDict = deDEDict.default;
 
 import * as enGBDict from "./dictionaries/hyph_en_GB.dic";
 export const enGB: HyphenDict = enGBDict.default;
+
 //
 import * as enUSDict from "./dictionaries/hyph_en_US.dic";
 export const enUS: HyphenDict = enUSDict.default;
+
 //
 import * as eoDict from "./dictionaries/hyph_eo.dic";
 export const eo: HyphenDict = eoDict.default;

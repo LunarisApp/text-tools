@@ -1,5 +1,5 @@
 module.exports = {
-  process(sourceText, sourcePath, options) {
+  process(sourceText, _sourcePath, _options) {
     return {
       code: `module.exports = ${JSON.stringify(sourceText)};`,
     };

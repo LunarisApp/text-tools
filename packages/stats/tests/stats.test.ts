@@ -1,10 +1,10 @@
 import { describe, expect, it } from "@jest/globals";
+import { type Language, TextStats } from "../src";
 import {
   longRussianTextGuillemets,
   longTest,
   testSyllableCountCases,
 } from "./data";
-import { Language, TextStats } from "../src";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
   return expect(Math.abs(actual - expected)).toBeLessThanOrEqual(delta);
@@ -62,14 +62,14 @@ describe("stats tests", () => {
     });
 
     describe("syllable count", () => {
-      testSyllableCountCases.forEach((testCase) => {
+      for (const testCase of testSyllableCountCases) {
         const [lang, text, expected, delta] = testCase;
         it(`syllable count: ${(text as string).slice(0, 10)}${(text as string).length >= 10 ? "..." : ""}`, () => {
           textStats.setLang(lang as Language);
           const actual = textStats.syllableCount(text as string);
           assertDelta(actual, expected as number, delta as number);
         });
-      });
+      }
     });
   });
 

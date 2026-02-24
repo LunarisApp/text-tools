@@ -1,5 +1,6 @@
-import { enUS, dictionaries, Language } from "./dicts";
+import { dictionaries, enUS, type Language } from "./dicts";
 
+// biome-ignore lint/performance/noBarrelFile: library entry point
 export * from "./dicts";
 
 // export function getDictionary(lang: string) {
@@ -28,48 +29,59 @@ class DataInt {
 class HyphenDictParser {
   patterns: Map<string, [number, number[]]> = new Map();
   cache: Map<string, DataInt[]> = new Map();
-  maxLen: number = 0;
+  maxLen = 0;
 
   constructor(content: string) {
     const lines = content.split("\n");
-    lines.forEach((line) => {
-      line = line.trim();
-      if (!line || IGNORED.some((i) => line.startsWith(i))) return;
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      if (!trimmedLine || IGNORED.some((i) => trimmedLine.startsWith(i))) {
+        continue;
+      }
 
-      const pattern = line.replace(/\^{2}([0-9a-f]{2})/g, (match, hex) =>
-        String.fromCharCode(parseInt(hex, 16)),
+      const pattern = trimmedLine.replace(
+        /\^{2}([0-9a-f]{2})/g,
+        (_match, hex) => String.fromCharCode(Number.parseInt(hex, 16))
       );
 
       const parts = Array.from(pattern.matchAll(/(\d?)(\D?)/g));
       const tags: string[] = [];
       const values: number[] = [];
 
-      parts.forEach(([, num, char]) => {
-        tags.push(char!);
-        values.push(num ? parseInt(num) : 0);
-      });
+      for (const [, num, char] of parts) {
+        tags.push(char ?? "");
+        values.push(num ? Number.parseInt(num, 10) : 0);
+      }
 
-      if (Math.max(...values) === 0) return;
+      if (Math.max(...values) === 0) {
+        continue;
+      }
 
       let start = 0,
         end = values.length;
-      while (!values[start]) start++;
-      while (!values[end - 1]) end--;
+      while (!values[start]) {
+        start++;
+      }
+      while (!values[end - 1]) {
+        end--;
+      }
 
       this.patterns.set(tags.join(""), [start, values.slice(start, end)]);
-    });
+    }
 
     this.maxLen = Math.max(
-      ...Array.from(this.patterns.keys()).map((k) => k.length),
+      ...Array.from(this.patterns.keys()).map((k) => k.length)
     );
   }
 
   positions(word: string): DataInt[] {
-    word = word.toLowerCase();
-    if (this.cache.has(word)) return this.cache.get(word)!;
+    const lowerWord = word.toLowerCase();
+    if (this.cache.has(lowerWord)) {
+      return this.cache.get(lowerWord) as DataInt[];
+    }
 
-    const references = new Array(word.length + 2).fill(0);
-    const extendedWord = `.${word}.`;
+    const references = new Array(lowerWord.length + 2).fill(0);
+    const extendedWord = `.${lowerWord}.`;
 
     for (let i = 0; i < extendedWord.length - 1; i++) {
       for (
@@ -78,22 +90,24 @@ class HyphenDictParser {
         j++
       ) {
         const pattern = this.patterns.get(extendedWord.slice(i, j));
-        if (!pattern) continue;
+        if (!pattern) {
+          continue;
+        }
 
         const [offset, values] = pattern;
-        values.forEach((val, idx) => {
+        for (let idx = 0; idx < values.length; idx++) {
           references[i + offset + idx] = Math.max(
-            val,
-            references[i + offset + idx],
+            values[idx],
+            references[i + offset + idx]
           );
-        });
+        }
       }
     }
 
     const positions = references
       .map((val, idx) => (val % 2 ? new DataInt(idx - 1) : null))
       .filter(Boolean) as DataInt[];
-    this.cache.set(word, positions);
+    this.cache.set(lowerWord, positions);
     return positions;
   }
 }
@@ -101,7 +115,7 @@ class HyphenDictParser {
 export class TextHyphen {
   private readonly left: number;
   private readonly right: number;
-  private hd!: HyphenDictParser;
+  private readonly hd!: HyphenDictParser;
 
   constructor(props?: { lang?: Language; left?: number; right?: number }) {
     const { lang = "en", left = 2, right = 2 } = props || {};
@@ -163,9 +177,9 @@ export class TextHyphen {
    * @param hyphen
    */
   wrap(word: string, width: number, hyphen = "-") {
-    width -= hyphen.length;
+    const effectiveWidth = width - hyphen.length;
     for (const [w1, w2] of this.iterate(word)) {
-      if (w1.length <= width) {
+      if (w1.length <= effectiveWidth) {
         return [w1 + hyphen, w2];
       }
     }
@@ -179,11 +193,9 @@ export class TextHyphen {
    */
   inserted(word: string, hyphen = "-"): string {
     const letters = [...word];
-    this.positions(word)
-      .reverse()
-      .forEach((pos) => {
-        letters.splice(pos, 0, hyphen);
-      });
+    for (const pos of this.positions(word).reverse()) {
+      letters.splice(pos, 0, hyphen);
+    }
     return letters.join("");
   }
 }

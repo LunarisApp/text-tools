@@ -1,4 +1,4 @@
-import { Language } from "./languages";
+import type { Language } from "./languages";
 
 const VOWEL_LATIN_GROUP = ["a", "e", "i", "o", "u"] as const;
 const VOWEL_GERMANIC_UMLAUTS_GROUP = [
@@ -121,22 +121,7 @@ export const vowels: Readonly<Record<Language, readonly string[]>> = {
     "ఓ",
     "ఔ",
   ] as const,
-  th: [
-    "ะ",
-    "า",
-    "ิ",
-    "ี",
-    "ึ",
-    "ื",
-    "ุ",
-    "ู",
-    "เ",
-    "แ",
-    "โ",
-    "ใ",
-    "ไ",
-    "ๅ",
-  ] as const,
+  th: ["ะ", "า", "ิ", "ี", "ึ", "ื", "ุ", "ู", "เ", "แ", "โ", "ใ", "ไ", "ๅ"] as const,
   uk: ["а", "е", "є", "и", "і", "ї", "о", "у", "ю", "я"] as const,
   zu: VOWEL_LATIN_GROUP,
 } as const;

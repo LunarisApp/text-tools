@@ -3,19 +3,22 @@ import cmuPhones from "./data/cmudict.phones";
 import cmuSymbols from "./data/cmudict.symbols";
 import cmuVp from "./data/cmudict.vp";
 
+const WHITESPACE_RE = /\s+/;
+const VARIANT_SUFFIX_RE = /\(\d+\)$/;
+
 function parseEntries(
   lines: string[],
-  commentChar?: string,
+  commentChar?: string
 ): [string, string[]][] {
   return lines
     .map((line) => {
       // There are a few lines in the dictionary that contain comment at the end of the line.
-      if (commentChar) line = line.split(commentChar)[0];
-      const parts = line.trim().split(/\s+/);
+      const cleanedLine = commentChar ? line.split(commentChar)[0] : line;
+      const parts = cleanedLine.trim().split(WHITESPACE_RE);
       if (parts.length < 2) {
         return null;
       }
-      const word = parts[0].replace(/\(\d+\)$/, "");
+      const word = parts[0].replace(VARIANT_SUFFIX_RE, "");
       return [word.toLowerCase(), parts.slice(1)];
     })
     .filter(Boolean) as [string, string[]][];
@@ -28,11 +31,13 @@ export function dict(): Record<string, string[][]> {
   const entries = parseEntries(cmuDict.split("\n"), "#");
   return entries.reduce(
     (dict, [word, pron]) => {
-      if (!Array.isArray(dict[word])) dict[word] = [];
+      if (!Array.isArray(dict[word])) {
+        dict[word] = [];
+      }
       dict[word].push(pron);
       return dict;
     },
-    {} as Record<string, string[][]>,
+    {} as Record<string, string[][]>
   );
 }
 
@@ -43,7 +48,7 @@ export function phones(): [string, string[]][] {
   return cmuPhones
     .split("\n")
     .map((line) => {
-      const parts = line.trim().split(/\s+/);
+      const parts = line.trim().split(WHITESPACE_RE);
       if (parts.length < 2) {
         return null;
       }
@@ -69,11 +74,13 @@ export function vp(): Record<string, string[][]> {
   const entries = parseEntries(cmuVp.split("\n"));
   return entries.reduce(
     (dict, [word, pron]) => {
-      if (!dict[word]) dict[word] = [];
+      if (!dict[word]) {
+        dict[word] = [];
+      }
       dict[word].push(pron);
       return dict;
     },
-    {} as Record<string, string[][]>,
+    {} as Record<string, string[][]>
   );
 }
 

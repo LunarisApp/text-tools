@@ -1,20 +1,19 @@
+import { describe, expect, it } from "@jest/globals";
+import { TextReadability } from "../src";
 import {
   easySpanishText,
   emptyStr,
   italianText,
   longSpanishText,
   longTest,
-  punctText,
   shortText,
 } from "./data";
-import { describe, expect, it } from "@jest/globals";
-import { TextReadability } from "../src";
 
 function assertDelta(actual: number, expected: number, delta = 0.1) {
   const diff = Math.abs(actual - expected);
   if (diff > delta) {
     throw new Error(
-      `actual=${actual}; expected=${expected}; allowed error=${delta}`,
+      `actual=${actual}; expected=${expected}; allowed error=${delta}`
     );
   }
 }
