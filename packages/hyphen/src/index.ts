@@ -69,9 +69,8 @@ class HyphenDictParser {
       this.patterns.set(tags.join(""), [start, values.slice(start, end)]);
     }
 
-    this.maxLen = Math.max(
-      ...Array.from(this.patterns.keys()).map((k) => k.length)
-    );
+    const lengths = Array.from(this.patterns.keys()).map((k) => k.length);
+    this.maxLen = lengths.length > 0 ? Math.max(...lengths) : 0;
   }
 
   positions(word: string): DataInt[] {
@@ -126,16 +125,19 @@ export class TextHyphen {
     this.hd = new HyphenDictParser(dict);
   }
 
+  private filteredPositions(word: string): DataInt[] {
+    const rightLimit = word.length - this.right;
+    return this.hd
+      .positions(word)
+      .filter((pos) => this.left <= pos.value && pos.value <= rightLimit);
+  }
+
   /**
    * Get the positions of possible hyphenation points in a word
    * @param word
    */
   positions(word: string): number[] {
-    const rightLimit = word.length - this.right;
-    return this.hd
-      .positions(word)
-      .map((pos) => pos.value)
-      .filter((pos) => this.left <= pos && pos <= rightLimit);
+    return this.filteredPositions(word).map((pos) => pos.value);
   }
 
   /**
@@ -143,7 +145,7 @@ export class TextHyphen {
    * @param word
    */
   *iterate(word: string): Generator<[string, string]> {
-    for (const position of this.hd.positions(word).reverse()) {
+    for (const position of this.filteredPositions(word).reverse()) {
       if (position.data) {
         const [change, index, cut] = position.data;
         const updatedIndex = index + position.value;
