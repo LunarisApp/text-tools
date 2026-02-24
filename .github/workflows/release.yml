@@ -8,6 +8,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 permissions:
+  id-token: write
   contents: write
   pull-requests: write
 
@@ -34,6 +35,10 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      # This ensures ability to connect to npm via OIDC.
+      - name: Update npm
+        run: npm install -g npm@latest
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
