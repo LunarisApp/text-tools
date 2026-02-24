@@ -60,7 +60,6 @@ export const vowels: Readonly<Record<Language, readonly string[]>> = {
     "u",
     "y",
     "á",
-    "ð",
     "é",
     "í",
     "ó",
