@@ -1,5 +1,19 @@
 # @lunarisapp/hyphen
 
+## 1.1.0
+
+### Minor Changes
+
+- [`5e33b25`](https://github.com/LunarisApp/text-tools/commit/5e33b25c8e8e3e5c5c6b63dad0bcd15808ff7f38) Thanks [@MrLightful](https://github.com/MrLightful)! - Fix name of exported deAT hyphenation dictionary
+
+### Patch Changes
+
+- [`c9d5eab`](https://github.com/LunarisApp/text-tools/commit/c9d5eab515f3c78832163813595fd56300efcecc) Thanks [@MrLightful](https://github.com/MrLightful)! - Improve test coverage
+
+- [`8bc92b4`](https://github.com/LunarisApp/text-tools/commit/8bc92b48875e33f6bb62dd7d29948751f0bd16d0) Thanks [@MrLightful](https://github.com/MrLightful)! - Added empty spread guard for Math.max()
+
+- [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72) Thanks [@MrLightful](https://github.com/MrLightful)! - Replace eslint with biome (also adding formatter)
+
 ## 1.0.0
 
 ### Major Changes

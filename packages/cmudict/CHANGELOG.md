@@ -1,5 +1,15 @@
 # @lunarisapp/cmudict
 
+## 1.0.1
+
+### Patch Changes
+
+- [`604b894`](https://github.com/LunarisApp/text-tools/commit/604b894753f200f965041a5630a2897907ce3f72) Thanks [@MrLightful](https://github.com/MrLightful)! - Replace eslint with biome (also adding formatter)
+
+- [`e54abbb`](https://github.com/LunarisApp/text-tools/commit/e54abbb64ddf7c4639a2bbd59cdab37515ea9d24) Thanks [@MrLightful](https://github.com/MrLightful)! - Improve code consistency
+
+- [`5d4e39f`](https://github.com/LunarisApp/text-tools/commit/5d4e39f71628e6210eadaf0d9a46d8189135ad9b) Thanks [@MrLightful](https://github.com/MrLightful)! - Improve test coverage
+
 ## 1.0.0
 
 ### Major Changes
