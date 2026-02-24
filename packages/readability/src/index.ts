@@ -40,7 +40,13 @@ export class TextReadability {
 
   private getCfg(key: keyof LangConfig) {
     const lang = this.lang.split("_")[0];
-    return langs[lang][key] as number;
+    const config = langs[lang];
+    if (!config) {
+      throw new Error(
+        `Language "${lang}" is not supported. Supported languages: ${Object.keys(langs).join(", ")}`
+      );
+    }
+    return config[key] as number;
   }
 
   /**
@@ -69,6 +75,9 @@ export class TextReadability {
   }
 
   private computeFleschReadingEase(text: string) {
+    if (!text) {
+      return 0;
+    }
     if (this.lang === "pl") {
       throw new Error(
         "Flesch reading ease test does not support Polish language."
@@ -108,6 +117,9 @@ export class TextReadability {
   }
 
   private computeFleschKincaidGrade(text: string) {
+    if (!text) {
+      return 0;
+    }
     if (this.lang === "pl") {
       throw new Error(
         "Flesch-Kincaid grade level does not support Polish language."
@@ -134,6 +146,9 @@ export class TextReadability {
   }
 
   private computeSmogIndex(text: string) {
+    if (!text) {
+      return 0;
+    }
     const sentences = this.textStats.sentenceCount(text);
     if (sentences < 3) {
       return 0;
@@ -158,6 +173,9 @@ export class TextReadability {
   }
 
   private computeColemanLiauIndex(text: string) {
+    if (!text) {
+      return 0;
+    }
     const letters = this.textStats.avgLettersPerWord(text) * 100;
     const sentences = this.textStats.avgSentencesPerWord(text) * 100;
     return colemanLiauIndex({ letters, sentences });
@@ -179,6 +197,9 @@ export class TextReadability {
   }
 
   private computeAutomatedReadabilityIndex(text: string) {
+    if (!text) {
+      return 0;
+    }
     const chars = this.textStats.charCount(text);
     const words = this.textStats.wordCount(text);
     const sentences = this.textStats.sentenceCount(text);
@@ -202,6 +223,9 @@ export class TextReadability {
   }
 
   private computeLinsearWriteFormula(text: string, sample: number) {
+    if (!text) {
+      return 0;
+    }
     const words = text
       .split(WHITESPACE_RE)
       .slice(0, sample)

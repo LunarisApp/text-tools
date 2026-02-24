@@ -103,7 +103,7 @@ describe("readability tests", () => {
     it("empty text", () => {
       textReadability.setLang("en");
       const score = textReadability.linsearWriteFormula(emptyStr);
-      assertDelta(score, -1);
+      assertDelta(score, 0);
     });
   });
 
