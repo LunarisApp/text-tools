@@ -42,7 +42,7 @@
     "@lunarisapp/cmudict": "workspace:*",
     "@lunarisapp/hyphen": "workspace:*",
     "@lunarisapp/language": "workspace:*",
-    "lru-cache": "^11.2.5"
+    "lru-cache": "^11.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
