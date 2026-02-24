@@ -23,8 +23,13 @@ export const ca: HyphenDict = caDict.default;
 import * as daDKDict from "./dictionaries/hyph_da_DK.dic";
 export const daDK: HyphenDict = daDKDict.default;
 
-import * as deDTDict from "./dictionaries/hyph_de_AT.dic";
-export const deDT: HyphenDict = deDTDict.default;
+import * as deATDict from "./dictionaries/hyph_de_AT.dic";
+export const deAT: HyphenDict = deATDict.default;
+
+/**
+ * @deprecated Use `deAT` instead.
+ */
+export const deDT: HyphenDict = deATDict.default;
 
 import * as deCHDict from "./dictionaries/hyph_de_CH.dic";
 export const deCH: HyphenDict = deCHDict.default;
