@@ -4,6 +4,7 @@ import {
   easySpanishText,
   emptyStr,
   italianText,
+  longRussianTextGuillemets,
   longSpanishText,
   longTest,
   shortText,
@@ -64,34 +65,84 @@ describe("readability tests", () => {
       const score = textReadability.fleschReadingEase(longTest);
       assertDelta(score, 118.27, 0.02); // TODO: check delta
     });
+    it("spanish config with spanish text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fleschReadingEase(longSpanishText);
+      assertDelta(score, 65.97, 0.5);
+    });
+    it("italian config with italian text", () => {
+      textReadability.setLang("it");
+      const score = textReadability.fleschReadingEase(italianText);
+      assertDelta(score, 26.93, 0.5);
+    });
+    it("russian config with russian text", () => {
+      textReadability.setLang("ru");
+      const score = textReadability.fleschReadingEase(
+        longRussianTextGuillemets
+      );
+      assertDelta(score, 53.6, 1);
+    });
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.fleschReadingEase(emptyStr);
+      assertDelta(score, 0);
+    });
     it("polish config should throw", () => {
       textReadability.setLang("pl");
       expect(() => textReadability.fleschReadingEase(longTest)).toThrow();
     });
   });
 
-  it("flesch-kincaid grade", () => {
-    textReadability.setLang("en");
-    const score = textReadability.fleschKincaidGrade(longTest);
-    assertDelta(score, 10.7, 0.5); // TODO: check delta
+  describe("flesch-kincaid grade", () => {
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.fleschKincaidGrade(longTest);
+      assertDelta(score, 10.7, 0.5); // TODO: check delta
+    });
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.fleschKincaidGrade(emptyStr);
+      assertDelta(score, 0);
+    });
   });
 
-  it("smog index", () => {
-    textReadability.setLang("en");
-    const score = textReadability.smogIndex(longTest);
-    assertDelta(score, 11.7, 0.1); // TODO: check delta
+  describe("smog index", () => {
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.smogIndex(longTest);
+      assertDelta(score, 11.7, 0.1); // TODO: check delta
+    });
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.smogIndex(emptyStr);
+      assertDelta(score, 0);
+    });
   });
 
-  it("coleman-liau index", () => {
-    textReadability.setLang("en");
-    const score = textReadability.colemanLiauIndex(longTest);
-    assertDelta(score, 8.99, 3); // TODO: check delta
+  describe("coleman-liau index", () => {
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.colemanLiauIndex(longTest);
+      assertDelta(score, 8.99, 3); // TODO: check delta
+    });
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.colemanLiauIndex(emptyStr);
+      assertDelta(score, 0);
+    });
   });
 
-  it("automated readability index", () => {
-    textReadability.setLang("en");
-    const score = textReadability.automatedReadabilityIndex(longTest);
-    assertDelta(score, 11.6, 0.05); // TODO: check delta
+  describe("automated readability index", () => {
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.automatedReadabilityIndex(longTest);
+      assertDelta(score, 11.6, 0.05); // TODO: check delta
+    });
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.automatedReadabilityIndex(emptyStr);
+      assertDelta(score, 0);
+    });
   });
 
   describe("linsear write formula", () => {
@@ -176,19 +227,50 @@ describe("readability tests", () => {
   });
 
   describe("wiener sachtextformel (German)", () => {
-    it("sample 1", () => {
+    const wsSimple =
+      "Alle meine Entchen schwimmen auf dem See, Köpfchen unters Wasser, Schwänzchen in die Höh.";
+    const wsComplex =
+      "Alle Parteien widmen dem Thema rein quantitativ betrachtet nennenswerte Aufmerksamkeit, die Grünen wenig überraschend am meisten.";
+
+    it("variant 1 - simple", () => {
       textReadability.setLang("de");
-      const text =
-        "Alle meine Entchen schwimmen auf dem See, Köpfchen unters Wasser, Schwänzchen in die Höh.";
-      const score = textReadability.wienerSachtextformel(text);
-      assertDelta(score, 3.8, 1.5); // TODO: check delta
+      const score = textReadability.wienerSachtextformel(wsSimple, 1);
+      assertDelta(score, 3.77, 1.5); // TODO: check delta
     });
-    it("sample 2", () => {
+    it("variant 1 - complex", () => {
       textReadability.setLang("de");
-      const text =
-        "Alle Parteien widmen dem Thema rein quantitativ betrachtet nennenswerte Aufmerksamkeit, die Grünen wenig überraschend am meisten.";
-      const score = textReadability.wienerSachtextformel(text);
-      assertDelta(score, 13.9, 0.02);
+      const score = textReadability.wienerSachtextformel(wsComplex, 1);
+      assertDelta(score, 13.91, 0.02);
+    });
+    it("variant 2 - simple", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsSimple, 2);
+      assertDelta(score, 3.5, 1.5);
+    });
+    it("variant 2 - complex", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsComplex, 2);
+      assertDelta(score, 13.45, 0.02);
+    });
+    it("variant 3 - simple", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsSimple, 3);
+      assertDelta(score, 1.55, 1.5);
+    });
+    it("variant 3 - complex", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsComplex, 3);
+      assertDelta(score, 13.04, 0.02);
+    });
+    it("variant 4 - simple", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsSimple, 4);
+      assertDelta(score, 2.03, 1.5);
+    });
+    it("variant 4 - complex", () => {
+      textReadability.setLang("de");
+      const score = textReadability.wienerSachtextformel(wsComplex, 4);
+      assertDelta(score, 12.85, 0.02);
     });
   });
 
