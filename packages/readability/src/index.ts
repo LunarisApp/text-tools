@@ -13,6 +13,7 @@ import {
   linsearWriteFormula,
   mcalpineEflaw,
   smogIndex,
+  szigrisztPazos,
   type WienerSachtextformelVariant,
   wienerSachtextformel,
 } from "./formulas";
@@ -327,6 +328,40 @@ export class TextReadability {
     const words = this.textStats.wordCount(text);
     const syllables = this.textStats.syllableCount(text);
     return fernandezHuerta({ words, sentences, syllables });
+  }
+
+  /**
+   * Calculate the Szigriszt Pazos readability formula for text (Spanish only).
+   * @param text
+   */
+  szigrisztPazos(text: string) {
+    return lruCache(
+      this.cache,
+      "szigrisztPazos",
+      [text],
+      (text) => this.computeSzigrisztPazos(text),
+      this.cacheEnabled
+    );
+  }
+
+  private computeSzigrisztPazos(text: string) {
+    if (this.lang !== "es") {
+      console.warn(`Szigriszt Pazos is designed for Spanish text.
+                          Textstat language is set to '${this.lang}'.`);
+    }
+    if (!text) {
+      return 0;
+    }
+    const totalSyllables = this.textStats.syllableCount(text);
+    const totalWords = this.textStats.wordCount(text);
+    const totalSentences = this.textStats.sentenceCount(text);
+    const freBase = this.getCfg("fre_base");
+    return szigrisztPazos({
+      totalSyllables,
+      totalWords,
+      totalSentences,
+      freBase,
+    });
   }
 
   /**

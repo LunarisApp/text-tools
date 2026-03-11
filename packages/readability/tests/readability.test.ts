@@ -235,6 +235,34 @@ describe("readability tests", () => {
     });
   });
 
+  describe("szigriszt pazos formula (Spanish)", () => {
+    it("long spanish text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.szigrisztPazos(longSpanishText);
+      assertDelta(score, 62.16, 5);
+    });
+    it("easy spanish text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.szigrisztPazos(easySpanishText);
+      expect(score).toBeGreaterThan(80);
+    });
+    it("long english text (non-spanish)", () => {
+      textReadability.setLang("es");
+      const score = textReadability.szigrisztPazos(longTest);
+      expect(score).toBeGreaterThan(0);
+    });
+    it("short text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.szigrisztPazos(shortText);
+      expect(score).toBeGreaterThan(0);
+    });
+    it("empty text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.szigrisztPazos(emptyStr);
+      assertDelta(score, 0);
+    });
+  });
+
   describe("crawford formula (Spanish)", () => {
     it("long text", () => {
       textReadability.setLang("es");

@@ -12,4 +12,5 @@ export * from "./lix";
 export * from "./mcalpine-eflaw";
 export * from "./rix";
 export * from "./smog-index";
+export * from "./szigriszt-pazos";
 export * from "./wiener-sachtextformel";
