@@ -67,12 +67,17 @@ export class TextStats {
    * @param text
    */
   vowelCount(text: string) {
+    const dict = vowels[this.lang];
+    if (!dict) {
+      console.warn(`Vowel dictionary not found for language: ${this.lang}`);
+      return undefined;
+    }
+
     const seq = getWords(text).join("");
     if (!seq) {
       return 0;
     }
 
-    const dict = vowels[this.lang];
     return seq.split("").filter((char) => dict.includes(char)).length;
   }
 
@@ -81,12 +86,17 @@ export class TextStats {
    * @param text
    */
   consonantCount(text: string) {
+    const dict = consonants[this.lang];
+    if (!dict) {
+      console.warn(`Consonant dictionary not found for language: ${this.lang}`);
+      return undefined;
+    }
+
     const seq = getWords(text).join("");
     if (!seq) {
       return 0;
     }
 
-    const dict = consonants[this.lang];
     return seq.split("").filter((char) => dict.includes(char)).length;
   }
 
@@ -145,6 +155,9 @@ export class TextStats {
     );
   }
 
+  // Sentences with ≤2 words are excluded from the count because readability
+  // formulas treat them as fragments or artifacts (e.g. headings, labels)
+  // that would skew results. At least 1 sentence is always returned.
   private computeSentenceCount(text: string) {
     const sentences = getSentences(text);
     if (sentences.length === 0) {
@@ -253,7 +266,7 @@ export class TextStats {
   private computePolysyllableCount(text: string) {
     let count = 0;
     for (const word of getWords(text)) {
-      if (this.syllableCount(word) > 2) {
+      if (this.computeSyllableCount(word) > 2) {
         count += 1;
       }
     }
@@ -277,7 +290,7 @@ export class TextStats {
   private computeMonosyllableCount(text: string) {
     let count = 0;
     for (const word of getWords(text)) {
-      if (this.syllableCount(word) === 1) {
+      if (this.computeSyllableCount(word) === 1) {
         count += 1;
       }
     }
@@ -308,8 +321,8 @@ export class TextStats {
    * @param msPerChar The time in milliseconds per character. Default is 14.69.
    */
   readingTime(text: string, msPerChar = 14.69) {
-    const chars = getWords(text, false).map((word) => word.length);
-    const rtPerWord = chars.map((char) => char * msPerChar);
-    return rtPerWord.reduce((acc, curr) => acc + curr, 0) / 1000;
+    const words = getWords(text, false);
+    const totalChars = words.reduce((sum, word) => sum + word.length, 0);
+    return (totalChars * msPerChar) / 1000;
   }
 }
