@@ -103,6 +103,9 @@ export const nlNL: HyphenDict = nlNLDict.default;
 import * as nnNODict from "./dictionaries/hyph_nn_NO.dic";
 export const nnNO: HyphenDict = nnNODict.default;
 
+import * as orINDict from "./dictionaries/hyph_or_IN.dic";
+export const orIN: HyphenDict = orINDict.default;
+
 import * as paINDict from "./dictionaries/hyph_pa_IN.dic";
 export const paIN: HyphenDict = paINDict.default;
 
@@ -188,6 +191,7 @@ export const dictionaries = {
   nb: nbNO,
   nl: nlNL,
   nn: nnNO,
+  or: orIN,
   pa: paIN,
   pl: plPL,
   pt: ptBR,

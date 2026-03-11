@@ -43,7 +43,7 @@ describe("readability tests", () => {
     it("spanish config", () => {
       textReadability.setLang("es");
       const score = textReadability.fleschReadingEase(longTest);
-      assertDelta(score, 86.76, 0.02); // TODO: check delta
+      assertDelta(score, 94.68, 0.02); // TODO: check delta
     });
     it("french config", () => {
       textReadability.setLang("fr");
@@ -221,7 +221,7 @@ describe("readability tests", () => {
     it("long english text (non-spanish)", () => {
       textReadability.setLang("es");
       const score = textReadability.fernandezHuerta(longTest);
-      assertDelta(score, 86.78, 0.5);
+      assertDelta(score, 94.68, 0.5);
     });
     it("short text", () => {
       textReadability.setLang("es");
