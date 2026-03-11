@@ -1,5 +1,11 @@
 # @lunarisapp/hyphen
 
+## 1.2.0
+
+### Minor Changes
+
+- [`6ea1517`](https://github.com/LunarisApp/text-tools/commit/6ea151740201f4046908679633df1b2e5de16d1c) Thanks [@MrLightful](https://github.com/MrLightful)! - Update es, huHU, orIN dictionaries
+
 ## 1.1.0
 
 ### Minor Changes
