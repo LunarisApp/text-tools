@@ -2,7 +2,9 @@ import { describe, expect, it } from "@jest/globals";
 import { type Language, TextStats } from "../src";
 import {
   emptyStr,
+  italianText,
   longRussianTextGuillemets,
+  longSpanishText,
   longTest,
   shortTest,
   testSyllableCountCases,
@@ -77,13 +79,25 @@ describe("stats tests", () => {
     it("polysyllable count", () => {
       textStats.setLang("en");
       const count = textStats.polysyllableCount(longTest);
-      expect(count).toBeGreaterThan(0);
+      expect(count).toBe(38);
     });
 
     it("monosyllable count", () => {
       textStats.setLang("en");
       const count = textStats.monosyllableCount(longTest);
-      expect(count).toBeGreaterThan(0);
+      expect(count).toBe(249);
+    });
+
+    it("polysyllable count single word", () => {
+      textStats.setLang("en");
+      expect(textStats.polysyllableCount("interesting")).toBe(1);
+      expect(textStats.polysyllableCount("dog")).toBe(0);
+    });
+
+    it("monosyllable count single word", () => {
+      textStats.setLang("en");
+      expect(textStats.monosyllableCount("dog")).toBe(1);
+      expect(textStats.monosyllableCount("interesting")).toBe(0);
     });
 
     it("mini word count", () => {
@@ -103,13 +117,13 @@ describe("stats tests", () => {
     it("avg sentence length", () => {
       textStats.setLang("en");
       const avg = textStats.avgSentenceLength(longTest);
-      assertDelta(avg, 21.9, 0.05); // TODO: check delta
+      assertDelta(avg, 21.88, 0.01);
     });
 
     it("avg syllables per word", () => {
       textStats.setLang("en");
       const avg = textStats.avgSyllablesPerWord(longTest);
-      assertDelta(avg, 1.5, 0.05); // TODO: check delta
+      assertDelta(avg, 1.48, 0.01);
     });
 
     it("avg characters per word", () => {
@@ -133,7 +147,7 @@ describe("stats tests", () => {
     it("avg words per sentence", () => {
       textStats.setLang("en");
       const avg = textStats.avgWordsPerSentence(longTest);
-      assertDelta(avg, 21.9, 0.05);
+      assertDelta(avg, 21.88, 0.01);
     });
   });
 
@@ -191,6 +205,58 @@ describe("stats tests", () => {
     });
   });
 
+  describe("reading time", () => {
+    it("normal text", () => {
+      textStats.setLang("en");
+      const time = textStats.readingTime(longTest);
+      assertDelta(time, 25.68);
+    });
+
+    it("empty text returns 0", () => {
+      textStats.setLang("en");
+      expect(textStats.readingTime("")).toBe(0);
+    });
+
+    it("single word", () => {
+      textStats.setLang("en");
+      const time = textStats.readingTime("Hello");
+      assertDelta(time, 0.073, 0.001);
+    });
+  });
+
+  describe("multilingual", () => {
+    it("spanish word and sentence counts", () => {
+      textStats.setLang("es");
+      expect(textStats.wordCount(longSpanishText)).toBe(162);
+      expect(textStats.sentenceCount(longSpanishText)).toBe(6);
+    });
+
+    it("spanish vowel and consonant counts", () => {
+      textStats.setLang("es");
+      expect(textStats.vowelCount(longSpanishText)).toBe(352);
+      expect(textStats.consonantCount(longSpanishText)).toBe(419);
+    });
+
+    it("spanish syllable count", () => {
+      textStats.setLang("es");
+      assertDelta(textStats.syllableCount(longSpanishText), 306, 10);
+    });
+
+    it("italian counts", () => {
+      textStats.setLang("it");
+      expect(textStats.wordCount(italianText)).toBe(18);
+      expect(textStats.sentenceCount(italianText)).toBe(1);
+      expect(textStats.vowelCount(italianText)).toBe(54);
+      expect(textStats.consonantCount(italianText)).toBe(57);
+    });
+
+    it("russian vowel and consonant counts", () => {
+      textStats.setLang("ru");
+      expect(textStats.vowelCount(longRussianTextGuillemets)).toBe(674);
+      expect(textStats.consonantCount(longRussianTextGuillemets)).toBe(891);
+    });
+  });
+
   describe("setLang", () => {
     it("switches language without throwing", () => {
       expect(() => textStats.setLang("es")).not.toThrow();
@@ -204,13 +270,7 @@ describe("stats tests", () => {
       noCacheStats.setLang("en");
       expect(noCacheStats.sentenceCount(longTest)).toBe(17);
       expect(noCacheStats.wordCount(longTest)).toBe(372);
-      assertDelta(noCacheStats.avgSyllablesPerWord(longTest), 1.5, 0.05);
+      assertDelta(noCacheStats.avgSyllablesPerWord(longTest), 1.48, 0.01);
     });
-  });
-
-  it("reading time", () => {
-    textStats.setLang("en");
-    const time = textStats.readingTime(longTest);
-    assertDelta(time, 25.68);
   });
 });
