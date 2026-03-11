@@ -5,6 +5,7 @@ import {
   automatedReadabilityIndex,
   colemanLiauIndex,
   crawford,
+  fernandezHuerta,
   fleschKincaidGrade,
   fleschReadingEase,
   gulpeaseIndex,
@@ -297,6 +298,35 @@ export class TextReadability {
     const words = this.textStats.wordCount(text);
     const syllables = this.textStats.syllableCount(text);
     return crawford({ words, sentences, syllables });
+  }
+
+  /**
+   * Calculate the Fernandez Huerta readability formula for text (Spanish only).
+   * https://www.spanishreadability.com/the-fernandez-huerta-readability-formula
+   * @param text
+   */
+  fernandezHuerta(text: string) {
+    return lruCache(
+      this.cache,
+      "fernandezHuerta",
+      [text],
+      (text) => this.computeFernandezHuerta(text),
+      this.cacheEnabled
+    );
+  }
+
+  private computeFernandezHuerta(text: string) {
+    if (this.lang !== "es") {
+      console.warn(`Fernandez Huerta's formula only supports Spanish language.
+                          Textstat language is set to '${this.lang}'.`);
+    }
+    if (!text) {
+      return 0;
+    }
+    const sentences = this.textStats.sentenceCount(text);
+    const words = this.textStats.wordCount(text);
+    const syllables = this.textStats.syllableCount(text);
+    return fernandezHuerta({ words, sentences, syllables });
   }
 
   /**

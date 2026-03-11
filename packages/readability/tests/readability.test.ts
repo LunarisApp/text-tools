@@ -207,6 +207,34 @@ describe("readability tests", () => {
     });
   });
 
+  describe("fernandez huerta formula (Spanish)", () => {
+    it("long spanish text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fernandezHuerta(longSpanishText);
+      assertDelta(score, 65.97, 0.5);
+    });
+    it("easy spanish text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fernandezHuerta(easySpanishText);
+      expect(score).toBeGreaterThan(100);
+    });
+    it("long english text (non-spanish)", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fernandezHuerta(longTest);
+      assertDelta(score, 86.78, 0.5);
+    });
+    it("short text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fernandezHuerta(shortText);
+      assertDelta(score, 105.74, 0.5);
+    });
+    it("empty text", () => {
+      textReadability.setLang("es");
+      const score = textReadability.fernandezHuerta(emptyStr);
+      assertDelta(score, 0);
+    });
+  });
+
   describe("crawford formula (Spanish)", () => {
     it("long text", () => {
       textReadability.setLang("es");

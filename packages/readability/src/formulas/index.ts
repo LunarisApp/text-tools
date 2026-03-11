@@ -2,6 +2,7 @@
 export * from "./automated-readability-index";
 export * from "./coleman-liau-index";
 export * from "./crawford";
+export * from "./fernandez-huerta";
 export * from "./flesch-kincaid-grade";
 export * from "./flesch-reading-ease";
 export * from "./gulpease-index";
