@@ -13,7 +13,7 @@ updates:
                   - 'minor'
                   - 'patch'
 
-    # Track updates in @lunarisapp/hyphen's LibreOffice dictionaries.
+    # Track updates in @lunarisapp/cmudict's data submodule.
     - package-ecosystem: gitsubmodule
       directory: /
       schedule:
