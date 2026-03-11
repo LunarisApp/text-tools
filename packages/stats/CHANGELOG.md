@@ -1,5 +1,14 @@
 # @lunarisapp/stats
 
+## 1.0.3
+
+### Patch Changes
+
+- [`bb0e47e`](https://github.com/LunarisApp/text-tools/commit/bb0e47e1cc8698cca8901e42b155d791cf64c96e) Thanks [@MrLightful](https://github.com/MrLightful)! - Minor improvements
+
+- Updated dependencies [[`6ea1517`](https://github.com/LunarisApp/text-tools/commit/6ea151740201f4046908679633df1b2e5de16d1c)]:
+  - @lunarisapp/hyphen@1.2.0
+
 ## 1.0.2
 
 ### Patch Changes

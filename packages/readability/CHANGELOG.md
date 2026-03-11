@@ -1,5 +1,20 @@
 # @lunarisapp/readability
 
+## 1.1.0
+
+### Minor Changes
+
+- [`6f20d06`](https://github.com/LunarisApp/text-tools/commit/6f20d066aaaf357678e5af062cf6959e65b0e61e) Thanks [@MrLightful](https://github.com/MrLightful)! - Added Fernandez Huerta formula
+
+- [`a568b3a`](https://github.com/LunarisApp/text-tools/commit/a568b3a428e7343c5b0a342f3241fa0ad17b3e25) Thanks [@MrLightful](https://github.com/MrLightful)! - Added Szigriszt Pazos formula
+
+- [`3c134f0`](https://github.com/LunarisApp/text-tools/commit/3c134f053b7dd0e393e2b5f352c250c861951153) Thanks [@MrLightful](https://github.com/MrLightful)! - Added Gunning Fog formula
+
+### Patch Changes
+
+- Updated dependencies [[`bb0e47e`](https://github.com/LunarisApp/text-tools/commit/bb0e47e1cc8698cca8901e42b155d791cf64c96e)]:
+  - @lunarisapp/stats@1.0.3
+
 ## 1.0.3
 
 ### Patch Changes
