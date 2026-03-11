@@ -263,6 +263,24 @@ describe("readability tests", () => {
     });
   });
 
+  describe("gunning fog index", () => {
+    it("empty text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.gunningFog(emptyStr);
+      assertDelta(score, 0);
+    });
+    it("long text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.gunningFog(longTest);
+      assertDelta(score, 12.84, 0.5);
+    });
+    it("short text", () => {
+      textReadability.setLang("en");
+      const score = textReadability.gunningFog(shortText);
+      expect(score).toBeGreaterThan(0);
+    });
+  });
+
   describe("crawford formula (Spanish)", () => {
     it("long text", () => {
       textReadability.setLang("es");

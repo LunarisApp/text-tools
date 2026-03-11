@@ -9,6 +9,7 @@ import {
   fleschKincaidGrade,
   fleschReadingEase,
   gulpeaseIndex,
+  gunningFog,
   gutierrezPolini,
   linsearWriteFormula,
   mcalpineEflaw,
@@ -157,6 +158,31 @@ export class TextReadability {
     }
     const polysyllables = this.textStats.polysyllableCount(text);
     return smogIndex({ sentences, polysyllables });
+  }
+
+  /**
+   * Calculate the Gunning Fog index for text.
+   * https://en.wikipedia.org/wiki/Gunning_fog_index
+   * @param text
+   */
+  gunningFog(text: string) {
+    return lruCache(
+      this.cache,
+      "gunningFog",
+      [text],
+      (text) => this.computeGunningFog(text),
+      this.cacheEnabled
+    );
+  }
+
+  private computeGunningFog(text: string) {
+    if (!text) {
+      return 0;
+    }
+    const avgWordsPerSentence = this.textStats.avgWordsPerSentence(text);
+    const difficultWords = this.textStats.polysyllableCount(text);
+    const totalWords = this.textStats.wordCount(text);
+    return gunningFog({ avgWordsPerSentence, difficultWords, totalWords });
   }
 
   /**

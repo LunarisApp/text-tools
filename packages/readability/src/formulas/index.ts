@@ -6,6 +6,7 @@ export * from "./fernandez-huerta";
 export * from "./flesch-kincaid-grade";
 export * from "./flesch-reading-ease";
 export * from "./gulpease-index";
+export * from "./gunning-fog";
 export * from "./gutierrez-polini";
 export * from "./linsear-write-formula";
 export * from "./lix";
