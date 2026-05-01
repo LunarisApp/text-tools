@@ -27,8 +27,8 @@ importers:
         specifier: ^2.9.3
         version: 2.9.3
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
       ultracite:
         specifier: ^7.4.2
         version: 7.4.2
@@ -55,10 +55,10 @@ importers:
         version: 30.3.0(@types/node@25.5.0)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3)
+        version: 8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/hyphen:
     devDependencies:
@@ -82,10 +82,10 @@ importers:
         version: 30.3.0(@types/node@25.5.0)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3)
+        version: 8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/language:
     devDependencies:
@@ -109,10 +109,10 @@ importers:
         version: 30.3.0(@types/node@25.5.0)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3)
+        version: 8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/readability:
     dependencies:
@@ -146,10 +146,10 @@ importers:
         version: 30.3.0(@types/node@25.5.0)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3)
+        version: 8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/stats:
     dependencies:
@@ -186,10 +186,10 @@ importers:
         version: 30.3.0(@types/node@25.5.0)
       tsup:
         specifier: ^8.5.1
-        version: 8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3)
+        version: 8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3)
       typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
+        specifier: ^6.0.3
+        version: 6.0.3
 
 packages:
 
@@ -2116,8 +2116,8 @@ packages:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
 
-  get-tsconfig@4.13.7:
-    resolution: {integrity: sha512-7tN6rFgBlMgpBML5j8typ92BKFi2sFQvIdpAqLA2beia5avZDrMs0FLZiM5etShWq5irVyGcGMEA1jcDaK7A/Q==}
+  get-tsconfig@4.14.0:
+    resolution: {integrity: sha512-yTb+8DXzDREzgvYmh6s9vHsSVCHeC0G3PI5bEXNBHtmshPnO+S5O7qgLEOn0I5QvMy6kpZN8K1NKGyilLb93wA==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -2989,8 +2989,8 @@ packages:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}
     engines: {node: '>=10'}
 
-  typescript@5.9.3:
-    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -5167,7 +5167,7 @@ snapshots:
 
   get-stream@6.0.1: {}
 
-  get-tsconfig@4.13.7:
+  get-tsconfig@4.14.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
     optional: true
@@ -6144,7 +6144,7 @@ snapshots:
   tslib@2.8.1:
     optional: true
 
-  tsup@8.5.1(tsx@4.19.2)(typescript@5.9.3)(yaml@2.8.3):
+  tsup@8.5.1(tsx@4.19.2)(typescript@6.0.3)(yaml@2.8.3):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.3)
       cac: 6.7.14
@@ -6164,7 +6164,7 @@ snapshots:
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
     optionalDependencies:
-      typescript: 5.9.3
+      typescript: 6.0.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -6174,7 +6174,7 @@ snapshots:
   tsx@4.19.2:
     dependencies:
       esbuild: 0.23.1
-      get-tsconfig: 4.13.7
+      get-tsconfig: 4.14.0
     optionalDependencies:
       fsevents: 2.3.3
     optional: true
@@ -6192,7 +6192,7 @@ snapshots:
 
   type-fest@0.21.3: {}
 
-  typescript@5.9.3: {}
+  typescript@6.0.3: {}
 
   ufo@1.6.3: {}
 
