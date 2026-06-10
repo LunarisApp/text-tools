@@ -2,8 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
-    "types": ["node", "jest"],
     "strictNullChecks": true
   },
-  "include": ["**/tests/**/*.ts", "__mocks__"]
+  "include": ["**/tests/**/*.ts", "**/src/**/*.d.ts"]
 }
