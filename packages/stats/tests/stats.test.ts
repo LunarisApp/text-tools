@@ -289,7 +289,7 @@ describe("stats tests", () => {
 
   describe("build output", () => {
     it("root ESM does not reference syllable dictionaries", () => {
-      const distPath = join(import.meta.dirname, "../dist/index.mjs");
+      const distPath = join(process.cwd(), "dist/index.mjs");
       if (!existsSync(distPath)) {
         return;
       }
