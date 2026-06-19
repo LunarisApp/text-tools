@@ -5,7 +5,6 @@ import { LRUCache } from "lru-cache";
 import { TextStats } from ".";
 import { chunkAndProcessText, lruCache } from "./utils";
 
-// biome-ignore lint/performance/noBarrelFile: library entry point
 export type { Language } from "@lunarisapp/language";
 
 export class TextStatsSyllables extends TextStats {
