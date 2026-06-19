@@ -31,11 +31,24 @@
     "reading time"
   ],
   "license": "MIT",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./syllables": {
+      "types": "./dist/syllables.d.ts",
+      "import": "./dist/syllables.mjs",
+      "require": "./dist/syllables.js"
+    }
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup",
     "test": "jest"
   },
   "dependencies": {

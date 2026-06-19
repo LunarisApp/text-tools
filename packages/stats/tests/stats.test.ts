@@ -1,5 +1,8 @@
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { describe, expect, it } from "@jest/globals";
 import { type Language, TextStats } from "../src";
+import { TextStatsSyllables } from "../src/syllables";
 import {
   emptyStr,
   italianText,
@@ -16,6 +19,7 @@ function assertDelta(actual: number, expected: number, delta = 0.1) {
 
 describe("stats tests", () => {
   const textStats = new TextStats();
+  const syllableStats = new TextStatsSyllables();
   describe("counts", () => {
     it("char count", () => {
       textStats.setLang("en");
@@ -69,35 +73,35 @@ describe("stats tests", () => {
       for (const testCase of testSyllableCountCases) {
         const [lang, text, expected, delta] = testCase;
         it(`syllable count: ${(text as string).slice(0, 10)}${(text as string).length >= 10 ? "..." : ""}`, () => {
-          textStats.setLang(lang as Language);
-          const actual = textStats.syllableCount(text as string);
+          syllableStats.setLang(lang as Language);
+          const actual = syllableStats.syllableCount(text as string);
           assertDelta(actual, expected as number, delta as number);
         });
       }
     });
 
     it("polysyllable count", () => {
-      textStats.setLang("en");
-      const count = textStats.polysyllableCount(longTest);
+      syllableStats.setLang("en");
+      const count = syllableStats.polysyllableCount(longTest);
       expect(count).toBe(38);
     });
 
     it("monosyllable count", () => {
-      textStats.setLang("en");
-      const count = textStats.monosyllableCount(longTest);
+      syllableStats.setLang("en");
+      const count = syllableStats.monosyllableCount(longTest);
       expect(count).toBe(249);
     });
 
     it("polysyllable count single word", () => {
-      textStats.setLang("en");
-      expect(textStats.polysyllableCount("interesting")).toBe(1);
-      expect(textStats.polysyllableCount("dog")).toBe(0);
+      syllableStats.setLang("en");
+      expect(syllableStats.polysyllableCount("interesting")).toBe(1);
+      expect(syllableStats.polysyllableCount("dog")).toBe(0);
     });
 
     it("monosyllable count single word", () => {
-      textStats.setLang("en");
-      expect(textStats.monosyllableCount("dog")).toBe(1);
-      expect(textStats.monosyllableCount("interesting")).toBe(0);
+      syllableStats.setLang("en");
+      expect(syllableStats.monosyllableCount("dog")).toBe(1);
+      expect(syllableStats.monosyllableCount("interesting")).toBe(0);
     });
 
     it("mini word count", () => {
@@ -121,8 +125,8 @@ describe("stats tests", () => {
     });
 
     it("avg syllables per word", () => {
-      textStats.setLang("en");
-      const avg = textStats.avgSyllablesPerWord(longTest);
+      syllableStats.setLang("en");
+      const avg = syllableStats.avgSyllablesPerWord(longTest);
       assertDelta(avg, 1.48, 0.01);
     });
 
@@ -152,7 +156,7 @@ describe("stats tests", () => {
   });
 
   describe("empty text", () => {
-    it("all count methods return 0", () => {
+    it("all lightweight count methods return 0", () => {
       textStats.setLang("en");
       expect(textStats.charCount(emptyStr)).toBe(0);
       expect(textStats.letterCount(emptyStr)).toBe(0);
@@ -160,29 +164,33 @@ describe("stats tests", () => {
       expect(textStats.consonantCount(emptyStr)).toBe(0);
       expect(textStats.wordCount(emptyStr)).toBe(0);
       expect(textStats.sentenceCount(emptyStr)).toBe(0);
-      expect(textStats.syllableCount(emptyStr)).toBe(0);
-      expect(textStats.polysyllableCount(emptyStr)).toBe(0);
-      expect(textStats.monosyllableCount(emptyStr)).toBe(0);
       expect(textStats.miniWordCount(emptyStr)).toBe(0);
       expect(textStats.longWordCount(emptyStr)).toBe(0);
     });
 
-    it("all average methods return 0", () => {
+    it("all lightweight average methods return 0", () => {
       textStats.setLang("en");
       expect(textStats.avgSentenceLength(emptyStr)).toBe(0);
-      expect(textStats.avgSyllablesPerWord(emptyStr)).toBe(0);
       expect(textStats.avgCharactersPerWord(emptyStr)).toBe(0);
       expect(textStats.avgLettersPerWord(emptyStr)).toBe(0);
       expect(textStats.avgSentencesPerWord(emptyStr)).toBe(0);
       expect(textStats.avgWordsPerSentence(emptyStr)).toBe(0);
     });
+
+    it("all syllable methods return 0", () => {
+      syllableStats.setLang("en");
+      expect(syllableStats.syllableCount(emptyStr)).toBe(0);
+      expect(syllableStats.polysyllableCount(emptyStr)).toBe(0);
+      expect(syllableStats.monosyllableCount(emptyStr)).toBe(0);
+      expect(syllableStats.avgSyllablesPerWord(emptyStr)).toBe(0);
+    });
   });
 
   describe("parameter variations", () => {
     it("avg syllables per word with interval", () => {
-      textStats.setLang("en");
-      const base = textStats.avgSyllablesPerWord(longTest);
-      const withInterval = textStats.avgSyllablesPerWord(longTest, 10);
+      syllableStats.setLang("en");
+      const base = syllableStats.avgSyllablesPerWord(longTest);
+      const withInterval = syllableStats.avgSyllablesPerWord(longTest, 10);
       assertDelta(withInterval, base * 10, 0.01);
     });
 
@@ -238,8 +246,8 @@ describe("stats tests", () => {
     });
 
     it("spanish syllable count", () => {
-      textStats.setLang("es");
-      assertDelta(textStats.syllableCount(longSpanishText), 306, 10);
+      syllableStats.setLang("es");
+      assertDelta(syllableStats.syllableCount(longSpanishText), 306, 10);
     });
 
     it("italian counts", () => {
@@ -270,7 +278,41 @@ describe("stats tests", () => {
       noCacheStats.setLang("en");
       expect(noCacheStats.sentenceCount(longTest)).toBe(17);
       expect(noCacheStats.wordCount(longTest)).toBe(372);
+    });
+
+    it("syllable operations work with cache disabled", () => {
+      const noCacheStats = new TextStatsSyllables({ cache: false });
+      noCacheStats.setLang("en");
       assertDelta(noCacheStats.avgSyllablesPerWord(longTest), 1.48, 0.01);
+    });
+  });
+
+  describe("build output", () => {
+    it("root ESM does not reference syllable dictionaries", () => {
+      const distPath = join(import.meta.dirname, "../dist/index.mjs");
+      if (!existsSync(distPath)) {
+        return;
+      }
+      const seen = new Set<string>();
+      const readImportGraph = (path: string): string => {
+        if (seen.has(path)) {
+          return "";
+        }
+        seen.add(path);
+        const source = readFileSync(path, "utf8");
+        const imports = Array.from(
+          source.matchAll(/from\s+["'](\.\/[^"']+)["']/g)
+        ).map((match) => match[1]);
+        return [
+          source,
+          ...imports.map((specifier) =>
+            readImportGraph(join(dirname(path), specifier))
+          ),
+        ].join("\n");
+      };
+      const output = readImportGraph(distPath);
+      expect(output).not.toContain("@lunarisapp/cmudict");
+      expect(output).not.toContain("@lunarisapp/hyphen");
     });
   });
 });

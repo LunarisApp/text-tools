@@ -1,5 +1,5 @@
 import type { Language } from "@lunarisapp/language";
-import { TextStats } from "@lunarisapp/stats";
+import { TextStatsSyllables } from "@lunarisapp/stats/syllables";
 import { LRUCache } from "lru-cache";
 import {
   automatedReadabilityIndex,
@@ -33,7 +33,7 @@ export class TextReadability {
   private readonly cache = new LRUCache<string, number>({ max: 512 });
   private readonly cacheEnabled: boolean;
   private lang: Language = "en_US";
-  private textStats!: TextStats;
+  private textStats!: TextStatsSyllables;
 
   constructor(props?: { lang?: Language; cache?: boolean }) {
     const { lang, cache } = props ?? {};
@@ -58,7 +58,7 @@ export class TextReadability {
    */
   setLang(lang: Language) {
     this.lang = lang;
-    this.textStats = new TextStats({ lang });
+    this.textStats = new TextStatsSyllables({ lang });
     this.cache.clear();
   }
 
