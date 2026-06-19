@@ -39,6 +39,11 @@ textStats.wordCount('Hello, world!');
 
 For syllable metrics, import the syllable-aware entrypoint:
 
+> [!NOTE]
+> The syllables module adds around 10 MB of bundle weight because it includes
+> CMU pronunciation data and hyphenation dictionaries. Use the root module when
+> you do not need syllable metrics.
+
 ```typescript
 import { TextStatsSyllables } from '@lunarisapp/stats/syllables';
 
