@@ -60,7 +60,7 @@ export class TextStats {
     const dict = vowels[this.lang];
     if (!dict) {
       console.warn(`Vowel dictionary not found for language: ${this.lang}`);
-      return undefined;
+      return;
     }
 
     const seq = getWords(text).join("");
@@ -79,7 +79,7 @@ export class TextStats {
     const dict = consonants[this.lang];
     if (!dict) {
       console.warn(`Consonant dictionary not found for language: ${this.lang}`);
-      return undefined;
+      return;
     }
 
     const seq = getWords(text).join("");
