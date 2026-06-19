@@ -1,5 +1,11 @@
 # @lunarisapp/hyphen
 
+## 1.2.1
+
+### Patch Changes
+
+- [`348d6f0`](https://github.com/LunarisApp/text-tools/commit/348d6f07b492bb0fa1ebc06d9f091c4f54eb020b) Thanks [@MrLightful](https://github.com/MrLightful)! - Bump typescript to v6
+
 ## 1.2.0
 
 ### Minor Changes

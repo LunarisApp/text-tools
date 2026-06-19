@@ -1,7 +1,7 @@
 {
   "name": "@lunarisapp/readability",
   "description": "A library for calculating readability scores of texts",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Roman Sirokov",
     "url": "https://mrlightful.com",

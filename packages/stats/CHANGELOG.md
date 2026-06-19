@@ -1,5 +1,20 @@
 # @lunarisapp/stats
 
+## 2.0.0
+
+### Major Changes
+
+- [#48](https://github.com/LunarisApp/text-tools/pull/48) [`b40dd95`](https://github.com/LunarisApp/text-tools/commit/b40dd954b64bfd4641786e4184335c86461e925f) Thanks [@MrLightful](https://github.com/MrLightful)! - Split syllable metrics into `@lunarisapp/stats/syllables` to keep the root stats entrypoint lightweight.
+
+### Patch Changes
+
+- [`348d6f0`](https://github.com/LunarisApp/text-tools/commit/348d6f07b492bb0fa1ebc06d9f091c4f54eb020b) Thanks [@MrLightful](https://github.com/MrLightful)! - Bump typescript to v6
+
+- Updated dependencies [[`348d6f0`](https://github.com/LunarisApp/text-tools/commit/348d6f07b492bb0fa1ebc06d9f091c4f54eb020b)]:
+  - @lunarisapp/language@1.1.1
+  - @lunarisapp/cmudict@1.0.2
+  - @lunarisapp/hyphen@1.2.1
+
 ## 1.0.3
 
 ### Patch Changes
