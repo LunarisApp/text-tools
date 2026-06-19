@@ -37,6 +37,20 @@ const textStats = new TextStats({
 textStats.wordCount('Hello, world!');
 ```
 
+For syllable metrics, import the syllable-aware entrypoint:
+
+> [!NOTE]
+> The syllables module adds around 10 MB of bundle weight because it includes
+> CMU pronunciation data and hyphenation dictionaries. Use the root module when
+> you do not need syllable metrics.
+
+```typescript
+import { TextStatsSyllables } from '@lunarisapp/stats/syllables';
+
+const textStats = new TextStatsSyllables({ lang: 'en_US' });
+textStats.syllableCount('Hello, world!');
+```
+
 | Function                            | Description                                                                 |
 |-------------------------------------|-----------------------------------------------------------------------------|
 | `readingTime(text)`                 | Calculates the reading time of the text in seconds.                         |
@@ -44,16 +58,23 @@ textStats.wordCount('Hello, world!');
 | `sentenceCount(text)`               | Counts the number of sentence in the provided text.                         |
 | `charCount(text)`                   | Counts the number of characters in the provided text.                       |
 | `letterCount(text)`                 | Counts the number of letters in the provided text.                          |
-| `syllableCount(text)`               | Counts the number of syllables in the provided text.                        |
 | `vowelCount(text)`                  | Counts the number of vowels in the provided text.                           |
 | `consonantCount(text)`              | Counts the number of consonants in the provided text.                       |
 | `longWordCount(text, len)`          | Counts the words longer than the specified length in the provided text.     |
 | `shortWordCount(text, len)`         | Counts the words shorter than the specified length in the provided text.    |
+| `avgSentenceLength(text)`           | Calculates the average sentence length in the provided text.                |
+| `avgCharactersPerWord(text)`        | Calculates the average characters per word in the provided text.            |
+
+### Syllable metrics
+
+These methods are available from `TextStatsSyllables` in `@lunarisapp/stats/syllables`.
+
+| Function                            | Description                                                                 |
+|-------------------------------------|-----------------------------------------------------------------------------|
+| `syllableCount(text)`               | Counts the number of syllables in the provided text.                        |
 | `monosyllableCount(text)`           | Counts the monosyllabic words in the provided text.                         |
 | `polysyllableCount(text)`           | Counts the polysyllabic words in the provided text.                         |
-| `avgSentenceLength(text)`           | Calculates the average sentence length in the provided text.                |
 | `avgSyllablesPerWord(text)`         | Calculates the average syllables per word in the provided text.             |
-| `avgCharactersPerWord(text)`        | Calculates the average characters per word in the provided text.            |
 
 ### Other
 ```
