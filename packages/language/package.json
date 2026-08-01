@@ -45,6 +45,6 @@
     "babel-jest": "^30.4.1",
     "jest": "^30.4.2",
     "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
