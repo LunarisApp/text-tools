@@ -42,7 +42,7 @@
   "dependencies": {
     "@lunarisapp/language": "workspace:*",
     "@lunarisapp/stats": "workspace:*",
-    "lru-cache": "^11.5.1"
+    "lru-cache": "^11.5.2"
   },
   "devDependencies": {
     "@babel/core": "^8.0.1",
