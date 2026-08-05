@@ -48,7 +48,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && rollup --config ../../rollup.dts.config.mjs",
     "test": "jest"
   },
   "dependencies": {

@@ -33,7 +33,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && rollup --config ../../rollup.dts.config.mjs",
     "test": "jest"
   },
   "devDependencies": {

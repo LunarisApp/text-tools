@@ -36,7 +36,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.ts --format cjs,esm && rollup --config ../../rollup.dts.config.mjs",
     "test": "jest"
   },
   "dependencies": {
