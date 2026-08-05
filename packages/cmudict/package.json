@@ -35,7 +35,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && rollup --config ../../rollup.dts.config.mjs",
     "test": "jest"
   },
   "devDependencies": {
@@ -46,6 +46,6 @@
     "babel-jest": "^30.4.1",
     "jest": "^30.4.2",
     "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
