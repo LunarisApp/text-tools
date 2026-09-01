@@ -48,9 +48,9 @@
     "@babel/core": "^8.0.1",
     "@babel/preset-env": "^8.0.2",
     "@babel/preset-typescript": "^8.0.1",
-    "@jest/globals": "^30.4.1",
-    "babel-jest": "^30.4.1",
-    "jest": "^30.4.2",
+    "@jest/globals": "^30.5.0",
+    "babel-jest": "^30.5.0",
+    "jest": "^30.5.0",
     "tsup": "^8.5.1",
     "typescript": "^7.0.2"
   }
