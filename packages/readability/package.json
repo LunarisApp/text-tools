@@ -42,15 +42,15 @@
   "dependencies": {
     "@lunarisapp/language": "workspace:*",
     "@lunarisapp/stats": "workspace:*",
-    "lru-cache": "^11.5.2"
+    "lru-cache": "^11.5.3"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.1",
-    "@babel/preset-env": "^8.0.2",
+    "@babel/core": "^8.0.6",
+    "@babel/preset-env": "^8.0.6",
     "@babel/preset-typescript": "^8.0.1",
-    "@jest/globals": "^30.4.1",
-    "babel-jest": "^30.4.1",
-    "jest": "^30.4.2",
+    "@jest/globals": "^30.5.2",
+    "babel-jest": "^30.5.2",
+    "jest": "^30.5.2",
     "tsup": "^8.5.1",
     "typescript": "^7.0.2"
   }
